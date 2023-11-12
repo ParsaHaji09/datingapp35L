@@ -1,6 +1,17 @@
-import React from 'react';
+import { React, useEffect } from 'react';
+import axios from 'axios';
 
 function Login() {
+
+  const fetchUsers = async() => {
+    const data = await axios.get('/api/users');
+    console.log(data);
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, [])
+
   return (
     <div>
       <h1>Login!</h1>
@@ -9,3 +20,5 @@ function Login() {
 }
 
 export default Login;
+
+
