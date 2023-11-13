@@ -3,7 +3,7 @@ import Category from './Category';
 
 function Rating() {
   const currentStars = useState([Array(5).fill(null)]);
-
+//here
 
   return (
     <div className="ratings">
