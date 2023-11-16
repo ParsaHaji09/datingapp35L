@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 
 // controllers for API endpoints
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, tags, pic } = req.body;
 
     // check if user already exists by their email
     const userExists = await User.findOne({ email });
@@ -16,7 +16,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // if user does not exist, create a new user post
     const user = await User.create({
-        name, email, password,
+        name, email, password, tags, pic
     });
 
     // if user create successfully
@@ -25,7 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
+            tags: user.tags,
             pic: user.pic,
         }) // otherwise there was an error with creating the user
     } else {
