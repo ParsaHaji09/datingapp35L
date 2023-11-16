@@ -1,8 +1,56 @@
 .App {
   text-align: center;
+  display: flex;
+  min-height: 100vh;
+  align-items:center;
+  justify-content: center;
+  /* cool tint sunset */
+  /* background-image: linear-gradient(0deg, #afacff, #fb9ec3 48%, #fae6b0) */ 
+  /* pastels */
+  /* background-image: linear-gradient(69deg, #f6ffbe, #f5bedc 48%, #bce1f3) */
+  /* warm tint sunset */
+  background-image: linear-gradient(0deg, #c48fbd, #f4857b 48%, #fccf76)
+
+
+
+
+
 }
 
-.App-logo {
+.auth-form-container, .login-form, .register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+input{
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+}
+
+.button {
+  border: none;
+  background-color: rgb(255, 214, 214);
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #16466e;
+}
+
+.link-btn{
+  border: none;
+  background: none;
+  color: white;
+  text-decoration: underline;
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +83,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

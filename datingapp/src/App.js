@@ -17,11 +17,27 @@ import Profile from './Components/Profile/Profile'
 import Rating from "./Components/Rating/Rating";
 
 function App() {
+  const [currentForm, setCurrentForm] = useState("register"); //when i set this to "login" it works fine
+  
+
+  useEffect(() => {
+
+  }, [currentForm])
+
+  const toggleForm = (formName)=>{
+    setCurrentForm(formName);
+    console.log(currentForm);
+  }
   return (
     <Router>
       <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/"
+          element={<div className="App">
+              {currentForm === 'login' && <Login onFormSwitch={toggleForm} />}
+              {currentForm === 'register' && <Register onFormSwitch={toggleForm} />}
+              </div>
+            }
+          />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/rating" element={<Rating />} />
@@ -33,3 +49,6 @@ function App() {
 }
 
 export default App;
+
+{/* <Route path="/" element={<Login />} />
+<Route path="/register" element={<Register />} /> */}
