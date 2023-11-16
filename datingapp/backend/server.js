@@ -2,10 +2,12 @@ const express = require('express');
 const users = require('./data/users');
 const dotenv = require('dotenv');
 const connectDB = require("./config/db");
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 dotenv.config({ path: './backend/.env' });
 connectDB();
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send("API is running...");
@@ -20,14 +22,7 @@ app.get('/api/users/:id', (req, res) => {
     res.send(user);
 })
 
-/* TO get the data, we can use AXIOS
-import axios form "axios"
-const fetchNotes = async() => {
-    const data = await axios.get('api/notes');
-}
-
- * 
- */
+app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
