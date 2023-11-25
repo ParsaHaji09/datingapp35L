@@ -1,0 +1,19 @@
+.category {
+    display: inline-block;
+    border: 2px solid #000000;
+    border-radius: 20px; /* Adjust the border-radius for a circular effect */
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .cat-name {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 5px;
+  }
+  
+  .star-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }

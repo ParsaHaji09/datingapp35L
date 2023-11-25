@@ -1,0 +1,25 @@
+.star {
+    display: inline-block;
+    position: relative;
+    padding: 25px 25px;
+    font-size: 60px;
+    background-color: transparent;
+    color: #ffffff;
+    outline: none;
+    border:none;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .star-shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    text-shadow: 0 0 6px #000000; /* Solid black outline */
+
+  }
+  .star.full .star-shape{
+    color: gold
+  }

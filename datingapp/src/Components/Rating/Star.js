@@ -1,8 +1,9 @@
 import React from 'react';
+import './Star.css';
 
-function Star({value,onStarClick}){
-  return( <button className="star" onClick={onStarClick}>
-    {value}
+function Star({color,onStarClick}){
+  return( <button className={`star ${color ? 'full' : ''}`} onClick={onStarClick}>
+            <span className="star-shape">&#9733;</span>
     </button>
   );
 }
