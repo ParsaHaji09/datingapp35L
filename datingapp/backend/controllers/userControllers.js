@@ -41,5 +41,10 @@ const registerUser = asyncHandler(async (req, res) => {
     // })
 });
 
+// authorize user logging in
+const verifyUser = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+});
 
-module.exports = { registerUser }
+
+module.exports = { registerUser, verifyUser }

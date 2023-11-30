@@ -3,6 +3,7 @@ const users = require('./data/users');
 const dotenv = require('dotenv');
 const connectDB = require("./config/db");
 const userRoutes = require('./routes/userRoutes');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
 dotenv.config({ path: './backend/.env' });
@@ -22,7 +23,12 @@ app.get('/api/users/:id', (req, res) => {
     res.send(user);
 })
 
+// registration
 app.use('/api/users', userRoutes);
+
+// errors
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

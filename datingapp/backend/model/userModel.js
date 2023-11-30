@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema(
         name: {
             type: String,
             required: true,
+            unique: true,
         },
         email: {
             type: String,
@@ -47,6 +48,11 @@ userSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.model('USer', userSchema);
+// decrypt password for login check
+userSchema.methods.matchPassword = async function (pwd) {
+    return await bcrypt.compare(pwd, this.password);
+} 
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
