@@ -44,9 +44,10 @@ const Login = (props) => {
       }, config);
 
       // local storage for our email and password
-      console.log(data);
+      // console.log(data);
       localStorage.setItem('saveData', JSON.stringify(data));
       setLoading(false);
+      navigate('/explore', { state: { data } });
 
     } catch (error) {
       setError(error.response.data.message);
