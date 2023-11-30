@@ -82,6 +82,7 @@ const Register = (props) => {
 
     } catch (error) {
       setError(error.response.data.message);
+      console.log(error.response.data.message);
     }
   }
   return (
@@ -95,7 +96,7 @@ const Register = (props) => {
       <label htmlFor ="password">password</label>
       <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="******" id="password" name="password"/>
       
-        <div>
+        <div style = {{margin: 10}}>
           <h2>Select Your Tags</h2>
           {tagsArray.map((tag) => (
             <button
