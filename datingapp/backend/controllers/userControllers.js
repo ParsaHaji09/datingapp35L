@@ -31,7 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id), // generate a token for the user to give them a JWT identity
         }) // otherwise there was an error with creating the user
     } else {
-        res.status(404);
+        res.status(400);
         throw new Error('Error Occurred!');
     }
 
