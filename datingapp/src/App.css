@@ -4,16 +4,7 @@
   min-height: 100vh;
   align-items:center;
   justify-content: center;
-  /* cool tint sunset */
-  /* background-image: linear-gradient(0deg, #afacff, #fb9ec3 48%, #fae6b0) */ 
-  /* pastels */
-  /* background-image: linear-gradient(69deg, #f6ffbe, #f5bedc 48%, #bce1f3) */
-  /* warm tint sunset */
   background-image: linear-gradient(0deg, #c48fbd, #f4857b 48%, #fccf76)
-
-
-
-
 
 }
 
@@ -49,6 +40,34 @@ input{
   color: white;
   text-decoration: underline;
 }
+
+.tag-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+.tag-button {
+  margin: 5px;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-basis: calc(20% - 10px);
+}
+
+.tag-button-selected {
+  background-color: rgb(234, 105, 185);
+}
+
+.tag-button-unselected {
+  background-color: rgb(250, 212, 212);
+}
+
+
+
+
+
 
 /* .App-logo {
   height: 40vmin;
