@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 
 // controllers for API endpoints
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, tags, pic } = req.body;
+    const { name, email, password } = req.body;
 
     // check if user already exists by their email
     const userExists = await User.findOne({ email });
@@ -16,7 +16,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // if user does not exist, create a new user post
     const user = await User.create({
-        name, email, password, tags, pic
+        name, email, password, tags, pic,
     });
 
     // if user create successfully
@@ -27,6 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
             email: user.email,
             tags: user.tags,
             pic: user.pic,
+            token: generateToken(user._id), // generate a token for the user to give them a JWT identity
         }) // otherwise there was an error with creating the user
     } else {
         res.status(400);
@@ -44,6 +45,21 @@ const registerUser = asyncHandler(async (req, res) => {
 // authorize user logging in
 const verifyUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
+
+    // find email by user
+    const user = await User.findOne({ email });
+    if (user && (await user.matchPassword(password))) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            tags: user.tags,
+            pic: user.pic
+        })
+    } else {
+        res.status(400);
+        throw new Error("Invalid email or password!")
+    }
 });
 
 
