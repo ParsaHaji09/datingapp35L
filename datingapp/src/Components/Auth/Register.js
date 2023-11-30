@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -5,6 +6,10 @@ const Register = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
+  const [pic, setPic] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const MAX_SELECTED_TAGS = 5; // Set the maximum number of selected tags
 
@@ -47,10 +52,37 @@ const Register = (props) => {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
+    console.log(name, email, pass, selectedTags, pic);
     console.log('Register component submitted with email:', email);
+
+    // register
+    try {
+
+      const config = {
+        header: {
+          "Content-type":"application/json",
+        },
+      };
+
+      setLoading(true);
+
+      const regData = await axios.post("api/users/", {
+        name: name,
+        email: email,
+        password: pass,
+        tags: selectedTags,
+        pic: pic,
+      }, config);
+
+      localStorage.setItem("saveData", JSON.stringify(regData.data))
+      console.log(regData.data)
+      setLoading(false);
+
+    } catch (error) {
+      setError(error.response.data.message);
+    }
   }
   return (
     <div className = "App">
@@ -68,6 +100,7 @@ const Register = (props) => {
           {tagsArray.map((tag) => (
             <button
               key={tag}
+              type = "button"
               onClick={() => handleTagClick(tag)}
               className={`tag-button ${selectedTags.includes(tag) ? 'tag-button-selected' : 'tag-button-unselected'}`}
             >
@@ -76,7 +109,7 @@ const Register = (props) => {
           ))}
         </div>
      
-      <button className="button" type="submit">Log In</button>
+      <button className="button" type="submit">Register</button>
     </form>
     <button className="link-btn" onClick={handleClick}> Already have an account? Log in here.</button>
     </div>

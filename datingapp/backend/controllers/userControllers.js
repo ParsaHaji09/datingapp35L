@@ -1,10 +1,11 @@
 const User = require('../model/userModel')
 const asyncHandler = require('express-async-handler');
+const generateToken = require('../util/generateToken');
 // asyncHander for async errors with user registration
 
 // controllers for API endpoints
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, tags, pic } = req.body;
 
     // check if user already exists by their email
     const userExists = await User.findOne({ email });
@@ -30,7 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id), // generate a token for the user to give them a JWT identity
         }) // otherwise there was an error with creating the user
     } else {
-        res.status(400);
+        res.status(404);
         throw new Error('Error Occurred!');
     }
 
@@ -54,7 +55,8 @@ const verifyUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             tags: user.tags,
-            pic: user.pic
+            pic: user.pic,
+            token: generateToken(user._id)
         })
     } else {
         res.status(400);
