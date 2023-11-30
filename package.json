@@ -1,0 +1,9 @@
+{
+  "proxy": "http://localhost:5000",
+  "dependencies": {
+    "axios": "^1.6.1",
+    "bcryptjs": "^2.4.3",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
