@@ -43,7 +43,14 @@ const Register = (props) => {
     }
   };
 
-  
+
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+  const onFileChange = async (event) => {
+    const file = event.target.files[0];
+    setPic(file.name)
+    console.log(file.name)
+  };
 
   const navigate = useNavigate();
   const handleClick = () => {
@@ -79,6 +86,7 @@ const Register = (props) => {
       localStorage.setItem("saveData", JSON.stringify(regData.data))
       console.log(regData.data)
       setLoading(false);
+      navigate('/')
 
     } catch (error) {
       setError(error.response.data.message);
@@ -94,10 +102,10 @@ const Register = (props) => {
       <label htmlFor ="email">email</label>
       <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter here" id="email" name="email"/>
       <label htmlFor ="password">password</label>
-      <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="******" id="password" name="password"/>
+      <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password"/>
       
-        <div style = {{margin: 10}}>
-          <h2>Select Your Tags</h2>
+        <div style = {{margin: 20}}>
+          <h3>Select Your Tags (up to 5)</h3>
           {tagsArray.map((tag) => (
             <button
               key={tag}
@@ -109,7 +117,11 @@ const Register = (props) => {
             </button>
           ))}
         </div>
-     
+        <label>
+          Upload Image:
+          <input type="file" onChange={onFileChange} />
+        </label>
+      
       <button className="button" type="submit">Register</button>
     </form>
     <button className="link-btn" onClick={handleClick}> Already have an account? Log in here.</button>
