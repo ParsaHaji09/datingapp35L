@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { register } from '../../actions/reduxActions';
 
 const Register = (props) => {
   const [email, setEmail] = useState('');
@@ -8,8 +10,11 @@ const Register = (props) => {
   const [name, setName] = useState('');
   const [pic, setPic] = useState("");
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
   const MAX_SELECTED_TAGS = 5; // Set the maximum number of selected tags
 
@@ -63,35 +68,37 @@ const Register = (props) => {
     e.preventDefault();
     console.log(name, email, pass, selectedTags, pic);
     console.log('Register component submitted with email:', email);
+    dispatch(register(name, email, pass, selectedTags, pic));
 
     // register
-    try {
 
-      const config = {
-        header: {
-          "Content-type":"application/json",
-        },
-      };
+    // try {
 
-      setLoading(true);
+    //   const config = {
+    //     header: {
+    //       "Content-type":"application/json",
+    //     },
+    //   };
 
-      const regData = await axios.post("api/users/", {
-        name: name,
-        email: email,
-        password: pass,
-        tags: selectedTags,
-        pic: pic,
-      }, config);
+    //   setLoading(true);
 
-      localStorage.setItem("saveData", JSON.stringify(regData.data))
-      console.log(regData.data)
-      setLoading(false);
+    //   const regData = await axios.post("api/users/", {
+    //     name: name,
+    //     email: email,
+    //     password: pass,
+    //     tags: selectedTags,
+    //     pic: pic,
+    //   }, config);
+
+      // localStorage.setItem("saveData", JSON.stringify(regData.data))
+      // console.log(regData.data)
+      // setLoading(false);
       navigate('/')
 
-    } catch (error) {
-      setError(error.response.data.message);
-      console.log(error.response.data.message);
-    }
+    // } catch (error) {
+    //   setError(error.response.data.message);
+    //   console.log(error.response.data.message);
+    // }
   }
   return (
     <div className = "App">
