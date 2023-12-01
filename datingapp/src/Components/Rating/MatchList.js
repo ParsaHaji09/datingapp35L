@@ -34,7 +34,6 @@ function MatchList({userID, onPersonClick, onListChange}){
           {loading ? (
             <p>Loading...</p>
         ) : (
-        <ul-container>
           <ul>
             {peopleList.map((person, index) => (
               <li key={index} onClick={() => handlePersonClick(person)} 
@@ -44,7 +43,6 @@ function MatchList({userID, onPersonClick, onListChange}){
               </li>
             ))}
           </ul>
-        </ul-container>
         )}
         </div>
       );
