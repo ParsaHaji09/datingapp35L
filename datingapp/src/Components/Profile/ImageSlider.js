@@ -67,20 +67,6 @@ const chipStyle = {
   border: '1px solid #ddd',
 };
 
-// const bioStyle = {
-//   position: "absolute",
-//   top: "0",
-//   left: "0",
-//   right: "0",
-//   bottom: "0",
-//   display: "flex",
-//   flexDirection: "column",
-//   justifyContent: "center",
-//   alignItems: "center",
-//   color: "#fff",
-//   textAlign: "center",
-//   zIndex: 2,
-// };
 
 const bioStyle = {
   position: "absolute",
@@ -91,6 +77,9 @@ const bioStyle = {
   flexDirection: "column",
   justifyContent: "flex-end", // Align content to the bottom
   alignItems: "flex-start",
+  textShadow: "1px 1px 2px rgba(0, 0, 0, 6)", 
+  backgroundColor: "rgba(0, 0, 0, 0.4)",
+  borderRadius: "10px",
   color: "#fff",
   textAlign: "center",
   padding: "1rem 2rem", // Add padding for better readability, adjust as needed
@@ -129,46 +118,48 @@ const ImageSlider = ({ slides, parentWidth }) => {
   });
 
   return (
-    <div style={sliderStyles}>
-      <div style={bioStyle}>
-        <h2>Pacific Ocean, 750 mil.</h2>
-        <p>I am an ocean and I like to wave.</p>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <Chip label="Chip Filled" style={chipStyle} />
-          <Chip label="Chip Filled" style={chipStyle} />
-          <Chip label="Chip Filled" style={chipStyle} />
-        </div>
-      </div>
-      <div>
-        <div onClick={goToPrevious} style={leftArrowStyles}>
-          <ArrowBackIosIcon />
-        </div>
-        <div onClick={goToNext} style={rightArrowStyles}>
-          <ArrowForwardIosIcon />
-        </div>
-      </div>
-      <div style={slidesContainerOverflowStyles}>
-        <div style={getSlidesContainerStylesWithWidth()}>
-          {slides.map((_, slideIndex) => (
-            <div
-              key={slideIndex}
-              style={getSlideStylesWithBackground(slideIndex)}
-            ></div>
-          ))}
-        </div>
-      </div>
-      <div style={dotsContainerStyles}>
-        {slides.map((slide, slideIndex) => (
-          <div
-            style={getDotStyle(slideIndex)}
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-          >
-            ●
-          </div>
-        ))}
-      </div>
-    </div>
+    <div className="App"></div>
+    // <div style={sliderStyles}>
+    //   <div style={bioStyle}>
+    //     <h2>John Doe, 19</h2>
+    //     <p>Here you can read things about me and understand what I am all about.</p>
+    //     <div style={{ display: 'flex', gap: '8px' }}>
+    //       {/* placeholders for tags */}
+    //       <Chip label="Tag 1" style={chipStyle} /> 
+    //       <Chip label="Tag 2" style={chipStyle} />
+    //       <Chip label="Tag 3" style={chipStyle} />
+    //     </div>
+    //   </div>
+    //   <div>
+    //     <div onClick={goToPrevious} style={leftArrowStyles}>
+    //       <ArrowBackIosIcon />
+    //     </div>
+    //     <div onClick={goToNext} style={rightArrowStyles}>
+    //       <ArrowForwardIosIcon />
+    //     </div>
+    //   </div>
+    //   <div style={slidesContainerOverflowStyles}>
+    //     <div style={getSlidesContainerStylesWithWidth()}>
+    //       {slides.map((_, slideIndex) => (
+    //         <div
+    //           key={slideIndex}
+    //           style={getSlideStylesWithBackground(slideIndex)}
+    //         ></div>
+    //       ))}
+    //     </div>
+    //   </div>
+    //   <div style={dotsContainerStyles}>
+    //     {slides.map((slide, slideIndex) => (
+    //       <div
+    //         style={getDotStyle(slideIndex)}
+    //         key={slideIndex}
+    //         onClick={() => goToSlide(slideIndex)}
+    //       >
+    //         ●
+    //       </div>
+    //     ))}
+    //   </div>
+    // </div>
   );
 };
 

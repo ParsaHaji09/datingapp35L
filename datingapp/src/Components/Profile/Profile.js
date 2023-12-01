@@ -13,12 +13,9 @@ const Profile = () => {
     margin: "0 auto",
     // 16:9 aspect ratio
   };
-  const bodyStyles = {
-    backgroundColor: '#8BB8E8', // Set your desired shade of blue
-    // Add other styles if needed
-  };
+
   return (
-    <div style={bodyStyles}>
+    <div>
       <div style={{ padding: "15px" }}></div>
       <div style={containerStyles}>
         <ImageSlider slides={slides} parentWidth={450} />
