@@ -7,10 +7,6 @@
   background-image: linear-gradient(0deg, #c48fbd, #f4857b 48%, #fccf76);
 }
 
-<<<<<<< HEAD
-
-.App-logo {
-=======
 .auth-form-container {
   display: flex;
   flex-direction: column;
@@ -86,7 +82,6 @@ input{
 
 
 /* .App-logo {
->>>>>>> 657ca73ec8e4617d23d83e8c516a0f546a716121
   height: 40vmin;
   pointer-events: none;
 }
@@ -119,12 +114,4 @@ input{
   to {
     transform: rotate(360deg);
   }
-<<<<<<< HEAD
-}
-
-body {
-  background-color: #8BB8E8; /* Set your desired background color */
-}
-=======
 } */
->>>>>>> 657ca73ec8e4617d23d83e8c516a0f546a716121
