@@ -5,6 +5,7 @@ const users = [
       tags:
         ["funny", "smart", "artistic", "wholesome"],
       rating: 9.7,
+      matchList: ["2","3","4"]
     },
     {
       _id: "2",
