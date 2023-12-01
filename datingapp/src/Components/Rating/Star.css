@@ -20,6 +20,9 @@
     text-shadow: 0 0 6px #000000; /* Solid black outline */
 
   }
-  .star.full .star-shape{
+  .star.full {
     color: gold
+  }
+  .star.hover {
+    color: grey; /* Set your color for a hovered star */
   }

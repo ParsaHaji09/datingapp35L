@@ -10,13 +10,15 @@ function Comment(){
     };
 
     return(
-        <div className="comment">
-            <input
+        
+        <div className="comment-container">
+            <textarea
+                className="comment-input"
                 type="text"
                 value={comment}
                 onChange={handleCommentChange}
-                placeholder="Type something..."
-            />
+                placeholder="Additional comments..."
+            ></textarea>
         </div>
     )
 }

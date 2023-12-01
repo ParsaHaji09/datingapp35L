@@ -4,16 +4,37 @@
     border-radius: 20px; /* Adjust the border-radius for a circular effect */
     overflow: hidden;
     margin-bottom: 10px;
+    width: 300px;
+    text-align: center;
   }
-  
+  .category:hover{
+    outline: none; /* Remove the default focus outline */
+    border-color: #000000; /* Change the border color on focus */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */
+  }
+  .nameAndImage {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center;
+  }
   .cat-name {
     font-size: 25px;
     text-align: center;
-    margin-top: 5px;
+    margin: 5px;
   }
   
   .star-row {
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
+    justify-content: center;
+    padding: 15px;
+  }
+  .image {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .image img {
+    margin: 10px;
+    max-width: 100%;
+    max-height: 100%;
   }
