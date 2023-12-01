@@ -22,6 +22,7 @@ const userSchema = mongoose.Schema(
         },
         tags: {
             type: Array,
+            default: []
         },
         pic: {
             type: String,
