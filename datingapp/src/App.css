@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +36,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-color: #8BB8E8; /* Set your desired background color */
 }
