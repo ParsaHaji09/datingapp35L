@@ -28,6 +28,38 @@ const userSchema = mongoose.Schema(
             type: String,
             default: ""
         },
+        attractiveness: {
+            type: Array,
+            default: [0, 0]
+        },
+        conversation: {
+            type: Array,
+            default: [0, 0]
+        },
+        activity: {
+            type: Array,
+            default: [0, 0]
+        },
+        humor: {
+            type: Array,
+            default: [0, 0]
+        },
+        decency: {
+            type: Array,
+            default: [0, 0]
+        },
+        after: {
+            type: Array,
+            default: [0, 0]
+        },
+        matches: {
+            type: Array,
+            default: []
+        },
+        incoming: {
+            type: Array,
+            default: []
+        },
     }, // track time of creation and modification
     {
         timestamps: true,
