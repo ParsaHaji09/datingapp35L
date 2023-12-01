@@ -58,11 +58,10 @@ const Login = (props) => {
     //     email: email, 
     //     password: pass,
     //   }, config);
-
     //   // local storage for our email and password
     //   console.log(data);
     //   localStorage.setItem('saveData', JSON.stringify(data));
-    //   setLoading(false);
+
 
     // } catch (error) {
     //   setError(error.response.data.message);
