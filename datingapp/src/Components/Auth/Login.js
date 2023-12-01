@@ -1,21 +1,36 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { login } from '../../actions/reduxActions';
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
 
   // check if user has logged in already based on local storage
   // TODO:  UNCOMMENT ON FINAL VERSION
-  // useEffect(() => {
-  //   const prevData = localStorage.getItem("saveData");
-  //   if (prevData) {
-  //     navigate('/explore');
-  //   }
-  // }, [])
+  useEffect(() => {
+    const prevData = localStorage.getItem("saveData");
+    if (prevData) {
+      navigate('/explore');
+    }
+  }, [userInfo])
+
+  useEffect(() => {
+    if (error) console.log(error);
+  }, [error])
+
+  useEffect(() => {
+    console.log(loading);
+  }, [loading])
   
 
   const navigate = useNavigate();
@@ -28,31 +43,30 @@ const Login = (props) => {
     e.preventDefault();
     console.log(email, pass);
 
-    // whenever you use API calls that take JSON data, use HEADERS
-    try {
-      const config = {
-        headers: {
-          "Content-type":"application/json",
-        }
-      };
+    // whenever you use API calls that take JSON data, use HEADERS and dispatch
+    dispatch(login(email, pass));
+    // try {
+    //   const config = {
+    //     headers: {
+    //       "Content-type":"application/json",
+    //     }
+    //   };
 
-      setLoading(true);
+    //   setLoading(true);
       
-      const { data } = await axios.post('/api/users/login', {
-        email: email, 
-        password: pass,
-      }, config);
+    //   const { data } = await axios.post('/api/users/login', {
+    //     email: email, 
+    //     password: pass,
+    //   }, config);
+    //   // local storage for our email and password
+    //   console.log(data);
+    //   localStorage.setItem('saveData', JSON.stringify(data));
 
-      // local storage for our email and password
-      // console.log(data);
-      localStorage.setItem('saveData', JSON.stringify(data));
-      setLoading(false);
-      navigate('/explore', { state: { data } });
 
-    } catch (error) {
-      setError(error.response.data.message);
-      setLoading(false);
-    }
+    // } catch (error) {
+    //   setError(error.response.data.message);
+    //   setLoading(false);
+    // }
   }
   return (
     <div className="App">

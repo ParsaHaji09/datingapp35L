@@ -51,6 +51,7 @@ const Explore = () => {
         )}
       </div>
     </form>
+
   );
 
 
