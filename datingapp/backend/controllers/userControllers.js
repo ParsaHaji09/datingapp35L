@@ -75,5 +75,16 @@ const getAllUsers = asyncHandler(async (req, res) => {
     }
 });
 
+const getUser = asyncHandler(async (req, res) => {
+    const id = req.body.id;
+    const user = await User.findById(id);
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(400);
+        throw new Error("User doesn't exist");
+    }
+});
 
-module.exports = { registerUser, verifyUser, getAllUsers }
+
+module.exports = { registerUser, verifyUser, getAllUsers, getUser }
