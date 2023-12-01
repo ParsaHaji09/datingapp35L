@@ -90,9 +90,9 @@ const Register = (props) => {
     //     pic: pic,
     //   }, config);
 
-      localStorage.setItem("saveData", JSON.stringify(regData.data))
-      console.log(regData.data)
-      setLoading(false);
+      // localStorage.setItem("saveData", JSON.stringify(regData.data))
+      // console.log(regData.data)
+      // setLoading(false);
       navigate('/')
 
     // } catch (error) {
