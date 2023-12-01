@@ -1,55 +1,57 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { BsSearch} from "react-icons/bs"
+import '../../App.css'
+
 const Explore = () => {
 
- const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
- const countries = [
-
-  { name: "Belgium", continent: "Europe" },
-  { name: "India", continent: "Asia" },
-  { name: "Bolivia", continent: "South America" },
-  { name: "Ghana", continent: "Africa" },
-  { name: "Japan", continent: "Asia" },
-  { name: "Canada", continent: "North America" },
-  { name: "New Zealand", continent: "Australasia" },
-  { name: "Italy", continent: "Europe" },
-  { name: "South Africa", continent: "Africa" },
-  { name: "China", continent: "Asia" },
-  { name: "Paraguay", continent: "South America" },
-  { name: "Usa", continent: "North America" },
-  { name: "France", continent: "Europe" },
-  { name: "Botswana", continent: "Africa" },
-  { name: "Spain", continent: "Europe" },
-  { name: "Senegal", continent: "Africa" },
-  { name: "Brazil", continent: "South America" },
-  { name: "Denmark", continent: "Europe" },
-  { name: "Mexico", continent: "South America" },
-  { name: "Australia", continent: "Australasia" },
-  { name: "Tanzania", continent: "Africa" },
-  { name: "Bangladesh", continent: "Asia" },
-  { name: "Portugal", continent: "Europe" },
-  { name: "Pakistan", continent: "Asia" },
-
-];
-
-const getFilteredItems = (input, itemList) => {
-  if(!input){
-    return itemList;
-  }
-  return itemList.filter(country => country.name.toLowerCase().includes(input.toLowerCase()))
-}
-
-const filteredCountries = getFilteredItems(searchInput, countries);
-
-return <div>
-
-<input type="search" placeholder="Search here" onChange={e => setSearchInput(e.target.value)} value={searchInput} />
-
-<ul>
-  {filteredCountries.map(value => <p>{value.name}</p>)}
-</ul>
-
-</div>
+  useEffect(() => {
+    const search = async () => {
+      try{
+        if (!searchInput){
+          setSearchResult([])
+          return
+        }
+        const result = await axios.get("/api/users/all-users", {params: {key: searchInput, limit: 5}}) // ask which api endpoint to get
+        setSearchInput(result.data.data)
+        console.log(result)
+      }
+      catch (error){
+        console.log(error)
+      }
+    }
+    search()
+  }, [searchInput])
+  return (
+    <form>
+      <div className='explore-wrapper'>
+        <div className='form-group'>
+          <button className = 'search-btn'><BsSearch/></button>
+          <input
+            className='search-input'
+            type = "text"
+            placeholder='Searching...'
+            value = {searchInput}
+            onChange={e => setSearchInput(e.target.value)}
+          />
+        </div>
+        {searchResult && searchResult.length > 0 && (
+          <div className='search-result'>
+            {searchResult.map(user => (
+                <div className='result-item' key = {user._id}>
+                  <p className='name'>{user.name}</p>
+                </div>
+              ),
+            )}
+          </div>
+        )}
+      </div>
+    </form>
+  );
 
 
 };
