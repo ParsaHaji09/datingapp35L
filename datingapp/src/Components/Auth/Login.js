@@ -12,11 +12,7 @@ const Login = (props) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
-
   // check if user has logged in already based on local storage
-  // TODO:  UNCOMMENT ON FINAL VERSION
   useEffect(() => {
     const prevData = localStorage.getItem("saveData");
     if (prevData) {
