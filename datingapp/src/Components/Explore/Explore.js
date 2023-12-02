@@ -11,14 +11,20 @@ function Explore() {
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const [name, setUserName] = useState("");
+  const [pfp, setPfp] = useState("");
 
   useEffect(() => {
     const prevData = localStorage.getItem("saveData");
     if (!prevData) {
       navigate('/');
     } else {
-      setUserData(JSON.parse(prevData));
-      console.log(prevData);
+      const parsedData = JSON.parse(prevData);
+      setUserData(parsedData);
+      setUserName(parsedData.name);
+      if (parsedData.pic !== undefined && parsedData.pic !== "") {
+        setPfp(parsedData.pic);
+      }
     }
   }, []);
 
@@ -30,7 +36,8 @@ function Explore() {
 
   return (
     <div>
-      <h1>{ userData.name }</h1>
+      <h1>{ name }</h1>
+      <img src = { pfp } />
       <button type = "submit" onClick = {logoutHandler}>Logout</button>
     </div>
   );

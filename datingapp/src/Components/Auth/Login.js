@@ -18,7 +18,7 @@ const Login = (props) => {
     if (prevData) {
       navigate('/explore');
     }
-  }, [userInfo])
+  }, [userLogin])
 
   useEffect(() => {
     if (error) console.log(error);
