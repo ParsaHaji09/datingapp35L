@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from "../constants/reduxConstants"
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from "../constants/reduxConstants"
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -51,4 +51,9 @@ export const register = (name, email, password, tags, pic) => async (dispatch) =
   } catch (error) {
     dispatch({ type: REGISTER_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message, });
   }
+}
+
+export const logout = () => async(dispatch) => {
+  localStorage.removeItem("saveData");
+  dispatch({ type: LOGOUT });
 }
