@@ -66,25 +66,77 @@ const verifyUser = asyncHandler(async (req, res) => {
 
 // get all users in DB
 const getAllUsers = asyncHandler(async (req, res) => {
-    const users = await User.find({});
-    if (users) {
+    try {
+        const users = await User.find({});
         res.json(users);
-    } else {
-        res.status(400);
-        throw new Error("Unable to fetch users");
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Error fetching users"});
     }
 });
 
 const getUser = asyncHandler(async (req, res) => {
-    const id = req.body.id;
-    const user = await User.findById(id);
+    const user = await User.findById(req.params.id);
+
     if (user) {
         res.json(user);
     } else {
-        res.status(400);
-        throw new Error("User doesn't exist");
+        res.status(404).json({ message: "User not found." });
+    }
+
+    res.json(user);
+});
+
+const updateUser = asyncHandler(async (req, res) => {
+    // need id and updated traits/tags
+    const { tags, attractiveness, conversation,
+            activity, humor, decency, after, matches, incoming, } = req.body;
+
+    const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
+
+    console.log("here")
+
+    const user = await User.findById(req.params.id);
+
+    if (user) {
+        if (tags){
+            user.tags = tags;
+        }
+
+        for (const key in req.body) {
+            const value = req.body[key];
+            
+            // Exclude the 'tags' key
+            if (includedKeys.includes(key)) {
+                // Check if the value exists before updating the user property
+                if (value !== undefined && value !== null) {
+                    // Use square bracket notation to dynamically set the user property
+                    user[key][0] += value;
+                    if (user[key][1]==null){
+                        user[key][1] = 1
+                    }
+                    user[key][1] += 1;
+                }
+            }
+        }
+
+        if (matches){
+            if (matches.type=="remove"){
+                user["matches"] = user["matches"].filter(item => item !== matches.value);
+            } else {
+                user["matches"].push(matches.value);
+            }
+        }
+        
+
+
+        const updateUser = await user.save();
+        res.json(updateUser);
+    } else {
+        res.status(404);
+        throw new Error("User not found.");
     }
 });
 
 
-module.exports = { registerUser, verifyUser, getAllUsers, getUser }
+module.exports = { registerUser, verifyUser, getAllUsers, getUser, updateUser }

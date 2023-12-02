@@ -1,5 +1,6 @@
 const express = require('express')
-const { registerUser, verifyUser, getAllUsers } = require('../controllers/userControllers')
+const { registerUser, verifyUser, getAllUsers, getUser, updateUser } = require('../controllers/userControllers');
+const { protect } = require('../middleware/authMiddleware');
 const router = express.Router()
 
 // API endpoints
@@ -12,6 +13,9 @@ router.route('/').post(registerUser);
 router.route('/login').post(verifyUser);
 
 // retrieve users
-router.route('/all-users').post(getAllUsers);
+router.route('/all-users').get(protect, getAllUsers);
+
+// retrieve specific user
+router.route('/:id').get(getUser).put(updateUser);
 
 module.exports = router;
