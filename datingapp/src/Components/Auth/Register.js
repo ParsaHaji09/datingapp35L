@@ -98,20 +98,20 @@ const Register = (props) => {
     <div className="auth-form-container">
     <form className="login-form" onSubmit={handleSubmit}>
 
-      <label htmlFor="name">Full name</label>
-      <input value={name} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="full name"/>
+      <label htmlFor="name">Full Name</label>
+      <input value={name} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="Enter here"/>
 
-      <label htmlFor ="email">email</label>
+      <label htmlFor ="email">Email</label>
       <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter here" id="email" name="email"/>
 
-      <label htmlFor ="password">password</label>
+      <label htmlFor ="password">Password</label>
       <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password"/>
 
       <label htmlFor="birthday">Birthday</label>
       <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" id="birthday" name="birthday"/>
 
       <label htmlFor="phoneNumber">Phone Number</label>
-      <PhoneInput country="US" value={phone} onChange={setPhone} />
+      <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"/>
 
         <div style = {{margin: 20}}>
           <h3>Select Your Tags (up to 5)</h3>
