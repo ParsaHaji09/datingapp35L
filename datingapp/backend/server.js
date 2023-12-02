@@ -3,12 +3,19 @@ const users = require('./data/users');
 const dotenv = require('dotenv');
 const connectDB = require("./config/db");
 const userRoutes = require('./routes/userRoutes');
+const cors = require('cors');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
 dotenv.config({ path: './backend/.env' });
 connectDB();
 app.use(express.json());
+
+app.use(cors({
+    origin: 'http://localhost:3000',  // Change this to the origin of your React app
+    credentials: true,
+  }));
+  
 
 app.get('/', (req, res) => {
     res.send("API is running...");
