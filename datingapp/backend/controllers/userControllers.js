@@ -67,7 +67,7 @@ const verifyUser = asyncHandler(async (req, res) => {
 // get all users in DB
 const getAllUsers = asyncHandler(async (req, res) => {
     try {
-        const users = await User.find({}).limit(5);
+        const users = await User.find({});
         res.json(users);
     } catch (error) {
         console.log(error);
@@ -76,15 +76,42 @@ const getAllUsers = asyncHandler(async (req, res) => {
 });
 
 const getUser = asyncHandler(async (req, res) => {
-    const id = req.body.id;
-    const user = await User.findById(id);
+    const user = await User.findById(req.params.id);
+
     if (user) {
         res.json(user);
     } else {
-        res.status(400);
-        throw new Error("User doesn't exist");
+        res.status(404).json({ message: "User not found." });
+    }
+
+    res.json(user);
+});
+
+const updateUser = asyncHandler(async (req, res) => {
+    // need id and updated traits/tags
+    const { tags, attractiveness, conversation,
+            activity, humor, decency, after, matches, incoming, } = req.body;
+
+    const user = await User.findById(req.params.id);
+
+    if (user) {
+        user.tags = tags;
+        user.attractiveness = attractiveness;
+        user.conversation = conversation;
+        user.activity = activity;
+        user.humor = humor;
+        user.decency = decency;
+        user.after = after;
+        user.matches = matches;
+        user.incoming = incoming;
+
+        const updateUser = await user.save();
+        res.json(updateUser);
+    } else {
+        res.status(404);
+        throw new Error("User not found.");
     }
 });
 
 
-module.exports = { registerUser, verifyUser, getAllUsers, getUser }
+module.exports = { registerUser, verifyUser, getAllUsers, getUser, updateUser }
