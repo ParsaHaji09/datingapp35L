@@ -66,12 +66,12 @@ const verifyUser = asyncHandler(async (req, res) => {
 
 // get all users in DB
 const getAllUsers = asyncHandler(async (req, res) => {
-    const users = await User.find({});
-    if (users) {
+    try {
+        const users = await User.find({}).limit(5);
         res.json(users);
-    } else {
-        res.status(400);
-        throw new Error("Unable to fetch users");
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Error fetching users"});
     }
 });
 

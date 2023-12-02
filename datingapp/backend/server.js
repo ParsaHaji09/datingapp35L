@@ -14,16 +14,16 @@ app.get('/', (req, res) => {
     res.send("API is running...");
 })
 
-app.get('/api/users', (req, res) => {
-    res.json(users)
-})
+// app.get('/api/users', (req, res) => {
+//     res.json(users)
+// })
 
-app.get('/api/users/:id', (req, res) => {
-    const user = users.find((n) => n._id === req.params.id);
-    res.send(user);
-})
+// app.get('/api/users/:id', (req, res) => {
+//     const user = users.find((n) => n._id === req.params.id);
+//     res.send(user);
+// })
 
-// registration
+// user opps
 app.use('/api/users', userRoutes);
 
 // errors
