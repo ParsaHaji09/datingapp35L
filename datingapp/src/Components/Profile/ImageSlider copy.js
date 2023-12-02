@@ -52,7 +52,7 @@ const dotStyle = {
 const slidesContainerStyles = {
   display: "flex",
   height: "100%",
-  transition: "transform ease-out 0.5s",
+  transition: "transform ease-out 0.2s",
 };
 
 const slidesContainerOverflowStyles = {
@@ -112,6 +112,7 @@ const bioStyle = {
 };
 
 const ImageSlider = ({ slides, parentWidth }) => {
+  const timerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
@@ -149,11 +150,9 @@ const ImageSlider = ({ slides, parentWidth }) => {
         <p>Second Year Computer Science Major</p>
         <div style={{ display: 'flex', gap: '8px' }}>
           {/* placeholders for tags */}
-          {[...Array(5)].map((_, index) => (
-          <div key={index}>
-            <Chip label={`Tag ${index}`} style={chipStyle} />
-          </div>
-          ))}
+          <Chip label="Tag 1" style={chipStyle} /> 
+          <Chip label="Tag 2" style={chipStyle} />
+          <Chip label="Tag 3" style={chipStyle} />
         </div>
       </div>
       <div>
