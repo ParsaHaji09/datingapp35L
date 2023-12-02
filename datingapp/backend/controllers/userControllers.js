@@ -92,18 +92,43 @@ const updateUser = asyncHandler(async (req, res) => {
     const { tags, attractiveness, conversation,
             activity, humor, decency, after, matches, incoming, } = req.body;
 
+    const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
+
+    console.log("here")
+
     const user = await User.findById(req.params.id);
 
     if (user) {
-        user.tags = tags;
-        user.attractiveness = attractiveness;
-        user.conversation = conversation;
-        user.activity = activity;
-        user.humor = humor;
-        user.decency = decency;
-        user.after = after;
-        user.matches = matches;
-        user.incoming = incoming;
+        if (tags){
+            user.tags = tags;
+        }
+
+        for (const key in req.body) {
+            const value = req.body[key];
+            
+            // Exclude the 'tags' key
+            if (includedKeys.includes(key)) {
+                // Check if the value exists before updating the user property
+                if (value !== undefined && value !== null) {
+                    // Use square bracket notation to dynamically set the user property
+                    user[key][0] += value;
+                    if (user[key][1]==null){
+                        user[key][1] = 1
+                    }
+                    user[key][1] += 1;
+                }
+            }
+        }
+
+        if (matches){
+            if (matches.type=="remove"){
+                user["matches"] = user["matches"].filter(item => item !== matches.value);
+            } else {
+                user["matches"].push(matches.value);
+            }
+        }
+        
+
 
         const updateUser = await user.save();
         res.json(updateUser);
