@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/reduxActions';
@@ -11,14 +12,20 @@ function Explore() {
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const [name, setUserName] = useState("");
+  const [pfp, setPfp] = useState("");
 
   useEffect(() => {
     const prevData = localStorage.getItem("saveData");
     if (!prevData) {
       navigate('/');
     } else {
-      setUserData(JSON.parse(prevData));
-      console.log(prevData);
+      const parsedData = JSON.parse(prevData);
+      setUserData(parsedData);
+      setUserName(parsedData.name);
+      if (parsedData.pic !== undefined && parsedData.pic !== "") {
+        setPfp(parsedData.pic);
+      }
     }
   }, []);
 
@@ -27,11 +34,18 @@ function Explore() {
     navigate('/');
   }
 
+  const toRating = () => {
+    const data = { userData };
+    navigate('/rating', { state: { data } });
+  }
+
 
   return (
     <div>
-      <h1>{ userData.name }</h1>
-      <button type = "submit" onClick = {logoutHandler}>Logout</button>
+      <h1>{ name }</h1>
+      <img src = { pfp } />
+      <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
+      <Button type = "submit" onClick = {toRating}>To Rating</Button>
     </div>
   );
 }
