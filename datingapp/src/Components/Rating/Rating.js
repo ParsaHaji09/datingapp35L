@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import RatingForm from './RatingForm';
 import MatchList from './MatchList';
+import './Rating.css';
 
 function Rating(){
     const [list, setList] = useState({});
     const [currentPerson, setCurrentPerson]=useState(null)
 
-    function handleListChange(categoryName, ratingValue) {
-        
+    function handleListChange(newList) {
+          
       }
     function handlePersonClick(person){
         setCurrentPerson(person)
@@ -16,6 +17,7 @@ function Rating(){
 
     return (
         <div className="page">
+            <div className="line"></div>
             <div className="list">
                 <MatchList userID='1'onPersonClick={handlePersonClick} onListChange={handleListChange}/>
             </div>

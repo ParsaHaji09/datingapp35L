@@ -1,0 +1,33 @@
+.page {
+    display: flex;
+    padding: 5px;
+  }
+  
+  .list {
+    width: 310px; /* Adjust the width of the list column as needed */
+    border: 1px solid #000; /* Set the border style and color */
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 150vh; /* Set a fixed height (100% of the viewport height) */
+
+  }
+  .list:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */
+  }
+  /*.line {
+    position: absolute;
+    left: 300px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #000;
+    margin: 0 auto;
+      
+
+}*/
+  
+  .ratingForm {
+    flex-grow: 1; /* Allow the rating form to grow and take the remaining space */
+  }

@@ -1,13 +1,19 @@
-
-
+h2{
+    text-align: center;
+    margin-top: 10px; /* Add some top margin for spacing */
+}
+.bold-text {
+    font-weight: bold;
+  }
 ul {
     list-style-type: none;
-    padding: 0;
+    padding: 4.2px;
     position: relative;
     z-index: 1;
     width:100%;
-    max-height: 100%;
-    overflow-y:auto;
+    overflow-y: auto;
+    border-width: black;
+    text-align: center;
   }
   
   li {
@@ -19,6 +25,7 @@ ul {
     transition: background-color 0.1s ease;
     width: 300px;
     box-sizing: border-box;
+    
     
     
   }

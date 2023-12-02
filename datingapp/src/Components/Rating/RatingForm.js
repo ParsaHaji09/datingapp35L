@@ -52,15 +52,13 @@ function RatingForm({user}) {
           <Category  name={"After The Date"}onRatingChange={handleRatingChange}image={afterDate}/>
         </div>
       </div>
-      <div className="comment">
-        <Comment />
-      </div>
-      <div className="submit-container">
-        <Submit/>
-      </div>
+      
       
       <div className="styledRating">
         <CustomizedRating value={averageRating}name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange}/>
+      </div>
+      <div className="submit-container">
+        <Submit/>
       </div>
       <div className ="profileName">
         <ProfileData userID={user}/>

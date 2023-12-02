@@ -27,10 +27,11 @@ function MatchList({userID, onPersonClick, onListChange}){
         setSelectedPerson(person)
         onPersonClick(person)
     }
+  
 
     return (
         <div>
-          <h2>People List</h2>
+          <h2 className='bold-text'> Current Matches</h2>
           {loading ? (
             <p>Loading...</p>
         ) : (
