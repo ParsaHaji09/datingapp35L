@@ -45,28 +45,6 @@ const Login = (props) => {
 
     // whenever you use API calls that take JSON data, use HEADERS and dispatch
     dispatch(login(email, pass));
-    // try {
-    //   const config = {
-    //     headers: {
-    //       "Content-type":"application/json",
-    //     }
-    //   };
-
-    //   setLoading(true);
-      
-    //   const { data } = await axios.post('/api/users/login', {
-    //     email: email, 
-    //     password: pass,
-    //   }, config);
-    //   // local storage for our email and password
-    //   console.log(data);
-    //   localStorage.setItem('saveData', JSON.stringify(data));
-
-
-    // } catch (error) {
-    //   setError(error.response.data.message);
-    //   setLoading(false);
-    // }
   }
   return (
     <div className="App">
