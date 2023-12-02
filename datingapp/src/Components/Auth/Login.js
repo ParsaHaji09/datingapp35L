@@ -12,17 +12,13 @@ const Login = (props) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
-
   // check if user has logged in already based on local storage
-  // TODO:  UNCOMMENT ON FINAL VERSION
   useEffect(() => {
     const prevData = localStorage.getItem("saveData");
     if (prevData) {
       navigate('/explore');
     }
-  }, [userInfo])
+  }, [userLogin])
 
   useEffect(() => {
     if (error) console.log(error);
@@ -45,28 +41,6 @@ const Login = (props) => {
 
     // whenever you use API calls that take JSON data, use HEADERS and dispatch
     dispatch(login(email, pass));
-    // try {
-    //   const config = {
-    //     headers: {
-    //       "Content-type":"application/json",
-    //     }
-    //   };
-
-    //   setLoading(true);
-      
-    //   const { data } = await axios.post('/api/users/login', {
-    //     email: email, 
-    //     password: pass,
-    //   }, config);
-    //   // local storage for our email and password
-    //   console.log(data);
-    //   localStorage.setItem('saveData', JSON.stringify(data));
-
-
-    // } catch (error) {
-    //   setError(error.response.data.message);
-    //   setLoading(false);
-    // }
   }
   return (
     <div className="App">

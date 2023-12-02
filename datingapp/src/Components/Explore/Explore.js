@@ -1,10 +1,15 @@
-import React, {useState} from 'react'
+
 import axios from 'axios';
 import { BsSearch, BsStarFill} from "react-icons/bs"
 import './Explore.css'
+import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../actions/reduxActions';
+
 
 const Explore = () => {
-
   const users = [
     {
       _id: "1",
@@ -61,6 +66,28 @@ const Explore = () => {
       tags: ["funny", "smart", "artistic", "wholesome"],
       rating: 8.7
     }
+
+  // const dispatch = useDispatch();
+  // const userLogin = useSelector((state) => state.userLogin);
+  // const { userInfo } = userLogin;
+
+  // const navigate = useNavigate();
+  // const [userData, setUserData] = useState({});
+  // const [name, setUserName] = useState("");
+  // const [pfp, setPfp] = useState("");
+
+  // useEffect(() => {
+  //   const prevData = localStorage.getItem("saveData");
+  //   if (!prevData) {
+  //     navigate('/');
+  //   } else {
+  //     const parsedData = JSON.parse(prevData);
+  //     setUserData(parsedData);
+  //     setUserName(parsedData.name);
+  //     if (parsedData.pic !== undefined && parsedData.pic !== "") {
+  //       setPfp(parsedData.pic);
+  //     }
+  //   }
     
   ];
 
@@ -93,8 +120,6 @@ const Explore = () => {
     });
 
     const sortedUsers = matchingUsers.sort((a, b) => b.rating - a.rating);
-    
-
     //sorted_list = []
     setSearchResult(sortedUsers)
 
@@ -174,9 +199,29 @@ const Explore = () => {
       </div>
     </form>
 
-  );
+   );
 
 
 };
 
 export default Explore;
+
+
+  // const logoutHandler = () => {
+  //   dispatch(logout());
+  //   navigate('/');
+  // }
+
+  // const toRating = () => {
+  //   const data = { userData };
+  //   navigate('/rating', { state: { data } });
+  // }
+
+
+  // return (
+  //   <div>
+  //     <h1>{ name }</h1>
+  //     <img src = { pfp } />
+  //     <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
+  //     <Button type = "submit" onClick = {toRating}>To Rating</Button>
+  //   </div>
