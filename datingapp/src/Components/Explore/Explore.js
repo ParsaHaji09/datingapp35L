@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/reduxActions';
@@ -33,12 +34,18 @@ function Explore() {
     navigate('/');
   }
 
+  const toRating = () => {
+    const data = { userData };
+    navigate('/rating', { state: { data } });
+  }
+
 
   return (
     <div>
       <h1>{ name }</h1>
       <img src = { pfp } />
-      <button type = "submit" onClick = {logoutHandler}>Logout</button>
+      <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
+      <Button type = "submit" onClick = {toRating}>To Rating</Button>
     </div>
   );
 }
