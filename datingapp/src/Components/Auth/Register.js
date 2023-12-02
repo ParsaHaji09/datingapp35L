@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { register } from '../../actions/reduxActions';
 
 const Register = (props) => {
   const [email, setEmail] = useState('');
@@ -11,8 +12,13 @@ const Register = (props) => {
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
   const [pic, setPic] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [picMsg, setPicMsg] = useState("");
+
+
+  const dispatch = useDispatch();
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
   const MAX_SELECTED_TAGS = 5; // Set the maximum number of selected tags
 
@@ -57,38 +63,36 @@ const Register = (props) => {
     e.preventDefault();
     console.log(name, birthday, email, pass, phone, selectedTags, pic);
     console.log('Register component submitted with email:', email);
+    dispatch(register(name, email, pass, selectedTags, pic));
+    navigate('/')
+  }
 
-    // register
-    try {
+  const uploadImage = (pics) => {
+    if (!pics) {
+      return setPicMsg("No Image Selected");
+    }
 
-      const config = {
-        header: {
-          "Content-type":"application/json",
-        },
-      };
+    setPicMsg(null);
 
-      setLoading(true);
-
-      const regData = await axios.post("api/users/", {
-        name: name,
-        email: email,
-        password: pass,
-        birthday: birthday,
-        phone: phone,
-        tags: selectedTags,
-        pic: pic,
-      }, config);
-
-      localStorage.setItem("saveData", JSON.stringify(regData.data))
-      console.log(regData.data)
-      setLoading(false);
-      navigate('/')
-
-    } catch (error) {
-      setError(error.response.data.message);
-      console.log(error.response.data.message);
+    if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
+      const data = new FormData();
+      data.append('file', pics);
+      data.append('upload_preset', 'datewalk');
+      data.append('cloud_name', 'deyvjcuxo');
+      fetch("https://api.cloudinary.com/v1_1/deyvjcuxo/image/upload", {
+        method: 'post',
+        body: data,
+      }).then((res) => res.json()).then((data) => {
+        console.log(data)
+        setPic(data.url.toString());
+      }).catch((err) => {
+        console.log(err);
+      })
+    } else {
+      return setPicMsg("Unsupported Image Format");
     }
   }
+
   return (
     <div className = "App">
     <div className="auth-form-container">
@@ -123,7 +127,8 @@ const Register = (props) => {
 
         <label>
           Upload Image:
-          <input type="file" onChange={onFileChange} />
+          <input id = "custom-file" type = "file" label = "Upload Profile Picture" custom onChange={(e) => uploadImage(e.target.files[0])} />
+          { picMsg }
         </label>
       
       <button className="button" type="submit">Register</button>

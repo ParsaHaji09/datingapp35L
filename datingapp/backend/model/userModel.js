@@ -26,7 +26,39 @@ const userSchema = mongoose.Schema(
         },
         pic: {
             type: String,
-            default: ""
+            default: "https://res.cloudinary.com/deyvjcuxo/image/upload/v1701495688/funny-profile-picture-7k1legjukiz1lju7_vg3ia2.jpg"
+        },
+        attractiveness: {
+            type: Array,
+            default: [0, 0]
+        },
+        conversation: {
+            type: Array,
+            default: [0, 0]
+        },
+        activity: {
+            type: Array,
+            default: [0, 0]
+        },
+        humor: {
+            type: Array,
+            default: [0, 0]
+        },
+        decency: {
+            type: Array,
+            default: [0, 0]
+        },
+        after: {
+            type: Array,
+            default: [0, 0]
+        },
+        matches: {
+            type: Array,
+            default: []
+        },
+        incoming: {
+            type: Array,
+            default: []
         },
     }, // track time of creation and modification
     {
