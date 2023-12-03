@@ -13,7 +13,9 @@ router.route('/').post(registerUser);
 router.route('/login').post(verifyUser);
 
 // retrieve users
-router.route('/all-users').get(protect,getAllUsers);
+router.route('/all-users').get(getAllUsers);
+
+//add protect
 
 // retrieve specific user
 router.route('/:id').get(getUser).put(updateUser);

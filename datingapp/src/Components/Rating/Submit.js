@@ -1,3 +1,4 @@
+
   // Submit.jsx
 import React from 'react';
 
@@ -10,4 +11,3 @@ const Submit = ({ onSubmit }) => {
 };
 
 export default Submit;
-

@@ -1,15 +1,17 @@
+
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/reduxActions';
+import Search from './Search';
 
 function Explore() {
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
+  
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [name, setUserName] = useState("");
@@ -27,7 +29,7 @@ function Explore() {
         setPfp(parsedData.pic);
       }
     }
-  }, []);
+  }, [])
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -46,8 +48,11 @@ function Explore() {
       <img src = { pfp } />
       <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
       <Button type = "submit" onClick = {toRating}>To Rating</Button>
+      <Search />
     </div>
-  );
+  )
+    
 }
+
 
 export default Explore;
