@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+
 import { register } from '../../actions/reduxActions';
 
 const Register = (props) => {
