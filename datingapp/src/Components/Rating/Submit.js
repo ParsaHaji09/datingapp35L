@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './Submit.css';
 
-function Submit() {
-    return (
-      <button className="submit"
-        type="submit">
-        SUBMIT
-      </button>
-    );
-  }
-  
-  export default Submit;
+  // Submit.jsx
+import React from 'react';
+
+const Submit = ({ onSubmit }) => {
+  return (
+    <button onClick={onSubmit} type="submit">
+      Submit
+    </button>
+  );
+};
+
+export default Submit;

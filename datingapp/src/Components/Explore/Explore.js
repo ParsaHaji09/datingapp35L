@@ -8,65 +8,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/reduxActions';
 
+function Explore() {
 
-const Explore = () => {
-  const users = [
-    {
-      _id: "1",
-      name: "Bob Marley",
-      tags:
-        ["funny", "smart", "artistic", "wholesome"],
-      rating: 9.7,
-    },
-    {
-      _id: "2",
-      name: "Joe Dahmer",
-      tags: ["friendly", "cool", "fun"],
-      rating: 0.2,
-    },
-    {
-        _id: "3",
-        name: "Archduke Ferdinand",
-        tags: ["powerful", "commanding", "charismatic", "important"],
-        rating: 6.2,
-    },
-    {
-        _id: "4",
-        name: "Bonobo Chimp",
-        tags: ["Best", "Monkey", "Friendly"],
-        rating: 10.0,
-    },
-    {
-      _id: 5,
-      name: "Alice Wonderland",
-      tags: ["funny", "smart", "artistic", "wholesome"],
-      rating: 8.5
-    },
-    {
-      _id: 6,
-      name: "Eva Einstein",
-      tags: ["friendly", "cool", "fun"],
-      rating: 7.9
-    },
-    {
-      _id: 7,
-      name: "Queen Victoria",
-      tags: ["powerful", "commanding", "charismatic", "important"],
-      rating: 9.1
-    },
-    {
-      _id: 8,
-      name: "Charlie Chimpanzee",
-      tags: ["Best", "Monkey", "Friendly"],
-      rating: 9.8
-    },
-    {
-      _id: 9,
-      name: "David Bowie",
-      tags: ["funny", "smart", "artistic", "wholesome"],
-      rating: 8.7
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
+  const [name, setUserName] = useState("");
+  const [pfp, setPfp] = useState("");
+
+  useEffect(() => {
+    const prevData = localStorage.getItem("saveData");
+    if (!prevData) {
+      navigate('/');
+    } else {
+      const parsedData = JSON.parse(prevData);
+      setUserData(parsedData);
+      setUserName(parsedData.name);
+      if (parsedData.pic !== undefined && parsedData.pic !== "") {
+        setPfp(parsedData.pic);
+      }
     }
-
+  }
+  )
   // const dispatch = useDispatch();
   // const userLogin = useSelector((state) => state.userLogin);
   // const { userInfo } = userLogin;
@@ -88,8 +54,6 @@ const Explore = () => {
   //       setPfp(parsedData.pic);
   //     }
   //   }
-    
-  ];
 
   const [searchInput, setSearchInput] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -202,7 +166,8 @@ const Explore = () => {
    );
 
 
-};
+}
+
 
 export default Explore;
 
