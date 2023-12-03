@@ -127,8 +127,6 @@ const updateUser = asyncHandler(async (req, res) => {
                 user["matches"].push(matches.value);
             }
         }
-        
-
 
         const updateUser = await user.save();
         res.json(updateUser);
