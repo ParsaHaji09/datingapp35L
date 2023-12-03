@@ -14,10 +14,11 @@ import humor from './images/humor.png';
 import ProfileData from './ProfileData';
 import axios from 'axios';
 
-function RatingForm({user}) {
+function RatingForm({user, onListChange}) {
   const navigate = useNavigate();
   const [ratings, setRatings] = useState({});
   const [udata, setUdata] = useState({});
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const prevData = localStorage.getItem("saveData");
@@ -64,18 +65,29 @@ function RatingForm({user}) {
     console.log(user);
     console.log('Submitting ratings:', ratings);
     updateUserData(user, ratings);
-    removeMatch(user)
+    removeMatch(user);
+    onListChange();
   }
 
 
   const categoryNames = Object.keys(ratings);
   const averageRating =
   categoryNames.length > 0
-    ? categoryNames.reduce((sum, categoryName) => sum + 2*ratings[categoryName], 0) / categoryNames.length
+    ? categoryNames.reduce((sum, categoryName) => sum + ratings[categoryName], 0) / categoryNames.length
     : 0;
 
   return (
+    
     <div className="rating">
+      <div className ="profileName">
+        <ProfileData userID={user}/>
+      </div>
+      <button className="toggle-button" onClick={() =>setShowForm(!showForm)}>
+        {showForm ? 'Hide Rating Form': 'Show Rating Form'}
+      </button>
+      {showForm &&(
+      <div className='rating-form'>
+
       <div className="rating-container">
         <div className="rating1">
           <Category  name={"attractiveness"}onRatingChange={handleRatingChange} image={attractiveness}/>
@@ -104,12 +116,8 @@ function RatingForm({user}) {
       <div className="styledRating">
         <CustomizedRating value={averageRating}name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange}/>
       </div>
-      <div className="submit-container">
-        <Submit/>
       </div>
-      <div className ="profileName">
-        <ProfileData userID={user}/>
-      </div>
+      )}
     </div>
   );
   }

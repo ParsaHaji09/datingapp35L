@@ -44,3 +44,11 @@
     padding: 10px;
     
   }
+  .toggle-button {
+    position: absolute;
+    left: calc(50% + 70px); /* Center horizontally and skip left 300 pixels */
+    top: calc(30% + 50px);
+    z-index: 2; /* Set the z-index value */
+    padding: 10px 20px;
+    font-size: 16px;
+  }

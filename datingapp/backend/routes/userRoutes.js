@@ -13,7 +13,7 @@ router.route('/').post(registerUser);
 router.route('/login').post(verifyUser);
 
 // retrieve users
-router.route('/all-users').get(protect, getAllUsers);
+router.route('/all-users').get(protect,getAllUsers);
 
 // retrieve specific user
 router.route('/:id').get(getUser).put(updateUser);

@@ -11,18 +11,19 @@ function MatchList({userID, onPersonClick, onListChange}){
 
 
     useEffect(() => {
-        // Fetch the initial list from the backend
-        axios.get('http://localhost:5000/api/users/' + userID) // Replace 1 with the appropriate user ID
-          .then(response => {
-            console.log(response.data.matches)
-            setPeopleList(response.data.matches); 
-            setLoading(false)
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
-            setLoading(false)
-          });
-      }, [userID]);
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/users/${userID}`);
+          setPeopleList(response.data.matches);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, [userID, onListChange]);
 
     const handlePersonClick=(person)=>{
         setSelectedPerson(person)
