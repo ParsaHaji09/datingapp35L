@@ -63,7 +63,7 @@ const Register = (props) => {
     e.preventDefault();
     console.log(name, birthday, email, pass, phone, selectedTags, pic);
     console.log('Register component submitted with email:', email);
-    dispatch(register(name, email, pass, selectedTags, pic));
+    dispatch(register(name, email, pass, selectedTags, pic, birthday, phone));
     navigate('/')
   }
 
