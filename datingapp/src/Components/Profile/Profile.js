@@ -1,6 +1,8 @@
 import ImageSlider from "./ImageSlider";
-import Bio from "./Bio";
+import PersonalBio from "./PersonalBio";
 import ScrollAnimation from 'react-animate-on-scroll';
+import CreateIcon from '@mui/icons-material/Create';
+import IconButton from "@material-ui/core/IconButton";
 
 const Profile = () => {
   const slides = [
@@ -14,29 +16,21 @@ const Profile = () => {
     width: "800px",
     height: "600px",
     margin: "0 auto",
-    // 16:9 aspect ratio
+    zIndex: 1,
   };
 
-  return (
-    <div>
-      <div style={{ padding: "50px" }}></div>
-      {/* <div style={containerStyles}>
-            <ImageSlider slides={slides} parentWidth={800} />
-      </div> */}
-    
-      
-      {/* Assuming you want equal spacing between ImageSliders */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
-        {[...Array(5)].map((_, index) => (
-          <ScrollAnimation animateIn="fadeInUp">
-            <div key={index} style={containerStyles}>
-              <ImageSlider slides={slides} parentWidth={800} />
-            </div>
-          </ScrollAnimation>
-        ))}
-      </div>
 
-      <div style={{ padding: "50px" }}></div>
+  return (
+    <div style={{ display: 'flex', gap: '10px', justifyContent: "center", border: "2px solid red" }}>
+      <div style={{ display: 'flex', gap: '3px', border: "2px solid blue", position: 'relative' }}>
+        <div style={containerStyles}>
+          <ImageSlider slides={slides} parentWidth={800} />
+        </div>
+          <PersonalBio />
+          <IconButton style={{ position: 'absolute', bottom: 0, right: 0 }}>
+            <CreateIcon />
+          </IconButton>
+      </div>
     </div>
   );
 };
