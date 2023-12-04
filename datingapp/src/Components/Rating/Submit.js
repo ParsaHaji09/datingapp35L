@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import './Submit.css';
 
-function Submit() {
-    return (
-      <button className="submit"
-        type="submit">
-        SUBMIT
-      </button>
-    );
-  }
-  
-  export default Submit;
+  // Submit.jsx
+import React from 'react';
+
+const Submit = ({ onSubmit }) => {
+  return (
+    <button onClick={onSubmit} type="submit"
+      style={{ fontSize: '20px', padding: '12px 20px' }}>
+      Submit
+    </button>
+  );
+};
+
+export default Submit;

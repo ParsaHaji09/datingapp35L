@@ -4,51 +4,53 @@
     grid-template-columns: repeat(3,350px);
     justify-content: center;
     align-items: center;
-    margin-top: 150px;
-    margin-left: 340px;
-    
+    width: calc(100%-300px);
+    margin-left: 300px;
+    margin-top:400px;
     row-gap: 10px; /* Adjust the gap as needed */
-  }
-  .comment{
-    display: flex;
-    justify-content: center;
-
-    align-items: center;
-    margin-right: 50px;
-  }
-  .submit-container{
-    text-align: center;
-    margin-left: 650px;
-    margin-top: -60px;
-
+    color: #000;
   }
   .styledRating{
     text-align: center;
-    margin-left: 1000px;
-    margin-top: -150px;
-    color: #090080;
-    border: 2px solid #090080;
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 5px; /* Adjust the border-radius value */
     width: 180px; /* Adjust the width */
     height: 80px; /* Adjust the height */
+    margin-left: 735px;
+    background-color: rgb(255, 209, 216);
+    color: rgb(0, 0, 0);
+
+
+
   }
+  .submit-container{
+    text-align: center;
+    margin-left: 150px; /* Set the right margin to 300 pixels */
+    width: calc(100%);
+    padding: 10px;
+  }
+  
   .styledRating:hover {
     outline: none; /* Remove the default focus outline */
-    color: rgb(8, 17, 143);
     border-color: #090080; /* Change the border color on focus */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */
   }
   .profileName{
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 300px; /* Set the right margin to 300 pixels */
+    width: calc(100% - 300px);
     padding: 10px;
-    margin-top: 20px;
-    margin-left: 140px;
     
+  }
+  .toggle-button {
+    position: absolute;
+    left: calc(50% + 60px); /* Center horizontally and skip left 300 pixels */
+    top: calc(40% + 50px);
+    z-index: 2; /* Set the z-index value */
+    padding: 10px 20px;
+    font-size: 16px;
   }

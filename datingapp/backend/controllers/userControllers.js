@@ -5,7 +5,7 @@ const generateToken = require('../util/generateToken');
 
 // controllers for API endpoints
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, tags, pic } = req.body;
+    const { name, email, password, tags, pic, birthday, phone } = req.body;
 
     // check if user already exists by their email
     const userExists = await User.findOne({ email });
@@ -17,7 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // if user does not exist, create a new user post
     const user = await User.create({
-        name, email, password, tags, pic,
+        name, email, password, tags, pic, birthday, phone
     });
 
     // if user create successfully
@@ -28,6 +28,8 @@ const registerUser = asyncHandler(async (req, res) => {
             email: user.email,
             tags: user.tags,
             pic: user.pic,
+            birthday: user.birthday,
+            phone: user.phone,
             token: generateToken(user._id), // generate a token for the user to give them a JWT identity
         }) // otherwise there was an error with creating the user
     } else {
@@ -83,8 +85,6 @@ const getUser = asyncHandler(async (req, res) => {
     } else {
         res.status(404).json({ message: "User not found." });
     }
-
-    res.json(user);
 });
 
 const updateUser = asyncHandler(async (req, res) => {
@@ -92,18 +92,44 @@ const updateUser = asyncHandler(async (req, res) => {
     const { tags, attractiveness, conversation,
             activity, humor, decency, after, matches, incoming, } = req.body;
 
+    const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
+
+    console.log("here")
+
     const user = await User.findById(req.params.id);
 
     if (user) {
-        user.tags = tags;
-        user.attractiveness = attractiveness;
-        user.conversation = conversation;
-        user.activity = activity;
-        user.humor = humor;
-        user.decency = decency;
-        user.after = after;
-        user.matches = matches;
-        user.incoming = incoming;
+        if (tags){
+            user.tags = tags;
+        }
+
+        for (const key in req.body) {
+            const value = req.body[key];
+            
+            // Exclude the 'tags' key
+            if (includedKeys.includes(key)) {
+                // Check if the value exists before updating the user property
+                if (value !== undefined && value !== null) {
+                    // Use square bracket notation to dynamically set the user property
+                    user[key][0] += value;
+                    if (user[key][1]==null){
+                        user[key][1] = 1
+                    }
+                    user[key][1] += 1;
+                }
+            }
+        }
+
+        console.log("Matches is null?" + (matches === null));
+        if (matches){
+            if (matches.type==="remove"){
+                console.log("Hee");
+                user["matches"] = user["matches"].filter(item => item !== matches.value);
+            } else {
+                console.log("Teehee");
+                user.matches = [...user["matches"], matches.value];
+            }
+        }
 
         const updateUser = await user.save();
         res.json(updateUser);

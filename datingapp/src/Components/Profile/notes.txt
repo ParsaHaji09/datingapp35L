@@ -1,0 +1,22 @@
+- add pronouns
+- set a limit to how much each person can type
+- make sure the pencil button doesn't overlap when the text reaches it
+    - i.e. put barrier before reaching the pencil
+- bring up a form to fill out information
+    - update profile as information gets saved
+- make a dark mode
+    - use MUI switch
+- support multiple rows of interests
+- disable default favicon
+- decide which social media we want to support (if any)
+    - Spotify
+    - Reddit
+    - Instagram
+    - Snapchat
+    - Dicord
+    - Facebook
+    - Twitter
+    - Tiktok
+    - Messenger
+    - WhatsApp
+- dropdown for year in profile editor?

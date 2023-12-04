@@ -11,7 +11,7 @@ export const login = (email, password) => async (dispatch) => {
             }
           };
           
-          const { data } = await axios.post('/api/users/login', {
+          const { data } = await axios.post('http://localhost:5000/api/users/login', {
             email: email, 
             password: password,
           }, config);
@@ -27,7 +27,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
-export const register = (name, email, password, tags, pic) => async (dispatch) => {
+export const register = (name, email, password, tags, pic, birthday, phone) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_REQUEST });
 
@@ -37,12 +37,14 @@ export const register = (name, email, password, tags, pic) => async (dispatch) =
       },
     };
 
-    const regData = await axios.post("api/users/", {
+    const regData = await axios.post("http://localhost:5000/api/users/", {
       name: name,
       email: email,
       password: password,
       tags: tags,
       pic: pic,
+      birthday: birthday,
+      phone: phone,
     }, config);
 
     localStorage.setItem("saveData", JSON.stringify(regData.data));

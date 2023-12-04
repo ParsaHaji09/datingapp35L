@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+
 import { register } from '../../actions/reduxActions';
+import ErrorRedirect, { ErrorField } from './Error';
 
 const Register = (props) => {
   const [email, setEmail] = useState('');
@@ -63,7 +66,7 @@ const Register = (props) => {
     e.preventDefault();
     console.log(name, birthday, email, pass, phone, selectedTags, pic);
     console.log('Register component submitted with email:', email);
-    dispatch(register(name, email, pass, selectedTags, pic));
+    dispatch(register(name, email, pass, selectedTags, pic, birthday, phone));
     navigate('/')
   }
 
@@ -89,7 +92,7 @@ const Register = (props) => {
         console.log(err);
       })
     } else {
-      return setPicMsg("Unsupported Image Format");
+      return setPicMsg("Unsupported Image Format!");
     }
   }
 
@@ -125,10 +128,10 @@ const Register = (props) => {
           ))}
         </div>
 
+        {picMsg !== null ? <ErrorField ErrorMessage = { picMsg }/> : null }
         <label>
           Upload Image:
           <input id = "custom-file" type = "file" label = "Upload Profile Picture" custom onChange={(e) => uploadImage(e.target.files[0])} />
-          { picMsg }
         </label>
       
       <button className="button" type="submit">Register</button>

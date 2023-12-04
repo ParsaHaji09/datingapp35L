@@ -2,12 +2,11 @@ import { useCallback, useRef, useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Chip from '@mui/material/Chip';
-
+import "./Profile.css"
 
 const slideStyles = {
   width: "100%",
   height: "100%",
-  borderRadius: "10px",
   backgroundSize: "cover",
   backgroundPosition: "center",
 };
@@ -35,24 +34,29 @@ const leftArrowStyles = {
 const sliderStyles = {
   position: "relative",
   height: "100%",
+  overflow: "hidden",
+  borderRadius: "20px",
 };
 
 const dotsContainerStyles = {
+  position: "absolute",
+  bottom: "8px", // Adjust the position from the bottom as needed
+  width: "100%",
   display: "flex",
   justifyContent: "center",
-  padding: "15px",
+  zIndex: 2,
 };
 
 const dotStyle = {
-  margin: "0 3px",
+  margin: "0 2.7px",
   cursor: "pointer",
-  fontSize: "15px",
+  fontSize: "12px",
 };
 
 const slidesContainerStyles = {
   display: "flex",
   height: "100%",
-  transition: "transform ease-out 0.2s",
+  transition: "transform ease-out 0.5s",
 };
 
 const slidesContainerOverflowStyles = {
@@ -60,38 +64,51 @@ const slidesContainerOverflowStyles = {
   height: "100%",
 };
 
-const chipStyle = {
-  backgroundColor: 'rgba(139, 184, 232, 0.6)',
-  color: '#fff',
-  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
-  border: '1px solid #ddd',
-};
-
-
-const bioStyle = {
+const infoStyles = {
   position: "absolute",
   left: "0",
   right: "0",
   bottom: "0",
+  zIndex: 2,
   display: "flex",
   flexDirection: "column",
   justifyContent: "flex-end", // Align content to the bottom
-  alignItems: "flex-start",
-  textShadow: "1px 1px 2px rgba(0, 0, 0, 6)", 
-  backgroundColor: "rgba(0, 0, 0, 0.4)",
-  borderRadius: "10px",
+  alignItems: "flex-start", 
+  background: "linear-gradient(0deg, rgba(0, 0, 0, 1.2), rgba(0, 0, 0, .8) 45%, rgba(0, 0, 0, 0))", // Gradient background
   color: "#fff",
-  textAlign: "center",
-  padding: "1rem 2rem", // Add padding for better readability, adjust as needed
-  zIndex: 2,
+  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
+  textAlign: "left",
+  padding: "2.3rem 2.2rem 0.2rem", // Add padding for better readability, adjust as needed
+
+  h2: {
+    padding: "3rem 0rem 0rem", // Add margin-bottom to create a gap
+    fontSize: "48px",
+    fontFamily: 'Jost, sans-serif',
+  },
+
+  p: {
+    fontSize: "18px",
+    color: "#e6e6e6",
+    fontFamily: 'Nunito, sans-serif',
+  },
+
+  pronouns: {
+    fontSize: "18px",
+    color: "#808080",
+    fontFamily: 'Nunito, sans-serif',
+  },
+
 };
 
+const chipStyles = {
+  color: "white"
+}
+
 const ImageSlider = ({ slides, parentWidth }) => {
-  const timerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
-    color: currentIndex === slideIndex ? "#3992e5" : "black", // Set your desired colors
+    color: currentIndex === slideIndex ? "#01BFFF" : "rgba(255, 255, 255, 0.5)", // Set your desired colors
   });
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -118,48 +135,42 @@ const ImageSlider = ({ slides, parentWidth }) => {
   });
 
   return (
-    <div className="App"></div>
-    // <div style={sliderStyles}>
-    //   <div style={bioStyle}>
-    //     <h2>John Doe, 19</h2>
-    //     <p>Here you can read things about me and understand what I am all about.</p>
-    //     <div style={{ display: 'flex', gap: '8px' }}>
-    //       {/* placeholders for tags */}
-    //       <Chip label="Tag 1" style={chipStyle} /> 
-    //       <Chip label="Tag 2" style={chipStyle} />
-    //       <Chip label="Tag 3" style={chipStyle} />
-    //     </div>
-    //   </div>
-    //   <div>
-    //     <div onClick={goToPrevious} style={leftArrowStyles}>
-    //       <ArrowBackIosIcon />
-    //     </div>
-    //     <div onClick={goToNext} style={rightArrowStyles}>
-    //       <ArrowForwardIosIcon />
-    //     </div>
-    //   </div>
-    //   <div style={slidesContainerOverflowStyles}>
-    //     <div style={getSlidesContainerStylesWithWidth()}>
-    //       {slides.map((_, slideIndex) => (
-    //         <div
-    //           key={slideIndex}
-    //           style={getSlideStylesWithBackground(slideIndex)}
-    //         ></div>
-    //       ))}
-    //     </div>
-    //   </div>
-    //   <div style={dotsContainerStyles}>
-    //     {slides.map((slide, slideIndex) => (
-    //       <div
-    //         style={getDotStyle(slideIndex)}
-    //         key={slideIndex}
-    //         onClick={() => goToSlide(slideIndex)}
-    //       >
-    //         ●
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
+    <div style={sliderStyles}>
+      <div style={infoStyles}>
+        <h2 style={infoStyles.h2}>Daemon, 19</h2>
+        <p style={infoStyles.p}>Second Year CS Major<span style={infoStyles.pronouns}><em>, she/her</em></span></p>
+
+      </div>
+      <div>
+        <div onClick={goToPrevious} style={leftArrowStyles}>
+          <ArrowBackIosIcon />
+        </div>
+        <div onClick={goToNext} style={rightArrowStyles}>
+          <ArrowForwardIosIcon />
+        </div>
+      </div>
+      <div style={slidesContainerOverflowStyles}>
+        <div style={getSlidesContainerStylesWithWidth()}>
+          {slides.map((_, slideIndex) => (
+            <div
+              key={slideIndex}
+              style={getSlideStylesWithBackground(slideIndex)}
+            ></div>
+          ))}
+        </div>
+      </div>
+      <div style={dotsContainerStyles}>
+        {slides.map((slide, slideIndex) => (
+          <div
+            style={getDotStyle(slideIndex)}
+            key={slideIndex}
+            onClick={() => goToSlide(slideIndex)}
+          >
+            ●
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

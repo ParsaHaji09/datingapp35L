@@ -11,27 +11,29 @@ function MatchList({userID, onPersonClick, onListChange}){
 
 
     useEffect(() => {
-        // Fetch the initial list from the backend
-        axios.get('http://localhost:5000/api/users/' + userID) // Replace 1 with the appropriate user ID
-          .then(response => {
-            console.log(response.data.matches)
-            setPeopleList(response.data.matches); 
-            setLoading(false)
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
-            setLoading(false)
-          });
-      }, [userID]);
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/users/${userID}`);
+          setPeopleList(response.data.matches);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, [userID, onListChange]);
 
     const handlePersonClick=(person)=>{
         setSelectedPerson(person)
         onPersonClick(person)
     }
+  
 
     return (
-        <div>
-          <h2>People List</h2>
+        <div className='container'>
+          <h2 className='bold-text'> Current Matches</h2>
           {loading ? (
             <p>Loading...</p>
         ) : (
@@ -39,8 +41,9 @@ function MatchList({userID, onPersonClick, onListChange}){
             {peopleList.map((person, index) => (
               <li key={index} onClick={() => handlePersonClick(person)} 
               className={selectedPerson === person ? 'selected' : ''}
-              >
+              ><span>
                 <UserDetails userID={person}/>
+                </span>
               </li>
             ))}
           </ul>
