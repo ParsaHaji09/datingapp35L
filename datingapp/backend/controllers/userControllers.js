@@ -5,7 +5,7 @@ const generateToken = require('../util/generateToken');
 
 // controllers for API endpoints
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, tags, pic } = req.body;
+    const { name, email, password, tags, pic, birthday, phone } = req.body;
 
     // check if user already exists by their email
     const userExists = await User.findOne({ email });
@@ -17,7 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // if user does not exist, create a new user post
     const user = await User.create({
-        name, email, password, tags, pic,
+        name, email, password, tags, pic, birthday, phone
     });
 
     // if user create successfully
@@ -28,6 +28,8 @@ const registerUser = asyncHandler(async (req, res) => {
             email: user.email,
             tags: user.tags,
             pic: user.pic,
+            birthday: user.birthday,
+            phone: user.phone,
             token: generateToken(user._id), // generate a token for the user to give them a JWT identity
         }) // otherwise there was an error with creating the user
     } else {
@@ -120,11 +122,14 @@ const updateUser = asyncHandler(async (req, res) => {
             }
         }
 
+        console.log("Matches is null?" + (matches === null));
         if (matches){
-            if (matches.type=="remove"){
+            if (matches.type==="remove"){
+                console.log("Hee");
                 user["matches"] = user["matches"].filter(item => item !== matches.value);
             } else {
-                user["matches"].push(matches.value);
+                console.log("Teehee");
+                user.matches = [...user["matches"], matches.value];
             }
         }
 

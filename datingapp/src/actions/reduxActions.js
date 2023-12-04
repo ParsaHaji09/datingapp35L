@@ -27,7 +27,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
-export const register = (name, email, password, tags, pic) => async (dispatch) => {
+export const register = (name, email, password, tags, pic, birthday, phone) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_REQUEST });
 
@@ -43,6 +43,8 @@ export const register = (name, email, password, tags, pic) => async (dispatch) =
       password: password,
       tags: tags,
       pic: pic,
+      birthday: birthday,
+      phone: phone,
     }, config);
 
     localStorage.setItem("saveData", JSON.stringify(regData.data));
