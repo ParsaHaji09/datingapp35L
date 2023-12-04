@@ -108,10 +108,10 @@ const Register = (props) => {
       <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password"/>
 
       <label htmlFor="birthday">Birthday</label>
-      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" id="birthday" name="birthday"/>
+      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" placeholder= "placeholder" id="birthday" name="birthday"/>
 
       <label htmlFor="phoneNumber">Phone Number</label>
-      <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"/>
+      <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"  />
 
         <div style = {{margin: 20}}>
           <h3>Select Your Tags (up to 5)</h3>
