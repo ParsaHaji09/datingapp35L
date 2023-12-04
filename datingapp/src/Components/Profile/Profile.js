@@ -1,4 +1,3 @@
-// Profile.js (or your component name)
 import React, { useState } from 'react';
 import ImageSlider from "./ImageSlider";
 import Bio from "./Bio";
