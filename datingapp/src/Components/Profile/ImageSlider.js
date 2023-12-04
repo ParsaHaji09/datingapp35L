@@ -8,7 +8,6 @@ import "./Profile.css"
 const slideStyles = {
   width: "100%",
   height: "100%",
-  borderRadius: "10px",
   backgroundSize: "cover",
   backgroundPosition: "center",
 };
@@ -36,6 +35,9 @@ const leftArrowStyles = {
 const sliderStyles = {
   position: "relative",
   height: "100%",
+  overflow: "hidden",
+  borderRadius: "20px",
+
 };
 
 // const dotsContainerStyles = {
@@ -90,10 +92,7 @@ const infoStyles = {
   flexDirection: "column",
   justifyContent: "flex-end", // Align content to the bottom
   alignItems: "flex-start", 
-  // backgroundColor: "rgba(0, 0, 0, 0.4)",
   background: "linear-gradient(0deg, rgba(0, 0, 0, 1.2), rgba(0, 0, 0, .8) 45%, rgba(0, 0, 0, 0))", // Gradient background
-  
-  borderRadius: "10px",
   color: "#fff",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
   textAlign: "left",

@@ -6,3 +6,5 @@
     - update profile as information gets saved
 - make a dark mode
     - use MUI switch
+- support multiple rows of interests
+- disable default favicon

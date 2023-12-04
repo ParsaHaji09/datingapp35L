@@ -35,12 +35,12 @@ const Profile = () => {
 
   return (
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center" }}>
-      <div style={{ display: 'flex', gap: '3px', position: 'relative' }}>
+      <div style={{ display: 'flex', gap: '20px', position: 'relative' }}>
         <div style={containerStyles}>
           <ImageSlider slides={slides} parentWidth={800} />
         </div>
         <PersonalBio />
-        <IconButton onClick={openProfileEditor} style={{ position: 'absolute', bottom: 0, right: 0 }}>
+        <IconButton onClick={openProfileEditor} style={{ color: "rgba(255, 255, 255, 0.5)", position: 'absolute', bottom: '3px', right: '3px' }}>
           <CreateIcon />
         </IconButton>
       </div>
