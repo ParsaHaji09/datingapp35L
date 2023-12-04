@@ -25,14 +25,6 @@ const Profile = () => {
 
   const [data, setData] = useState(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    const userData = localStorage.getItem("saveData");
-    if(userData) {
-      setData(JSON.parse(userData));
-    } else {
-      navigate('/');
-    }
-  }, [])
 
   const [isProfileEditorVisible, setProfileEditorVisible] = useState(false);
 
