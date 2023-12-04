@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { login } from '../../actions/reduxActions';
+import ErrorRedirect from './Error';
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
@@ -43,7 +44,8 @@ const Login = (props) => {
     dispatch(login(email, pass));
   }
   return (
-    <div className="App">
+    <div className="App" style = {{display: "flex", flexDirection: "column"}}>
+      {error ? <ErrorRedirect ErrorMessage={ error }/> : null}
     <div className="auth-form-container">
     <form className="login-form" onSubmit={handleSubmit}>
       <label htmlFor ="email">Email</label>
