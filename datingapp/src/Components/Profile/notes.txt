@@ -6,3 +6,17 @@
     - update profile as information gets saved
 - make a dark mode
     - use MUI switch
+- support multiple rows of interests
+- disable default favicon
+- decide which social media we want to support (if any)
+    - Spotify
+    - Reddit
+    - Instagram
+    - Snapchat
+    - Dicord
+    - Facebook
+    - Twitter
+    - Tiktok
+    - Messenger
+    - WhatsApp
+- dropdown for year in profile editor?
