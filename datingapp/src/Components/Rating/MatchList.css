@@ -45,8 +45,15 @@ li {
   transition: background-color 0.1s ease;
   width: 100%;
   box-sizing: border-box;
+  color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  padding: 10px;
 }
-
+li span {
+  font-size: 0.8em; /* Adjust the font size as needed */
+}
 li:hover {
   background-color: #e0e0e0;
 }

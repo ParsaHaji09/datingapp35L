@@ -6,6 +6,7 @@
     margin-bottom: 10px;
     width: 300px;
     text-align: center;
+    background-color:rgb(255, 209, 216);
   }
   .category:hover{
     outline: none; /* Remove the default focus outline */

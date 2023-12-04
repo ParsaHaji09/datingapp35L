@@ -1,6 +1,7 @@
 {
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "axios": "^1.6.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

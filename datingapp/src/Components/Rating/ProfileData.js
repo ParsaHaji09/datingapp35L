@@ -26,9 +26,15 @@ function ProfileData({userID}){
         <div className="prof">
           {profile ? (
             <div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              {profile.pic && <img src={profile.pic} alt="img" style={{ maxWidth: '100px', maxHeight: '100px' }}/>}
+              
               <h2>{profile.name}</h2>
+              </div>
               <p>{profile.tags.join(', ')}</p>
+              <p>{profile.birthday}&nbsp;&nbsp;{profile.phone}</p>
             </div>
+            
           ) : (
             <p>Loading...</p>
           )}

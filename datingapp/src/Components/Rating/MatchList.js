@@ -41,8 +41,9 @@ function MatchList({userID, onPersonClick, onListChange}){
             {peopleList.map((person, index) => (
               <li key={index} onClick={() => handlePersonClick(person)} 
               className={selectedPerson === person ? 'selected' : ''}
-              >
+              ><span>
                 <UserDetails userID={person}/>
+                </span>
               </li>
             ))}
           </ul>

@@ -82,9 +82,11 @@ function RatingForm({user, onListChange}) {
       <div className ="profileName">
         <ProfileData userID={user}/>
       </div>
-      <button className="toggle-button" onClick={() =>setShowForm(!showForm)}>
+      <button className="toggle-button" onClick={() =>setShowForm(!showForm)}
+      style={{ fontSize: '20px', padding: '12px 20px' }}>
         {showForm ? 'Hide Rating Form': 'Show Rating Form'}
       </button>
+
       {showForm &&(
       <div className='rating-form'>
 
