@@ -1,8 +1,10 @@
+// Profile.js (or your component name)
+import React, { useState } from 'react';
 import ImageSlider from "./ImageSlider";
 import PersonalBio from "./PersonalBio";
-import ScrollAnimation from 'react-animate-on-scroll';
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@material-ui/core/IconButton";
+import ProfileEditor from "./ProfileEditor";
 
 const Profile = () => {
   const slides = [
@@ -19,18 +21,31 @@ const Profile = () => {
     zIndex: 1,
   };
 
+  const [isProfileEditorVisible, setProfileEditorVisible] = useState(false);
+
+  const openProfileEditor = () => {
+    console.log('Opening ProfileEditor');
+    setProfileEditorVisible(true);
+  };
+
+  const closeProfileEditor = () => {
+    console.log('Closing ProfileEditor');
+    setProfileEditorVisible(false);
+  };
 
   return (
-    <div style={{ display: 'flex', gap: '10px', justifyContent: "center", border: "2px solid red" }}>
-      <div style={{ display: 'flex', gap: '3px', border: "2px solid blue", position: 'relative' }}>
+    <div style={{ display: 'flex', gap: '10px', justifyContent: "center" }}>
+      <div style={{ display: 'flex', gap: '3px', position: 'relative' }}>
         <div style={containerStyles}>
           <ImageSlider slides={slides} parentWidth={800} />
         </div>
-          <PersonalBio />
-          <IconButton style={{ position: 'absolute', bottom: 0, right: 0 }}>
-            <CreateIcon />
-          </IconButton>
+        <PersonalBio />
+        <IconButton onClick={openProfileEditor} style={{ position: 'absolute', bottom: 0, right: 0 }}>
+          <CreateIcon />
+        </IconButton>
       </div>
+
+      {isProfileEditorVisible && <ProfileEditor onClose={closeProfileEditor} />}
     </div>
   );
 };

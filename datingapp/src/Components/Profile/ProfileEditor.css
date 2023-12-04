@@ -1,0 +1,16 @@
+.profile-editor {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #862020; /* Add your desired background color */
+    padding: 20px;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for a raised effect */
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(100%); /* Start off-screen */
+}
+  
+.profile-editor.show {
+    transform: translateY(0); /* Slide up to the screen */
+}
+  
