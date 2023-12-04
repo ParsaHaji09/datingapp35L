@@ -1,7 +1,6 @@
-// Profile.js (or your component name)
 import React, { useState } from 'react';
 import ImageSlider from "./ImageSlider";
-import PersonalBio from "./PersonalBio";
+import Bio from "./Bio";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@material-ui/core/IconButton";
 import ProfileEditor from "./ProfileEditor";
@@ -26,31 +25,23 @@ const Profile = () => {
   const [data, setData] = useState(null);
   const navigate = useNavigate();
 
-  const [isProfileEditorVisible, setProfileEditorVisible] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const openProfileEditor = () => {
-    console.log('Opening ProfileEditor');
-    setProfileEditorVisible(true);
-  };
-
-  const closeProfileEditor = () => {
-    console.log('Closing ProfileEditor');
-    setProfileEditorVisible(false);
-  };
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center" }}>
-      <div style={{ display: 'flex', gap: '3px', position: 'relative' }}>
+      <div style={{ display: 'flex', gap: '20px', position: 'relative' }}>
         <div style={containerStyles}>
           <ImageSlider slides={slides} parentWidth={800} />
         </div>
-        <PersonalBio />
-        <IconButton onClick={openProfileEditor} style={{ position: 'absolute', bottom: 0, right: 0 }}>
+        <Bio />
+        <IconButton onClick={handleShow} style={{ color: "rgba(255, 255, 255, 0.5)", position: 'absolute', bottom: '3px', right: '3px' }}>
           <CreateIcon />
         </IconButton>
       </div>
-
-      {isProfileEditorVisible && <ProfileEditor onClose={closeProfileEditor} />}
+      <ProfileEditor show={show} onHide={handleClose} />
     </div>
   );
 };

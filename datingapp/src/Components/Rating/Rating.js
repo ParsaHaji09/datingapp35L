@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RatingForm from './RatingForm';
 import MatchList from './MatchList';
+import './Rating.css';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,16 +9,20 @@ function Rating(){
     const [list, setList] = useState({});
     const [currentPerson, setCurrentPerson]=useState(null)
 
+
+    function handleListChange() {
+        setCurrentPerson(null)
+    }
+          
     const location = useLocation();
     const userData = JSON.parse(localStorage.getItem("saveData"));
     console.log(userData);
 
-    function handleListChange(categoryName, ratingValue) {
-        
-      }
     function handlePersonClick(person){
         setCurrentPerson(person)
     }
+    
+ 
 
     // const addMatch = async (uid) => {
     //     try {
@@ -43,8 +48,9 @@ function Rating(){
             <div className="list">
                 <MatchList userID={userData._id} onPersonClick={handlePersonClick} onListChange={handleListChange}/>
             </div>
+            
             <div className="ratingForm">
-                {currentPerson && <RatingForm key={currentPerson} user={currentPerson} onListChange={handleListChange}/>}
+            {currentPerson && <RatingForm key={currentPerson} user={currentPerson} onListChange={handleListChange}/>}
             </div>
         </div>
     );
