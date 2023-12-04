@@ -28,6 +28,14 @@ const userSchema = mongoose.Schema(
             type: String,
             default: "https://res.cloudinary.com/deyvjcuxo/image/upload/v1701495688/funny-profile-picture-7k1legjukiz1lju7_vg3ia2.jpg"
         },
+        birthday: {
+            type: String,
+            default: ""
+        },
+        phone: {
+            type: String,
+            default: ""
+        },
         attractiveness: {
             type: Array,
             default: [0, 0]
