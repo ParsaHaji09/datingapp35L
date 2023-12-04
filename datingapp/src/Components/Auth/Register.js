@@ -7,6 +7,7 @@ import PhoneInput from 'react-phone-number-input'
 
 import { register } from '../../actions/reduxActions';
 import ErrorRedirect, { ErrorField } from './Error';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 
 const Register = (props) => {
   const [email, setEmail] = useState('');
@@ -14,8 +15,9 @@ const Register = (props) => {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
+  const [phoneMsg, setPhoneMsg] = useState(null);
   const [pic, setPic] = useState("");
-  const [picMsg, setPicMsg] = useState("");
+  const [picMsg, setPicMsg] = useState(null);
 
 
   const dispatch = useDispatch();
@@ -65,6 +67,11 @@ const Register = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(name, birthday, email, pass, phone, selectedTags, pic);
+    if (!isValidPhoneNumber(phone)) {
+      return setPhoneMsg("Invalid Phone Number!");
+    }
+
+    setPhoneMsg(null);
     console.log('Register component submitted with email:', email);
     dispatch(register(name, email, pass, selectedTags, pic, birthday, phone));
     navigate('/')
@@ -113,6 +120,7 @@ const Register = (props) => {
       <label htmlFor="birthday">Birthday</label>
       <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" id="birthday" name="birthday"/>
 
+      { phoneMsg !== null ? <ErrorField ErrorMessage = { phoneMsg } /> : null }
       <label htmlFor="phoneNumber">Phone Number</label>
       <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"/>
 
