@@ -22,7 +22,7 @@ function UserDetails({userID}){
           {profile ? (
             <div>
               <h2>{profile.name}</h2>
-            </div>
+            </div> 
           ) : (
             <p>Loading...</p>
           )}
