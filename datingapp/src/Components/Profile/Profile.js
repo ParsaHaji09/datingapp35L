@@ -5,6 +5,7 @@ import PersonalBio from "./PersonalBio";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@material-ui/core/IconButton";
 import ProfileEditor from "./ProfileEditor";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const slides = [
@@ -20,6 +21,18 @@ const Profile = () => {
     margin: "0 auto",
     zIndex: 1,
   };
+  const [name, setName] = useState("");
+
+  const [data, setData] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userData = localStorage.getItem("saveData");
+    if(userData) {
+      setData(JSON.parse(userData));
+    } else {
+      navigate('/');
+    }
+  }, [])
 
   const [isProfileEditorVisible, setProfileEditorVisible] = useState(false);
 
