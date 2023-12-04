@@ -2,7 +2,6 @@ import { useCallback, useRef, useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Chip from '@mui/material/Chip';
-import "./Profile.css"
 
 
 const slideStyles = {
@@ -38,49 +37,57 @@ const sliderStyles = {
   height: "100%",
 };
 
-// const dotsContainerStyles = {
-//   display: "flex",
-//   justifyContent: "center",
-//   padding: "15px",
-// };
-
 const dotsContainerStyles = {
-  position: "absolute",
-  bottom: "8px", // Adjust the position from the bottom as needed
-  width: "100%",
   display: "flex",
   justifyContent: "center",
-  zIndex: 2,
+  padding: "15px",
 };
 
 const dotStyle = {
-  margin: "0 2.7px",
+  margin: "0 3px",
   cursor: "pointer",
-  fontSize: "12px",
+  fontSize: "15px",
 };
 
 const slidesContainerStyles = {
   display: "flex",
   height: "100%",
-  transition: "transform ease-out 0.5s",
+  transition: "transform ease-out 0.2s",
 };
-
-// const slidesContainerStyles = {
-//   position: "relative", // Make the container relative to position dots absolutely
-//   display: "flex",
-//   height: "100%",
-//   transition: "transform ease-out 0.5s",
-//   overflow: "hidden",
-// };
 
 const slidesContainerOverflowStyles = {
   overflow: "hidden",
   height: "100%",
 };
 
+const chipStyle = {
+  backgroundColor: 'rgba(139, 184, 232, 0.6)',
+  color: '#fff',
+  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+  border: '1px solid #ddd',
+};
 
 
-const infoStyles = {
+// const bioStyle = {
+//   position: "absolute",
+//   left: "0",
+//   right: "0",
+//   bottom: "0",
+//   display: "flex",
+//   flexDirection: "column",
+//   justifyContent: "flex-end", // Align content to the bottom
+//   alignItems: "flex-start", 
+//   backgroundColor: "rgba(0, 0, 0, 0.4)",
+//   borderRadius: "10px",
+//   color: "#fff",
+//   fontFamily: "'Varela Round', sans-serif",
+//   textShadow: "1px 1px 2px rgba(0, 0, 0, 3)",
+//   textAlign: "left",
+//   padding: "1.25rem 1.5rem 1rem", // Add padding for better readability, adjust as needed
+//   zIndex: 2,
+// };
+
+const bioStyle = {
   position: "absolute",
   left: "0",
   right: "0",
@@ -90,44 +97,26 @@ const infoStyles = {
   flexDirection: "column",
   justifyContent: "flex-end", // Align content to the bottom
   alignItems: "flex-start", 
-  // backgroundColor: "rgba(0, 0, 0, 0.4)",
-  background: "linear-gradient(0deg, rgba(0, 0, 0, 1.2), rgba(0, 0, 0, .8) 45%, rgba(0, 0, 0, 0))", // Gradient background
-  
+  backgroundColor: "rgba(0, 0, 0, 0.4)",
   borderRadius: "10px",
   color: "#fff",
+  fontFamily: "'Varela Round', sans-serif",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
   textAlign: "left",
-  padding: "1.4rem 2.2rem 0.2rem", // Add padding for better readability, adjust as needed
+  padding: "1.25rem 1.5rem 1rem", // Add padding for better readability, adjust as needed
 
   h2: {
-    padding: "3rem 0rem 0rem", // Add margin-bottom to create a gap
-    fontSize: "48px",
-    fontFamily: 'Jost, sans-serif',
-  },
-
-  p: {
-    fontSize: "18px",
-    color: "#e6e6e6",
-    fontFamily: 'Nunito, sans-serif',
-  },
-
-  pronouns: {
-    fontSize: "18px",
-    color: "#808080",
-    fontFamily: 'Nunito, sans-serif',
+    padding: "0rem 0rem 1rem", // Add margin-bottom to create a gap
   },
 
 };
 
-const chipStyles = {
-  color: "white"
-}
-
 const ImageSlider = ({ slides, parentWidth }) => {
+  const timerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
-    color: currentIndex === slideIndex ? "#01BFFF" : "rgba(255, 255, 255, 0.5)", // Set your desired colors
+    color: currentIndex === slideIndex ? "#3992e5" : "black", // Set your desired colors
   });
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -154,11 +143,17 @@ const ImageSlider = ({ slides, parentWidth }) => {
   });
 
   return (
+    // <div className="App"></div>
     <div style={sliderStyles}>
-      <div style={infoStyles}>
-        <h2 style={infoStyles.h2}>Daemon, 19</h2>
-        <p style={infoStyles.p}>Second Year CS Major<span style={infoStyles.pronouns}><em>, she/her</em></span></p>
-
+      <div style={bioStyle}>
+        <h2 style={bioStyle.h2}>John Doe, 19</h2>
+        <p>Second Year Computer Science Major</p>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {/* placeholders for tags */}
+          <Chip label="Tag 1" style={chipStyle} /> 
+          <Chip label="Tag 2" style={chipStyle} />
+          <Chip label="Tag 3" style={chipStyle} />
+        </div>
       </div>
       <div>
         <div onClick={goToPrevious} style={leftArrowStyles}>
