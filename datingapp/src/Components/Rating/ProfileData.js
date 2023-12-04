@@ -10,23 +10,31 @@ function ProfileData({userID}){
     useEffect(() => {
         console.log('Fetching data...');
 
-        // Assuming your server is running on http://localhost:5000
-        axios.get('/api/users/'+userID) // Replace 1 with the appropriate user ID
-          .then(response => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get(`http://localhost:5000/api/users/${userID}`);
             setProfile(response.data); // Assuming the user object has a 'name' property
-          })
-          .catch(error => {
+          } catch (error) {
             console.error('Error fetching data:', error);
-          });
-      }, [userID]); // The empty dependency array ensures that this effect runs once after the initial render
+          }
+        };
+      
+        fetchData();
+      }, [userID]);
     
       return (
         <div className="prof">
           {profile ? (
             <div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              {profile.pic && <img src={profile.pic} alt="img" style={{ maxWidth: '100px', maxHeight: '100px' }}/>}
+              
               <h2>{profile.name}</h2>
+              </div>
               <p>{profile.tags.join(', ')}</p>
+              <p>{profile.birthday}&nbsp;&nbsp;{profile.phone}</p>
             </div>
+            
           ) : (
             <p>Loading...</p>
           )}

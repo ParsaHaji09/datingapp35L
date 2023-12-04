@@ -1,0 +1,23 @@
+.page {
+    display: flex;
+    padding: 5px;
+  }
+  
+  /*.list {
+    width: 310px; 
+    border: 1px solid #000; 
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 20vh;
+
+  }
+  .list:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+  }*/
+
+  
+  .ratingForm {
+    flex-grow: 1; 
+  }
