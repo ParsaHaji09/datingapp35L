@@ -1,49 +1,56 @@
-h2{
-    text-align: center;
-    margin-top: 10px; /* Add some top margin for spacing */
+.container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 310px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+h2 {
+  margin: 10px 0; /* Adjust the margin as needed */
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .bold-text {
-    font-weight: bold;
-  }
+  font-weight: bold;
+}
+
 ul {
-    list-style-type: none;
-    padding: 4.5px;
-    position: relative;
-    z-index: 1;
-    width:100%;
-    overflow-y: auto;
-    border: 1px solid #000;
-    text-align: center;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding-top: 70px;
-    height: 150vh; /* Set a fixed height (100% of the viewport height) */
-    margin-top: -55px;
-  }
-  ul:hover{
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */
-  }
-  
-  li {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    margin-bottom: 8px;
-    padding: 12px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-    width: 300px;
-    box-sizing: border-box;
-    
-    
-    
-  }
-  
-  li:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .selected {
-    background-color: rgb(250, 201, 109); /* Change to your preferred selected color */
-  }
+  list-style-type: none;
+  padding: 10px;
+  z-index: 3;
+  width: 100%;
+  overflow-y: auto;
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: calc(100% - 30px); /* Adjust the height to leave space for the header and margin */
+  margin-top: -70px;
+  padding-top: 70px;
+}
+
+ul:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+li {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+li:hover {
+  background-color: #e0e0e0;
+}
+
+.selected {
+  background-color: rgb(250, 201, 109);
+}

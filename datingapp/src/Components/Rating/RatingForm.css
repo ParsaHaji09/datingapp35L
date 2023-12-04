@@ -5,9 +5,10 @@
     justify-content: center;
     align-items: center;
     width: calc(100%-300px);
-    margin-left: 50px;
+    margin-left: 300px;
     margin-top:400px;
     row-gap: 10px; /* Adjust the gap as needed */
+    color: #000;
   }
   .styledRating{
     text-align: center;
@@ -16,13 +17,14 @@
     border-radius: 5px; /* Adjust the border-radius value */
     width: 180px; /* Adjust the width */
     height: 80px; /* Adjust the height */
-    margin-left: 505px;
+    margin-left: 735px;
+
 
 
   }
   .submit-container{
     text-align: center;
-    left: 300px; /* Set the right margin to 300 pixels */
+    margin-left: 150px; /* Set the right margin to 300 pixels */
     width: calc(100%);
     padding: 10px;
   }

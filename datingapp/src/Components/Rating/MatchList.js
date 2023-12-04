@@ -32,7 +32,7 @@ function MatchList({userID, onPersonClick, onListChange}){
   
 
     return (
-        <div>
+        <div className='container'>
           <h2 className='bold-text'> Current Matches</h2>
           {loading ? (
             <p>Loading...</p>
