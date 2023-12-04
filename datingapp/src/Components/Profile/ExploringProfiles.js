@@ -1,5 +1,5 @@
 import ImageSlider from "./ImageSlider";
-import PersonalBio from "./PersonalBio";
+import Bio from "./Bio";
 import ScrollAnimation from 'react-animate-on-scroll';
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@material-ui/core/IconButton";
@@ -37,11 +37,11 @@ const ExploringProfiles = () => {
                 </div>
                 {/* <ScrollAnimation animateIn="fadeInLeft">
                   <div style={{ display: 'flex', }}>
-                    <PersonalBio />
+                    <Bio />
                   </div>
                 </ScrollAnimation> */}
                 <div style={{ display: 'flex', }}>
-                  <PersonalBio />
+                  <Bio />
                 </div>
                 <IconButton style={{ alignSelf: 'flex-end', }}>
                   <CreateIcon />

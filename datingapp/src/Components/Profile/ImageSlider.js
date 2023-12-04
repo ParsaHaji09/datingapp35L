@@ -4,7 +4,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Chip from '@mui/material/Chip';
 import "./Profile.css"
 
-
 const slideStyles = {
   width: "100%",
   height: "100%",
@@ -37,14 +36,7 @@ const sliderStyles = {
   height: "100%",
   overflow: "hidden",
   borderRadius: "20px",
-
 };
-
-// const dotsContainerStyles = {
-//   display: "flex",
-//   justifyContent: "center",
-//   padding: "15px",
-// };
 
 const dotsContainerStyles = {
   position: "absolute",
@@ -67,20 +59,10 @@ const slidesContainerStyles = {
   transition: "transform ease-out 0.5s",
 };
 
-// const slidesContainerStyles = {
-//   position: "relative", // Make the container relative to position dots absolutely
-//   display: "flex",
-//   height: "100%",
-//   transition: "transform ease-out 0.5s",
-//   overflow: "hidden",
-// };
-
 const slidesContainerOverflowStyles = {
   overflow: "hidden",
   height: "100%",
 };
-
-
 
 const infoStyles = {
   position: "absolute",
@@ -96,7 +78,7 @@ const infoStyles = {
   color: "#fff",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
   textAlign: "left",
-  padding: "1.4rem 2.2rem 0.2rem", // Add padding for better readability, adjust as needed
+  padding: "2.3rem 2.2rem 0.2rem", // Add padding for better readability, adjust as needed
 
   h2: {
     padding: "3rem 0rem 0rem", // Add margin-bottom to create a gap

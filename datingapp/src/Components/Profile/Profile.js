@@ -1,7 +1,7 @@
 // Profile.js (or your component name)
 import React, { useState } from 'react';
 import ImageSlider from "./ImageSlider";
-import PersonalBio from "./PersonalBio";
+import Bio from "./Bio";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@material-ui/core/IconButton";
 import ProfileEditor from "./ProfileEditor";
@@ -21,17 +21,10 @@ const Profile = () => {
     zIndex: 1,
   };
 
-  const [isProfileEditorVisible, setProfileEditorVisible] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const openProfileEditor = () => {
-    console.log('Opening ProfileEditor');
-    setProfileEditorVisible(true);
-  };
-
-  const closeProfileEditor = () => {
-    console.log('Closing ProfileEditor');
-    setProfileEditorVisible(false);
-  };
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center" }}>
@@ -39,13 +32,12 @@ const Profile = () => {
         <div style={containerStyles}>
           <ImageSlider slides={slides} parentWidth={800} />
         </div>
-        <PersonalBio />
-        <IconButton onClick={openProfileEditor} style={{ color: "rgba(255, 255, 255, 0.5)", position: 'absolute', bottom: '3px', right: '3px' }}>
+        <Bio />
+        <IconButton onClick={handleShow} style={{ color: "rgba(255, 255, 255, 0.5)", position: 'absolute', bottom: '3px', right: '3px' }}>
           <CreateIcon />
         </IconButton>
       </div>
-
-      {isProfileEditorVisible && <ProfileEditor onClose={closeProfileEditor} />}
+      <ProfileEditor show={show} onHide={handleClose} />
     </div>
   );
 };

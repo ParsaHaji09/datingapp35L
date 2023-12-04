@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -15,13 +14,16 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import RedditIcon from '@mui/icons-material/Reddit';
-
-
+import { FaDiscord } from "react-icons/fa";
+import { BiLogoSnapchat } from "react-icons/bi";
+import { FaSpotify } from "react-icons/fa";
 
 const theme = createTheme();
 
 theme.typography.h4 = {
   fontSize: '28px',
+  fontWeight: 'bold',
+  letterSpacing: '1.5px'
 }
 
 const chipStyles = {
@@ -36,11 +38,15 @@ const chipIconStyles = {
 
 const socialIconStyles = {
   color: 'white',
-  fontSize: '40',
+  fontSize: '36',
+}
+
+const dividerStyles = {
+  height: '3px'
 }
 
 
-const PersonalBio = () => {
+const Bio = () => {
   return (
     <div className='glass'>
     <Box sx={{ width: '100%', maxWidth: 360, }}>
@@ -54,7 +60,8 @@ const PersonalBio = () => {
           that my current operating system runs properly. I
           am going to make this bio longer to see how things
           may look if a user's bio becomes long. Right now,
-          what you see is what you get.
+          what you see is what you get. We are going to try
+          to make this as long as possible.
         </Typography>
       </Box>
       <Box sx={{ m: 2 }}>
@@ -63,19 +70,28 @@ const PersonalBio = () => {
           <Chip style={chipStyles} variant="outlined" icon={<SmokeFreeIcon style={chipIconStyles} />} label="Non-Smoker" />
         </Stack>
       </Box>
-      <Divider variant="middle" color="white" />
+      <Divider style={dividerStyles} variant="middle" color="white" />
       <Box sx={{ m: 2 }}>
-        <Typography theme={theme} gutterBottom variant="h4" component="div">
+        <Typography theme={theme} fontSgutterBottom variant="h4" component="div">
           Interests
         </Typography>
-        <Stack direction="row" spacing={1}>
-          <Chip style={chipStyles} variant="outlined" label="CS 111" />
-          <Chip style={chipStyles} variant="outlined" label="Eggert" />
-          <Chip style={chipStyles} variant="outlined" label="Enrollment Pass" />
-          <Chip style={chipStyles} variant="outlined" label="Linux" />
-        </Stack>
+        <Box sx={{ my: 1 }}>
+          <Stack direction="row" spacing={1}>
+            <Chip style={chipStyles} variant="outlined" label="CS 111" />
+            <Chip style={chipStyles} variant="outlined" label="Eggert" />
+            <Chip style={chipStyles} variant="outlined" label="Enrollment Pass" />
+            <Chip style={chipStyles} variant="outlined" label="Linux" />
+          </Stack>
+        </Box>
+        <Box sx={{ my: 1 }}>
+          <Stack direction="row" spacing={1}>
+            <Chip style={chipStyles} variant="outlined" label="Basketball" />
+            <Chip style={chipStyles} variant="outlined" label="Working Out" />
+            <Chip style={chipStyles} variant="outlined" label="Photography" />
+          </Stack>
+        </Box>
       </Box>
-      <Divider variant="middle" color="white" />
+      <Divider style={dividerStyles} variant="middle" color="white" />
       <Box sx={{ mx: 2, my: 2 }}>
         <Typography theme={theme} gutterBottom variant="h4" component="div">
           Socials
@@ -88,13 +104,13 @@ const PersonalBio = () => {
             <FacebookIcon style={socialIconStyles} />
           </IconButton>
           <IconButton>
-            <YouTubeIcon style={socialIconStyles} />
+            <BiLogoSnapchat style={socialIconStyles} />
           </IconButton>
           <IconButton>
             <TwitterIcon style={socialIconStyles} />
           </IconButton>
           <IconButton>
-            <RedditIcon style={socialIconStyles} />
+            <FaDiscord style={socialIconStyles} />
           </IconButton>
         </Stack>
       </Box>
@@ -104,4 +120,4 @@ const PersonalBio = () => {
   );
 }
 
-export default PersonalBio;
+export default Bio;
