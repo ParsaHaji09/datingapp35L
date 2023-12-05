@@ -104,7 +104,7 @@ const chipStyles = {
   color: "white"
 }
 
-const ImageSlider = ({ slides, parentWidth }) => {
+const ImageSlider = ({ slides, name, age, major, pronouns, parentWidth }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
@@ -137,7 +137,7 @@ const ImageSlider = ({ slides, parentWidth }) => {
   return (
     <div style={sliderStyles}>
       <div style={infoStyles}>
-        <h2 style={infoStyles.h2}>Daemon, 19</h2>
+        <h2 style={infoStyles.h2}>{name}, 19</h2>
         <p style={infoStyles.p}>Second Year CS Major<span style={infoStyles.pronouns}><em>, she/her</em></span></p>
 
       </div>
