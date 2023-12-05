@@ -104,7 +104,7 @@ const chipStyles = {
   color: "white"
 }
 
-const ImageSlider = ({ slides, name, age, major, pronouns, parentWidth }) => {
+const ImageSlider = ({ slides, parentWidth, userData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
@@ -125,7 +125,7 @@ const ImageSlider = ({ slides, name, age, major, pronouns, parentWidth }) => {
   };
   const getSlideStylesWithBackground = (slideIndex) => ({
     ...slideStyles,
-    backgroundImage: `url(${slides[slideIndex].url})`,
+    backgroundImage: `url(${slides[slideIndex]})`,
     width: `${parentWidth}px`,
   });
   const getSlidesContainerStylesWithWidth = () => ({
@@ -134,11 +134,32 @@ const ImageSlider = ({ slides, name, age, major, pronouns, parentWidth }) => {
     transform: `translateX(${-(currentIndex * parentWidth)}px)`,
   });
 
+  function calculateAge(birthdate) {
+    const birthDate = new Date(birthdate);
+    const currentDate = new Date();
+  
+    // Calculate the difference in years
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+  
+    // Check if the birthday has occurred this year
+    if (
+      currentDate.getMonth() < birthDate.getMonth() ||
+      (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())
+    ) {
+      // If not, subtract 1 from the age
+      age--;
+    }
+  
+    return age;
+  }
+
+
   return (
     <div style={sliderStyles}>
       <div style={infoStyles}>
-        <h2 style={infoStyles.h2}>{name}, 19</h2>
-        <p style={infoStyles.p}>Second Year CS Major<span style={infoStyles.pronouns}><em>, she/her</em></span></p>
+
+        <h2 style={infoStyles.h2}>{userData.name}, {calculateAge(userData.birthday)}</h2>
+        <p style={infoStyles.p}>{userData.year} Year {userData.major} Major<span style={infoStyles.pronouns}><em>, {userData.pronouns}</em></span></p>
 
       </div>
       <div>
