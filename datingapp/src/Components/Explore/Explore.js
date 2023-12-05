@@ -8,6 +8,15 @@ import Search from './Search';
 import axios from 'axios';
 import GenericProfile from '../Profile/GenericProfile';
 
+
+/*TODO: Explore page match processing
+  - some sort of algorithm to rank all other users in terms of compatibility (on page load)
+  - remember to filter our users that the user has already seen somehow??
+  - implement like/dislike feature (pass data in generic profile -> bio?) add to other user's incoming first, then check if the other user is in incoming list 
+    then add to match list... i can explain more if u want.
+*/
+
+
 function Explore() {
 
   const dispatch = useDispatch();
@@ -84,7 +93,7 @@ const getAllUsers = async (uid) => {
         <Button type = "submit" onClick = {toRating}>To Rating</Button>
         <Search />
         {users.map((user, index) => (
-             <GenericProfile userData={user}></GenericProfile>
+             <GenericProfile userData={user} other_uid={userData._id}></GenericProfile>
         ))}
        
       </div>

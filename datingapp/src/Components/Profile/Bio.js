@@ -1,5 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+import Fab from '@mui/material/Fab';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -17,6 +20,7 @@ import RedditIcon from '@mui/icons-material/Reddit';
 import { FaDiscord } from "react-icons/fa";
 import { BiLogoSnapchat } from "react-icons/bi";
 import { FaSpotify } from "react-icons/fa";
+import Check from '@mui/icons-material/Check';
 
 const theme = createTheme();
 
@@ -46,7 +50,7 @@ const dividerStyles = {
 }
 
 
-const Bio = ({userData}) => {
+const Bio = ({userData, other_uid}) => {
   console.log(userData)
   return (
     <div className='glass'>
@@ -105,6 +109,21 @@ const Bio = ({userData}) => {
           </IconButton>
         </Stack>
       </Box>
+      {other_uid && (
+        <Box sx={{ m: 2 }}>
+          <Stack direction="row" spacing={1}>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <CheckIcon />
+            </Fab>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <ClearIcon />
+            </Fab>
+          </Stack>
+        </Box>
+      )}
+
+     
+
     </Box>
     </div>
     
