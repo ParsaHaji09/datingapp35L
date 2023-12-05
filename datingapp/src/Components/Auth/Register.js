@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-
 import { register } from '../../actions/reduxActions';
+import ErrorRedirect, { ErrorField } from './Error';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+
 
 const Register = (props) => {
   const [email, setEmail] = useState('');
@@ -15,8 +17,9 @@ const Register = (props) => {
   const [year, setYear] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
+  const [phoneMsg, setPhoneMsg] = useState(null);
   const [pic, setPic] = useState("");
-  const [picMsg, setPicMsg] = useState("");
+  const [picMsg, setPicMsg] = useState(null);
 
 
   const dispatch = useDispatch();
@@ -65,9 +68,13 @@ const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isValidPhoneNumber(phone)) {
+      return setPhoneMsg("Invalid Phone Number!");
+    }
+    setPhoneMsg(null);
     console.log(name, birthday, email, pronouns, year, major, pass, phone, selectedTags, pic);
     console.log('Register component submitted with email:', email);
-    dispatch(register(name, email, pronouns, year, major, pass, selectedTags, pic));
+    dispatch(register(name, birthday, email, pronouns, major, year, pass, phone, selectedTags, pic));
     navigate('/')
   }
 
@@ -141,6 +148,7 @@ const Register = (props) => {
       <label htmlFor ="password">Password</label>
       <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password"/>
 
+      { phoneMsg !== null ? <ErrorField ErrorMessage = { phoneMsg } /> : null }
       <label htmlFor="phoneNumber">Phone Number</label>
       <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"  />
 
@@ -158,7 +166,7 @@ const Register = (props) => {
 
         <label>
           Upload Image:
-          <input id = "custom-file" type = "file" label = "Upload Profile Picture" custom onChange={(e) => uploadImage(e.target.files[0])} />
+          <input id = "custom-file" type = "file" label = "Upload Profile Picture" onChange={(e) => uploadImage(e.target.files[0])} />
           { picMsg }
         </label>
       

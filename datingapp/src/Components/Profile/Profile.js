@@ -8,13 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
-
 const Profile = () => {
 
-const [loading, setLoading] = useState(true); 
-const [userData, setUserData] = useState({});
-const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true); 
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
 
 
 useEffect(() => {
@@ -51,6 +49,9 @@ const getUser = async (uid) => {
     margin: "0 auto",
     zIndex: 1,
   };
+  const [name, setName] = useState("");
+
+  const [data, setData] = useState(null);
 
   const [show, setShow] = useState(false);
 
@@ -86,7 +87,7 @@ const getUser = async (uid) => {
             </IconButton>
           </React.Fragment>
 
-          <ProfileEditor show={show} onHide={handleClose} userData={userData} />
+          <ProfileEditor show={show} onHide={handleClose} userData={userData} setUserData = {setUserData}/>
         
       </div>
       )}

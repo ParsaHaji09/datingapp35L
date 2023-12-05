@@ -79,9 +79,6 @@ const Bio = ({userData}) => {
         </Box>
         <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
-            <Chip style={chipStyles} variant="outlined" label="Basketball" />
-            <Chip style={chipStyles} variant="outlined" label="Working Out" />
-            <Chip style={chipStyles} variant="outlined" label="Photography" />
           </Stack>
         </Box>
       </Box>

@@ -5,7 +5,7 @@ const generateToken = require('../util/generateToken');
 
 // controllers for API endpoints
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, tags, pic, birthday, phone } = req.body;
+    const { name, email, password, tags, pic, birthday, phone, pronouns, year, major } = req.body;
 
     // check if user already exists by their email
     const userExists = await User.findOne({ email });
@@ -17,7 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // if user does not exist, create a new user post
     const user = await User.create({
-        name, email, password, tags, pic, birthday, phone
+        name, email, password, tags, pic, birthday, phone, major, year, pronouns
     });
 
     // if user create successfully
@@ -30,6 +30,9 @@ const registerUser = asyncHandler(async (req, res) => {
             pic: user.pic,
             birthday: user.birthday,
             phone: user.phone,
+            major: user.major,
+            year: user.year,
+            pronouns: user.pronouns,
             token: generateToken(user._id), // generate a token for the user to give them a JWT identity
         }) // otherwise there was an error with creating the user
     } else {
@@ -87,31 +90,6 @@ const getUser = asyncHandler(async (req, res) => {
     }
 });
 
-
-// const uploadImage = (picarr) => {
-//     const purls = [];
-//     for (let i=0; i<picarr.length; i++){
-//         let pics=picarr[i];
-//         if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
-//         const data = new FormData();
-//         data.append('file', pics);
-//         data.append('upload_preset', 'datewalk');
-//         data.append('cloud_name', 'deyvjcuxo');
-//         fetch("https://api.cloudinary.com/v1_1/deyvjcuxo/image/upload", {
-//             method: 'post',
-//             body: data,
-//         }).then((res) => res.json()).then((data) => {
-//             console.log(data)
-//             purls.append(data.url.toString());
-//         }).catch((err) => {
-//             console.log(err);
-//         })
-//         } else {
-//             return ("Unsupported Image Format");
-//         }
-//     }   
-//     return purls;
-//   }
 
 const updateUser = asyncHandler(async (req, res) => {
     // need id and updated traits/tags
