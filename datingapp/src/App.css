@@ -16,6 +16,11 @@
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
+.auth-form-container form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .login-form, .register-form {
   display: flex;
   flex-direction: column;
@@ -32,6 +37,40 @@ input{
   padding: 1rem;
   border: none;
   border-radius: 10px;
+}
+
+select{
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  width: 120%;
+}
+
+.flex-container {
+  display: flex;
+  gap: 25px; /* Adjust the gap between items as needed */
+}
+
+.flex-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.flex-item label {
+  text-align: left;
+  margin-bottom: 5px; /* Add some space between label and input/select */
+}
+
+label {
+  text-align: left;
+  margin-bottom: 5px; /* Add some space between label and input/select */
 }
 
 .button {
@@ -56,7 +95,6 @@ input{
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 
 .tag-button {
   border: none;

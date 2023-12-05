@@ -8,20 +8,70 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import InputLabel from '@mui/material/InputLabel';
+import axios from 'axios';
 
-const ProfileEditor = ({ show, onHide }) => {
-  const [name, setName] = useState('');
-  const [year, setYear] = useState('');
-  const [email, setEmail] = useState('');
-  const [major, setMajor] = useState('');
-  const [bio, setBio] = useState('');
-  const [selectedTags, setSelectedTags] = useState([]);
+const ProfileEditor = ({ show, onHide, userData }) => {
+  const [name, setName] = useState(userData.name);
+  const [year, setYear] = useState(userData.year);
+  const [pronouns, setPronouns] = useState(userData.pronouns);
+  const [major, setMajor] = useState(userData.major);
+  const [bio, setBio] = useState(userData.bio);
+  const [selectedTags, setSelectedTags] = useState(userData.tags);
   const [selectedImages, setSelectedImages] = useState([]);
+  const [purls, setPurls] = useState([]);
   const bioPlaceholder = "Hey, I'm Daemon. In my free time, I run silently in the background to monitor subsystems to ensure that my current operating system runs properly. I am going to make this bio longer to see how things may look if a user's bio becomes long. Right now, what you see is what you get. We are going to try to make this as long as possible."
 
+  //@aland figure out async and stuff???
+  const uploadImage = () => {
+    const purls = [];
+    for (let i=0; i<selectedImages.length; i++){
+      let pics = selectedImages[i];
+        if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
+        const data = new FormData();
+        data.append('file', pics);
+        data.append('upload_preset', 'datewalk');
+        data.append('cloud_name', 'deyvjcuxo');
+        fetch("https://api.cloudinary.com/v1_1/deyvjcuxo/image/upload", {
+            method: 'post',
+            body: data,
+        }).then((res) => res.json()).then((data) => {
+            console.log(data)
+            setPurls(prevItems => [...prevItems, data.url.toString()]);
+        }).catch((err) => {
+            console.log(err);
+        })
+        } else {
+        return ("Unsupported Image Format");
+        }
+    }   
+    console.log(purls)
+  }
+
   const handleSave = () => {
+    
     // Add logic to save the input data
+    uploadImage();
+    updateUserData();
+    console.log(userData.pronouns);
     onHide();
+  };
+
+  const updateUserData = async () => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/users/${userData._id}`, {
+        "name": name,
+        "bio": bio,
+        "major": major,
+        "pronouns": pronouns,
+        "year": year,
+        "tags": selectedTags,
+        "pic": selectedImages,
+      });
+      console.log(bio);
+      console.log(response.data); // Handle the response from the server
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
   };
 
   const tags = ["Funny", "Introverted", "Extroverted", "Casual", "Adventurous", "Creative", "Organized", "Laid-back", "Optimistic", "Reserved"];
@@ -37,15 +87,18 @@ const ProfileEditor = ({ show, onHide }) => {
   };
 
   const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files);
-
+    
+    const files = [...event.target.files];  // Use the spread operator to convert FileList to an array
+  
     if (files.length <= 4) {
       setSelectedImages(files);
     } else {
       // Display a message or take appropriate action for exceeding the limit
       console.log("You can only select up to 4 images");
     }
+    console.log(files);
   };
+  
 
   return (
     <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm">
@@ -85,15 +138,15 @@ const ProfileEditor = ({ show, onHide }) => {
         <div style={{ display: 'flex', gap: '16px' }}>
           {/* Email */}
           <div style={{ flex: 1 }}>
-            <InputLabel htmlFor="email">Email</InputLabel>
+            <InputLabel htmlFor="pronouns">Pronouns</InputLabel>
             <TextField
               margin="dense"
-              id="email"
-              type="email"
+              id="pronouns"
+              type="text"
               fullWidth
-              placeholder='daemon17@us.gov'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Pronouns'
+              value={pronouns}
+              onChange={(e) => setPronouns(e.target.value)}
             />
           </div>
 
@@ -151,11 +204,12 @@ const ProfileEditor = ({ show, onHide }) => {
           ))}
         </div>
 
+
         <div style={{ marginTop: '24px', marginBottom: '24px' }}>
           {/* Image Upload */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
             <InputLabel>Upload Images (Up to 4)</InputLabel>
-            <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
+            <input type="file" accept="image/*" multiple={true} onInput={handleImageUpload} />
           </div>
         </div>
 

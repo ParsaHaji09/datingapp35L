@@ -87,26 +87,57 @@ const getUser = asyncHandler(async (req, res) => {
     }
 });
 
+
+// const uploadImage = (picarr) => {
+//     const purls = [];
+//     for (let i=0; i<picarr.length; i++){
+//         let pics=picarr[i];
+//         if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
+//         const data = new FormData();
+//         data.append('file', pics);
+//         data.append('upload_preset', 'datewalk');
+//         data.append('cloud_name', 'deyvjcuxo');
+//         fetch("https://api.cloudinary.com/v1_1/deyvjcuxo/image/upload", {
+//             method: 'post',
+//             body: data,
+//         }).then((res) => res.json()).then((data) => {
+//             console.log(data)
+//             purls.append(data.url.toString());
+//         }).catch((err) => {
+//             console.log(err);
+//         })
+//         } else {
+//             return ("Unsupported Image Format");
+//         }
+//     }   
+//     return purls;
+//   }
+
 const updateUser = asyncHandler(async (req, res) => {
     // need id and updated traits/tags
     const { tags, attractiveness, conversation,
-            activity, humor, decency, after, matches, incoming, } = req.body;
+            activity, humor, decency, after, matches, incoming, bio, year, pic } = req.body;
 
     const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
+    const simpleUpdates = ['bio', 'year', 'major', 'name', 'pronouns'];
 
     console.log("here")
 
     const user = await User.findById(req.params.id);
 
     if (user) {
+
+        if (pic){
+            user["pic"] = pic;
+        }
+
         if (tags){
-            user.tags = tags;
+            user["tags"] = tags;
         }
 
         for (const key in req.body) {
             const value = req.body[key];
             
-            // Exclude the 'tags' key
             if (includedKeys.includes(key)) {
                 // Check if the value exists before updating the user property
                 if (value !== undefined && value !== null) {
@@ -118,9 +149,16 @@ const updateUser = asyncHandler(async (req, res) => {
                     user[key][1] += 1;
                 }
             }
+
+            if (simpleUpdates.includes(key)){
+                if (value !== undefined && value !== "") {
+                    user[key] = value;
+                }
+            }
+
+
         }
 
-        console.log("Matches is null?" + (matches === null));
         if (matches){
             if (matches.type==="remove"){
                 console.log("Hee");
