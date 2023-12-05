@@ -96,35 +96,6 @@ label {
   justify-content: space-between;
 }
 
-.custom-file-upload {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-}
-
-.custom-file-upload input[type="file"] {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  cursor: pointer;
-  margin: 0.5rem 0;
-  padding: 1rem;
-  border: none;
-  border-radius: 10px;
-  background-color: #3498db; /* Change to your desired background color */
-  color: #fff; /* Change to your desired text color */
-}
-
-.custom-file-upload label {
-  background-color: #3498db; /* Same as input background color */
-  color: #fff; /* Same as input text color */
-  padding: 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
 .tag-button {
   border: none;
   margin: 5px;
