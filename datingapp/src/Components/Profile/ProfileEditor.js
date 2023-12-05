@@ -18,39 +18,44 @@ const ProfileEditor = ({ show, onHide, userData }) => {
   const [bio, setBio] = useState(userData.bio);
   const [selectedTags, setSelectedTags] = useState(userData.tags);
   const [selectedImages, setSelectedImages] = useState([]);
-  const [purls, setPurls] = useState([]);
   const bioPlaceholder = "Hey, I'm Daemon. In my free time, I run silently in the background to monitor subsystems to ensure that my current operating system runs properly. I am going to make this bio longer to see how things may look if a user's bio becomes long. Right now, what you see is what you get. We are going to try to make this as long as possible."
 
   //@aland figure out async and stuff???
-  const uploadImage = () => {
-    const purls = [];
-    for (let i=0; i<selectedImages.length; i++){
-      let pics = selectedImages[i];
-        if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
+  // np baebae :kiss:
+  // cuh no way you use setpurl but dont have a webhook for purl :skull:
+  const uploadImage = (pics) => {
+    const imCount = Math.min(pics.length, 4);
+    let imUrls = [];
+
+    for (let i=0; i < imCount; i++){
+      let pic = pics[i];
+      console.log("Pic " + i + " " + pics[i]);
+      if (pic.type === 'image/jpeg' || pic.type === 'image/png') {
         const data = new FormData();
-        data.append('file', pics);
+        data.append('file', pic);
         data.append('upload_preset', 'datewalk');
         data.append('cloud_name', 'deyvjcuxo');
         fetch("https://api.cloudinary.com/v1_1/deyvjcuxo/image/upload", {
             method: 'post',
             body: data,
         }).then((res) => res.json()).then((data) => {
-            console.log(data)
-            setPurls(prevItems => [...prevItems, data.url.toString()]);
+            console.log(data);
+            imUrls.push(data.url.toString());
+
+            if (imUrls.length === imCount) setSelectedImages(imUrls);
+
         }).catch((err) => {
             console.log(err);
         })
         } else {
-        return ("Unsupported Image Format");
+        console.log("Unsupported Image Format");
         }
     }   
-    console.log(purls)
   }
 
   const handleSave = () => {
     
     // Add logic to save the input data
-    uploadImage();
     updateUserData();
     console.log(userData.pronouns);
     onHide();
@@ -209,7 +214,7 @@ const ProfileEditor = ({ show, onHide, userData }) => {
           {/* Image Upload */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
             <InputLabel>Upload Images (Up to 4)</InputLabel>
-            <input type="file" accept="image/*" multiple={true} onInput={handleImageUpload} />
+            <input type="file" accept="image/*" multiple onChange={(e) => { uploadImage(e.target.files); }} />
           </div>
         </div>
 

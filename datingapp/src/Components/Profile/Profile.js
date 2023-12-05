@@ -12,13 +12,12 @@ const Profile = () => {
 
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState({});
-
+  const navigate = useNavigate();
 
 
 useEffect(() => {
   const prevData = localStorage.getItem("saveData");
   if (!prevData) {
-    const navigate = useNavigate();
     navigate('/');
   } else {
     const parsedData = JSON.parse(prevData);
@@ -53,7 +52,6 @@ const getUser = async (uid) => {
   const [name, setName] = useState("");
 
   const [data, setData] = useState(null);
-  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
