@@ -44,7 +44,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   //@aland figure out async and stuff???
   // np baebae :kiss:
   const uploadImage = (pics) => {
-    const imCount = Math.min(pics.length, 4);
+    const imCount = Math.min(pics.length, 5);
     let imUrls = [];
 
     for (let i=0; i < imCount; i++){
