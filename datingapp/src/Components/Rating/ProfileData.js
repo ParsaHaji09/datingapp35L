@@ -27,7 +27,7 @@ function ProfileData({userID}){
           {profile ? (
             <div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-              {profile.pic && <img src={profile.pic} alt="img" style={{ maxWidth: '100px', maxHeight: '100px' }}/>}
+              {profile.pic && <img src={profile.pic} alt="img" style={{ width: '120px', height: '120px', borderRadius: '10px',objectFit: 'cover' }}/>}
               
               <h2>{profile.name}</h2>
               </div>

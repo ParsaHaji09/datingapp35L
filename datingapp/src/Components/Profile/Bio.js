@@ -1,5 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+import Fab from '@mui/material/Fab';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -17,6 +20,7 @@ import RedditIcon from '@mui/icons-material/Reddit';
 import { FaDiscord } from "react-icons/fa";
 import { BiLogoSnapchat } from "react-icons/bi";
 import { FaSpotify } from "react-icons/fa";
+import Check from '@mui/icons-material/Check';
 
 const theme = createTheme();
 
@@ -46,7 +50,8 @@ const dividerStyles = {
 }
 
 
-const Bio = () => {
+const Bio = ({userData, other_uid}) => {
+  console.log(userData)
   return (
     <div className='glass'>
     <Box sx={{ width: '100%', maxWidth: 360, }}>
@@ -55,13 +60,7 @@ const Bio = () => {
           About Me
         </Typography>
         <Typography color="#FAF9F6" variant="body2">
-          Hey, I'm Daemon. In my free time, I run silently 
-          in the background to monitor subsystems to ensure
-          that my current operating system runs properly. I
-          am going to make this bio longer to see how things
-          may look if a user's bio becomes long. Right now,
-          what you see is what you get. We are going to try
-          to make this as long as possible.
+          {userData.bio}
         </Typography>
       </Box>
       <Box sx={{ m: 2 }}>
@@ -72,22 +71,18 @@ const Bio = () => {
       </Box>
       <Divider style={dividerStyles} variant="middle" color="white" />
       <Box sx={{ m: 2 }}>
-        <Typography theme={theme} fontSgutterBottom variant="h4" component="div">
+        <Typography theme={theme} fontsgutterbottom="true" variant="h4" component="div">
           Interests
         </Typography>
         <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
-            <Chip style={chipStyles} variant="outlined" label="CS 111" />
-            <Chip style={chipStyles} variant="outlined" label="Eggert" />
-            <Chip style={chipStyles} variant="outlined" label="Enrollment Pass" />
-            <Chip style={chipStyles} variant="outlined" label="Linux" />
+            {userData.tags.map((item) => (
+              <Chip style={chipStyles} variant="outlined" label={item}></Chip>
+            ))}
           </Stack>
         </Box>
         <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
-            <Chip style={chipStyles} variant="outlined" label="Basketball" />
-            <Chip style={chipStyles} variant="outlined" label="Working Out" />
-            <Chip style={chipStyles} variant="outlined" label="Photography" />
           </Stack>
         </Box>
       </Box>
@@ -114,6 +109,21 @@ const Bio = () => {
           </IconButton>
         </Stack>
       </Box>
+      {other_uid && (
+        <Box sx={{ m: 2 }}>
+          <Stack direction="row" spacing={1}>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <CheckIcon />
+            </Fab>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <ClearIcon />
+            </Fab>
+          </Stack>
+        </Box>
+      )}
+
+     
+
     </Box>
     </div>
     

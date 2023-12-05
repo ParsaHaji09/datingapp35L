@@ -9,7 +9,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
 });
 
-const userStorageInfo = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("saveData")) : null;
+const userStorageInfo = localStorage.getItem("saveData") ? JSON.parse(localStorage.getItem("saveData")) : null;
 
 const middleware = [thunk];
 const initialState = {
