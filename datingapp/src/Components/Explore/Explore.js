@@ -1,10 +1,21 @@
-
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import './Explore.css'
+import { logout } from '../../actions/reduxActions';
 import Search from './Search';
+import axios from 'axios';
+import GenericProfile from '../Profile/GenericProfile';
+import './Explore.css'
+
+
+/*TODO: Explore page match processing
+  - some sort of algorithm to rank all other users in terms of compatibility (on page load)
+  - remember to filter our users that the user has already seen somehow??
+  - implement like/dislike feature (pass data in generic profile -> bio?) add to other user's incoming first, then check if the other user is in incoming list 
+    then add to match list... i can explain more if u want.
+*/
+
 
 function Explore() {
 
@@ -58,14 +69,35 @@ const getAllUsers = async (uid) => {
 };
 
 
-  
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate('/');
+  }
+
+  const toRating = () => {
+    const data = { userData };
+    navigate('/rating', { state: { data } });
+  }
+
+
   return (
     <div>
-      <h1>{ name }</h1>
-      <img src = { pfp } />
-      <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
-      <Button type = "submit" onClick = {toRating}>To Rating</Button>
-      <Search />
+    {loading | selfLoading ? (
+      // Display a loading indicator or message while data is being fetched
+      <p>Loading Page...</p>
+    ): (
+      <div>
+        <h1>{ userData.name }</h1>
+        <img src={userData.pic[0]} style={{ width: '100px' }} />
+        <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
+        <Button type = "submit" onClick = {toRating}>To Rating</Button>
+        <Search />
+        {users.map((user, index) => (
+             <GenericProfile userData={user} other_uid={userData._id}></GenericProfile>
+        ))}
+       
+      </div>
+    )}
     </div>
     
   )
