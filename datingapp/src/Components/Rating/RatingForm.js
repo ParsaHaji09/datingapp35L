@@ -28,7 +28,7 @@ function RatingForm({user, onListChange}) {
       const parsedData = JSON.parse(prevData);
       setUdata(parsedData);
     }
-  }, []);
+  }, [navigate]);
 
   function handleRatingChange(categoryName, ratingValue) {
     setRatings((prevRatings) => ({
