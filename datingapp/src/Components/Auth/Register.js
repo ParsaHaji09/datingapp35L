@@ -12,9 +12,9 @@ const Register = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
-  const [pronouns, setPronouns] = useState('');
+  const [pronouns, setPronouns] = useState('She/Her');
   const [major, setMajor] = useState('');
-  const [year, setYear] = useState('');
+  const [year, setYear] = useState('First Year');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
   const [phoneMsg, setPhoneMsg] = useState(null);
