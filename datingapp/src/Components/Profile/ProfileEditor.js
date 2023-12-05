@@ -10,19 +10,19 @@ import Chip from '@mui/material/Chip';
 import InputLabel from '@mui/material/InputLabel';
 import axios from 'axios';
 
-const ProfileEditor = ({ show, onHide, userData }) => {
+const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
+  const [curData, setCurData] = useState(userData);
   const [name, setName] = useState(userData.name);
   const [year, setYear] = useState(userData.year);
   const [pronouns, setPronouns] = useState(userData.pronouns);
   const [major, setMajor] = useState(userData.major);
   const [bio, setBio] = useState(userData.bio);
   const [selectedTags, setSelectedTags] = useState(userData.tags);
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState(userData.pic);
   const bioPlaceholder = "Hey, I'm Daemon. In my free time, I run silently in the background to monitor subsystems to ensure that my current operating system runs properly. I am going to make this bio longer to see how things may look if a user's bio becomes long. Right now, what you see is what you get. We are going to try to make this as long as possible."
 
   //@aland figure out async and stuff???
   // np baebae :kiss:
-  // cuh no way you use setpurl but dont have a webhook for purl :skull:
   const uploadImage = (pics) => {
     const imCount = Math.min(pics.length, 4);
     let imUrls = [];
@@ -54,7 +54,6 @@ const ProfileEditor = ({ show, onHide, userData }) => {
   }
 
   const handleSave = () => {
-    
     // Add logic to save the input data
     updateUserData();
     console.log(userData.pronouns);
@@ -74,6 +73,8 @@ const ProfileEditor = ({ show, onHide, userData }) => {
       });
       console.log(bio);
       console.log(response.data); // Handle the response from the server
+      setCurData(response.data);
+      setUserData(response.data);
     } catch (error) {
       console.error('Error updating user data:', error);
     }

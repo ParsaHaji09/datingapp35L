@@ -87,7 +87,7 @@ const getUser = async (uid) => {
             </IconButton>
           </React.Fragment>
 
-          <ProfileEditor show={show} onHide={handleClose} userData={userData} />
+          <ProfileEditor show={show} onHide={handleClose} userData={userData} setUserData = {setUserData}/>
         
       </div>
       )}

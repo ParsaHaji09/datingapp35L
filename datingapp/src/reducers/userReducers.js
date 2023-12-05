@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from "../constants/reduxConstants";
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, USER_UPDATE } from "../constants/reduxConstants";
 
 
 export const userLoginReducer = (state = { }, action) => {
@@ -9,6 +9,8 @@ export const userLoginReducer = (state = { }, action) => {
             return { loading: false, userInfo: action.payload };
         case LOGIN_FAIL:
             return { loading: false, error: action.payload };
+        case USER_UPDATE:
+            return { ...state, userInfo: action.payload };
         case LOGOUT:
             return {};
         default:
