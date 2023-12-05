@@ -102,24 +102,36 @@ const Register = (props) => {
     <div className="auth-form-container">
     <form className="login-form" onSubmit={handleSubmit}>
 
-      <label htmlFor="name">Full Name</label>
+    <label htmlFor="name">Full Name</label>
       <input value={name} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="Enter here"/>
 
-      <label htmlFor="pronouns">Pronouns</label>
-      <select value={pronouns} onChange={(e) => setPronouns(e.target.value)} id="pronouns" name="pronouns">
-      <option value="she/her">She/Her</option>
-      <option value="he/him">He/Him</option>
-      <option value="they/them">They/Them</option>
-      </select>
+    <div className ="flex-container">
 
-      <label htmlFor="year">Year</label>
-      <select value={year} onChange={(e) => setYear(e.target.value)} id="year" name="year">
-      <option value="First Year">First Year</option>
-      <option value="Second Year">Second Year</option>
-      <option value="Third Year">Third Year</option>
-      <option value="Fourth Year+">Fourth Year+</option>
-      </select>
+      <div className="flex-item">
+            <label htmlFor="pronouns">Pronouns</label>
+            <select value={pronouns} onChange={(e) => setPronouns(e.target.value)} id="pronouns" name="pronouns">
+            <option value="she/her">She/Her</option>
+            <option value="he/him">He/Him</option>
+            <option value="they/them">They/Them</option>
+        </select>
+        </div>
 
+        <div className="flex-item">
+          <label htmlFor="year">Year</label>
+          <select value={year} onChange={(e) => setYear(e.target.value)} id="year" name="year">
+          <option value="First Year">First Year</option>
+          <option value="Second Year">Second Year</option>
+          <option value="Third Year">Third Year</option>
+          <option value="Fourth Year+">Fourth Year+</option>
+        </select>
+        </div>
+
+        <div className="flex-item">
+        <label htmlFor="birthday">Birthday</label>
+      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" placeholder= "placeholder" id="birthday" name="birthday"/>
+      </div>
+
+      </div>
       <label htmlFor="major">Major</label>
       <input value={major} onChange={(e) => setMajor(e.target.value)} name="major" id="major" placeholder="Enter here"/>
 
@@ -128,9 +140,6 @@ const Register = (props) => {
 
       <label htmlFor ="password">Password</label>
       <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password"/>
-
-      <label htmlFor="birthday">Birthday</label>
-      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" placeholder= "placeholder" id="birthday" name="birthday"/>
 
       <label htmlFor="phoneNumber">Phone Number</label>
       <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"  />
