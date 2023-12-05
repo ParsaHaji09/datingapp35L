@@ -12,6 +12,7 @@ function Rating(){
 
     function handleListChange() {
         setCurrentPerson(null)
+        setList({})
     }
           
     const location = useLocation();
