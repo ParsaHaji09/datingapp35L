@@ -1,0 +1,41 @@
+.nav {
+    background-color: rgb(231, 75, 130);
+    
+    justify-content: space-between;
+}
+
+.sitename{
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 16px;
+    color: white;
+    text-decoration: none;
+}
+
+.logout{
+    padding: 5px;
+    border: none;
+    background: none;
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    margin-right: 10px;
+}
+
+.links{
+    display: flex; /* Add flex container to the links */
+    list-style-type: none; /* Remove default list styles */
+    color: white;
+    text-decoration: none;
+    align-items: center;
+}
+
+.profile, .explore, .rating{
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+}

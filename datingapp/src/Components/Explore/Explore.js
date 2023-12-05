@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +6,7 @@ import { logout } from '../../actions/reduxActions';
 import Search from './Search';
 import axios from 'axios';
 import GenericProfile from '../Profile/GenericProfile';
+import './Explore.css'
 
 
 /*TODO: Explore page match processing
