@@ -27,7 +27,7 @@ label {
   padding: 0.25rem 0;
 }
 
-input{
+input, select{
   margin: 0.5rem 0;
   padding: 1rem;
   border: none;
