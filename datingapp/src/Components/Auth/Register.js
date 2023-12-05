@@ -10,6 +10,9 @@ const Register = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
+  const [pronouns, setPronouns] = useState('');
+  const [major, setMajor] = useState('');
+  const [year, setYear] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
   const [pic, setPic] = useState("");
@@ -62,9 +65,9 @@ const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, birthday, email, pass, phone, selectedTags, pic);
+    console.log(name, birthday, email, pronouns, year, major, pass, phone, selectedTags, pic);
     console.log('Register component submitted with email:', email);
-    dispatch(register(name, email, pass, selectedTags, pic));
+    dispatch(register(name, email, pronouns, year, major, pass, selectedTags, pic));
     navigate('/')
   }
 
@@ -101,6 +104,24 @@ const Register = (props) => {
 
       <label htmlFor="name">Full Name</label>
       <input value={name} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="Enter here"/>
+
+      <label htmlFor="pronouns">Pronouns</label>
+      <select value={pronouns} onChange={(e) => setPronouns(e.target.value)} id="pronouns" name="pronouns">
+      <option value="she/her">She/Her</option>
+      <option value="he/him">He/Him</option>
+      <option value="they/them">They/Them</option>
+      </select>
+
+      <label htmlFor="year">Year</label>
+      <select value={year} onChange={(e) => setYear(e.target.value)} id="year" name="year">
+      <option value="First Year">First Year</option>
+      <option value="Second Year">Second Year</option>
+      <option value="Third Year">Third Year</option>
+      <option value="Fourth Year+">Fourth Year+</option>
+      </select>
+
+      <label htmlFor="major">Major</label>
+      <input value={major} onChange={(e) => setMajor(e.target.value)} name="major" id="major" placeholder="Enter here"/>
 
       <label htmlFor ="email">Email</label>
       <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter here" id="email" name="email"/>
