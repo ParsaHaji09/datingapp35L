@@ -8,19 +8,15 @@ import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
-import CreateIcon from '@mui/icons-material/Create';
-import IconButton from "@material-ui/core/IconButton";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import RedditIcon from '@mui/icons-material/Reddit';
-import { FaDiscord } from "react-icons/fa";
-import { BiLogoSnapchat } from "react-icons/bi";
-import { FaSpotify } from "react-icons/fa";
-import Check from '@mui/icons-material/Check';
+import SocialButton from './SocialButton';
+
+const instagramUsername = 'instagram_username';
+const spotifyUsername = 'spotify_username';
+const snapchatUsername = 'snapchat_username';
+const tiktokUsername  = 'tiktok_username';
+const facebookUsername = 'facebook_username';
+const twitterUsername = 'twitter_username';
+
 
 const theme = createTheme();
 
@@ -49,7 +45,6 @@ const dividerStyles = {
   height: '3px'
 }
 
-
 const Bio = ({userData, other_uid}) => {
   console.log(userData)
   return (
@@ -63,24 +58,23 @@ const Bio = ({userData, other_uid}) => {
           {userData.bio}
         </Typography>
       </Box>
-      <Box sx={{ m: 2 }}>
-        <Stack direction="row" spacing={1}>
-          <Chip style={chipStyles} variant="outlined" icon={<DarkModeIcon style={chipIconStyles} />} label="Taurus" />
-          <Chip style={chipStyles} variant="outlined" icon={<SmokeFreeIcon style={chipIconStyles} />} label="Non-Smoker" />
-        </Stack>
-      </Box>
       <Divider style={dividerStyles} variant="middle" color="white" />
       <Box sx={{ m: 2 }}>
         <Typography theme={theme} fontsgutterbottom="true" variant="h4" component="div">
           Interests
         </Typography>
-        <Box sx={{ my: 1 }}>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center', paddingTop: "12px" }}>
+          {userData.tags.map((item) => (
+            <Chip style={chipStyles} variant="outlined" label={item}></Chip>
+          ))}
+        </div>
+        {/* <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
             {userData.tags.map((item) => (
               <Chip style={chipStyles} variant="outlined" label={item}></Chip>
             ))}
           </Stack>
-        </Box>
+        </Box> */}
         <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
           </Stack>
@@ -91,23 +85,14 @@ const Bio = ({userData, other_uid}) => {
         <Typography theme={theme} gutterBottom variant="h4" component="div">
           Socials
         </Typography>
-        <Stack direction="row" spacing={0.5} justifyContent={"center"}>
-          <IconButton>
-            <InstagramIcon style={socialIconStyles} />
-          </IconButton>
-          <IconButton>
-            <FacebookIcon style={socialIconStyles} />
-          </IconButton>
-          <IconButton>
-            <BiLogoSnapchat style={socialIconStyles} />
-          </IconButton>
-          <IconButton>
-            <TwitterIcon style={socialIconStyles} />
-          </IconButton>
-          <IconButton>
-            <FaDiscord style={socialIconStyles} />
-          </IconButton>
-        </Stack>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center' }}>
+          <SocialButton socialMedia="instagram" userName="your_instagram_username" />
+          <SocialButton socialMedia="snapchat" userName="your_snapchat_username" />
+          <SocialButton socialMedia="facebook" userName="your_facebook_username" />
+          <SocialButton socialMedia="spotify" userName="your_spotify_username" />
+          <SocialButton socialMedia="twitter" userName="your_twitter_username" />
+          <SocialButton socialMedia="tiktok" userName="your_tiktok_username" />
+        </div>
       </Box>
       {other_uid && (
         <Box sx={{ m: 2 }}>
@@ -121,9 +106,6 @@ const Bio = ({userData, other_uid}) => {
           </Stack>
         </Box>
       )}
-
-     
-
     </Box>
     </div>
     
