@@ -102,8 +102,7 @@ const updateUser = asyncHandler(async (req, res) => {
     if (user) {
 
         if (tags){
-            console.log(tags);
-            user[tags] = tags;
+            user["tags"] = tags;
         }
 
         for (const key in req.body) {
