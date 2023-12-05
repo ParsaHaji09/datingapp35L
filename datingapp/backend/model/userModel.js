@@ -24,6 +24,22 @@ const userSchema = mongoose.Schema(
             type: Array,
             default: []
         },
+        year: {
+            type: String,
+            default: ""
+        },
+        major: {
+            type: String,
+            default: ""
+        },
+        bio: {
+            type: String,
+            default: ""
+        },
+        pronouns: {
+            type: String,
+            default: ""
+        },
         pic: {
             type: String,
             default: "https://res.cloudinary.com/deyvjcuxo/image/upload/v1701495688/funny-profile-picture-7k1legjukiz1lju7_vg3ia2.jpg"
