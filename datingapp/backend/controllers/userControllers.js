@@ -87,10 +87,36 @@ const getUser = asyncHandler(async (req, res) => {
     }
 });
 
+
+// const uploadImage = (picarr) => {
+//     const purls = [];
+//     for (let i=0; i<picarr.length; i++){
+//         let pics=picarr[i];
+//         if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
+//         const data = new FormData();
+//         data.append('file', pics);
+//         data.append('upload_preset', 'datewalk');
+//         data.append('cloud_name', 'deyvjcuxo');
+//         fetch("https://api.cloudinary.com/v1_1/deyvjcuxo/image/upload", {
+//             method: 'post',
+//             body: data,
+//         }).then((res) => res.json()).then((data) => {
+//             console.log(data)
+//             purls.append(data.url.toString());
+//         }).catch((err) => {
+//             console.log(err);
+//         })
+//         } else {
+//             return ("Unsupported Image Format");
+//         }
+//     }   
+//     return purls;
+//   }
+
 const updateUser = asyncHandler(async (req, res) => {
     // need id and updated traits/tags
     const { tags, attractiveness, conversation,
-            activity, humor, decency, after, matches, incoming, bio, year } = req.body;
+            activity, humor, decency, after, matches, incoming, bio, year, pic } = req.body;
 
     const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
     const simpleUpdates = ['bio', 'year', 'major', 'name', 'pronouns'];
@@ -100,6 +126,10 @@ const updateUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (user) {
+
+        if (pic){
+            user["pic"] = pic;
+        }
 
         if (tags){
             user["tags"] = tags;

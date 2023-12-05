@@ -41,8 +41,8 @@ const userSchema = mongoose.Schema(
             default: ""
         },
         pic: {
-            type: String,
-            default: "https://res.cloudinary.com/deyvjcuxo/image/upload/v1701495688/funny-profile-picture-7k1legjukiz1lju7_vg3ia2.jpg"
+            type: Array,
+            default: ["https://res.cloudinary.com/deyvjcuxo/image/upload/v1701495688/funny-profile-picture-7k1legjukiz1lju7_vg3ia2.jpg"]
         },
         birthday: {
             type: String,

@@ -125,7 +125,7 @@ const ImageSlider = ({ slides, parentWidth, userData }) => {
   };
   const getSlideStylesWithBackground = (slideIndex) => ({
     ...slideStyles,
-    backgroundImage: `url(${slides[slideIndex].url})`,
+    backgroundImage: `url(${slides[slideIndex]})`,
     width: `${parentWidth}px`,
   });
   const getSlidesContainerStylesWithWidth = () => ({
@@ -158,7 +158,7 @@ const ImageSlider = ({ slides, parentWidth, userData }) => {
     <div style={sliderStyles}>
       <div style={infoStyles}>
         <h2 style={infoStyles.h2}>{userData.name}, {calculateAge(userData.birthday)}</h2>
-        <p style={infoStyles.p}>{userData.year}nd Year {userData.major} Major<span style={infoStyles.pronouns}><em>, {userData.pronouns}</em></span></p>
+        <p style={infoStyles.p}>{userData.year} Year {userData.major} Major<span style={infoStyles.pronouns}><em>, {userData.pronouns}</em></span></p>
 
       </div>
       <div>
