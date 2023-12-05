@@ -25,8 +25,8 @@ function Explore() {
       const parsedData = JSON.parse(prevData);
       setUserData(parsedData);
       setUserName(parsedData.name);
-      if (parsedData.pic !== undefined && parsedData.pic !== "") {
-        setPfp(parsedData.pic);
+      if (parsedData.pic[0] !== undefined && parsedData.pic[0] !== "") {
+        setPfp(parsedData.pic[0]);
       }
     }
   }, [])

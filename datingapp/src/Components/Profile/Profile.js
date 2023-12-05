@@ -76,7 +76,7 @@ const getUser = async (uid) => {
           
       <div style={{ display: 'flex', gap: '20px', position: 'relative' }}>
         <div style={containerStyles}>
-          <ImageSlider slides={[{ url: userData.pic, title: "profile" }, ...slides.slice(1)]} userData={userData} parentWidth={800} />
+          <ImageSlider slides={userData.pic} userData={userData} parentWidth={800} />
         </div>
          
           <React.Fragment>

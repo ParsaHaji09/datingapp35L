@@ -18,10 +18,39 @@ const ProfileEditor = ({ show, onHide, userData }) => {
   const [bio, setBio] = useState(userData.bio);
   const [selectedTags, setSelectedTags] = useState(userData.tags);
   const [selectedImages, setSelectedImages] = useState([]);
+  const [purls, setPurls] = useState([]);
   const bioPlaceholder = "Hey, I'm Daemon. In my free time, I run silently in the background to monitor subsystems to ensure that my current operating system runs properly. I am going to make this bio longer to see how things may look if a user's bio becomes long. Right now, what you see is what you get. We are going to try to make this as long as possible."
 
+  //@aland figure out async and stuff???
+  const uploadImage = () => {
+    const purls = [];
+    for (let i=0; i<selectedImages.length; i++){
+      let pics = selectedImages[i];
+        if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
+        const data = new FormData();
+        data.append('file', pics);
+        data.append('upload_preset', 'datewalk');
+        data.append('cloud_name', 'deyvjcuxo');
+        fetch("https://api.cloudinary.com/v1_1/deyvjcuxo/image/upload", {
+            method: 'post',
+            body: data,
+        }).then((res) => res.json()).then((data) => {
+            console.log(data)
+            setPurls(prevItems => [...prevItems, data.url.toString()]);
+        }).catch((err) => {
+            console.log(err);
+        })
+        } else {
+        return ("Unsupported Image Format");
+        }
+    }   
+    console.log(purls)
+  }
+
   const handleSave = () => {
+    
     // Add logic to save the input data
+    uploadImage();
     updateUserData();
     console.log(userData.pronouns);
     onHide();
@@ -36,6 +65,7 @@ const ProfileEditor = ({ show, onHide, userData }) => {
         "pronouns": pronouns,
         "year": year,
         "tags": selectedTags,
+        "pic": selectedImages,
       });
       console.log(bio);
       console.log(response.data); // Handle the response from the server
@@ -57,15 +87,18 @@ const ProfileEditor = ({ show, onHide, userData }) => {
   };
 
   const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files);
-
+    
+    const files = [...event.target.files];  // Use the spread operator to convert FileList to an array
+  
     if (files.length <= 4) {
       setSelectedImages(files);
     } else {
       // Display a message or take appropriate action for exceeding the limit
       console.log("You can only select up to 4 images");
     }
+    console.log(files);
   };
+  
 
   return (
     <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm">
@@ -176,7 +209,7 @@ const ProfileEditor = ({ show, onHide, userData }) => {
           {/* Image Upload */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
             <InputLabel>Upload Images (Up to 4)</InputLabel>
-            <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
+            <input type="file" accept="image/*" multiple={true} onInput={handleImageUpload} />
           </div>
         </div>
 
