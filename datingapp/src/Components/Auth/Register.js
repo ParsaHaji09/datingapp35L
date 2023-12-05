@@ -74,7 +74,7 @@ const Register = (props) => {
     setPhoneMsg(null);
     console.log(name, birthday, email, pronouns, year, major, pass, phone, selectedTags, pic);
     console.log('Register component submitted with email:', email);
-    dispatch(register(name, email, pronouns, year, major, pass, selectedTags, pic));
+    dispatch(register(name, birthday, email, pronouns, major, year, pass, phone, selectedTags, pic));
     navigate('/')
   }
 
@@ -148,9 +148,6 @@ const Register = (props) => {
       <label htmlFor ="password">Password</label>
       <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password"/>
 
-      <label htmlFor="birthday">Birthday</label>
-      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" id="birthday" name="birthday"/>
-
       { phoneMsg !== null ? <ErrorField ErrorMessage = { phoneMsg } /> : null }
       <label htmlFor="phoneNumber">Phone Number</label>
       <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"  />
@@ -169,7 +166,7 @@ const Register = (props) => {
 
         <label>
           Upload Image:
-          <input id = "custom-file" type = "file" label = "Upload Profile Picture" custom onChange={(e) => uploadImage(e.target.files[0])} />
+          <input id = "custom-file" type = "file" label = "Upload Profile Picture" onChange={(e) => uploadImage(e.target.files[0])} />
           { picMsg }
         </label>
       

@@ -27,7 +27,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
-export const register = (name, email, password, tags, pic, birthday, phone) => async (dispatch) => {
+export const register = (name, birthday, email, pronouns, major, year, password, phone, tags, pic) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_REQUEST });
 
@@ -45,10 +45,14 @@ export const register = (name, email, password, tags, pic, birthday, phone) => a
       pic: pic,
       birthday: birthday,
       phone: phone,
+      pronouns: pronouns,
+      major: major,
+      year: year,
     }, config);
 
-    localStorage.setItem("saveData", JSON.stringify(regData.data));
+    //localStorage.setItem("saveData", JSON.stringify(regData.data));
     dispatch({ type: REGISTER_SUCCESS, payload: regData.data });
+    console.log("Register success!");
 
   } catch (error) {
     dispatch({ type: REGISTER_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message, });
@@ -58,13 +62,4 @@ export const register = (name, email, password, tags, pic, birthday, phone) => a
 export const logout = () => async(dispatch) => {
   localStorage.removeItem("saveData");
   dispatch({ type: LOGOUT });
-}
-
-export const updateUser = (newUserInfo) => async (dispatch, getState) => {
-  dispatch({
-    type: USER_UPDATE,
-    payload: newUserInfo
-  });
-
-  localStorage.setItem('saveData', JSON.stringify(newUserInfo));
 }
