@@ -75,6 +75,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
       console.log(response.data); // Handle the response from the server
       setCurData(response.data);
       setUserData(response.data);
+      localStorage.setItem('saveData', JSON.stringify(response.data));
     } catch (error) {
       console.error('Error updating user data:', error);
     }
