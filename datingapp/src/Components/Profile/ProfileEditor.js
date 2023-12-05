@@ -11,6 +11,9 @@ import InputLabel from '@mui/material/InputLabel';
 import axios from 'axios';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from "@material-ui/core/IconButton";
+
 
 const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const [curData, setCurData] = useState(userData);
@@ -118,6 +121,9 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
 
   return (
     <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '100vh', height: '100vh' }}>
+      <IconButton onClick={onHide} style={{ position: 'absolute', right: '6px', top: '6px' }}>
+        <CloseIcon />
+      </IconButton>
       <DialogTitle style={{ fontSize: '36px' }}>Edit Profile</DialogTitle>
       <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
         {currentPage === 1 && (
@@ -340,9 +346,14 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
           </Button>
         </div>
 
-        <Button onClick={handleSave} color="primary">
-          Save
-        </Button>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Button onClick={onHide} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSave} color="primary" variant="contained">
+            Save
+          </Button>
+        </div>
       </DialogActions>
     </Dialog>
   );
