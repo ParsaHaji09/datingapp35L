@@ -157,6 +157,7 @@ const ImageSlider = ({ slides, parentWidth, userData }) => {
   return (
     <div style={sliderStyles}>
       <div style={infoStyles}>
+
         <h2 style={infoStyles.h2}>{userData.name}, {calculateAge(userData.birthday)}</h2>
         <p style={infoStyles.p}>{userData.year} Year {userData.major} Major<span style={infoStyles.pronouns}><em>, {userData.pronouns}</em></span></p>
 

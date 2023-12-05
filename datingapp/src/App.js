@@ -14,6 +14,7 @@ import Register from './Components/Auth/Register'
 import Explore from './Components/Explore/Explore'
 import Profile from './Components/Profile/Profile'
 import Rating from "./Components/Rating/Rating";
+import Navbar from "./Components/NavBar/Navbar";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -27,16 +28,21 @@ function App() {
     console.log(currentForm);
   }
   return (
-    <Router>
-      <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/rating" element={<Rating />} />
-          <Route path="*" element={<Navigate to="/"/>} />
-        </Routes>
-    </Router>
+    <>
+      <div>
+        <Router>
+          <Navbar/>
+          <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/rating" element={<Rating />} />
+              <Route path="*" element={<Navigate to="/"/>} />
+            </Routes>
+        </Router>
+      </div>
+    </>
     
   );
 }

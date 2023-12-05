@@ -1,0 +1,20 @@
+body {
+    text-align: center;
+    
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    margin: 0; /* Remove default margin to ensure full coverage */
+    background-image: linear-gradient(0deg, #c48fbd, #f4857b 48%, #fccf76);
+    color: white; /* Set text color to ensure it's visible on the gradient */
+  }
+
+.gallery{
+    float:right;
+    width: 70%;
+}
+.search{
+    float:left;
+    padding-left: 100px;
+    width: 30%;
+}
