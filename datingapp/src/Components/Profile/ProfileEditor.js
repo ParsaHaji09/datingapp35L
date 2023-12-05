@@ -8,20 +8,40 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import InputLabel from '@mui/material/InputLabel';
+import axios from 'axios';
 
-const ProfileEditor = ({ show, onHide }) => {
-  const [name, setName] = useState('');
-  const [year, setYear] = useState('');
-  const [email, setEmail] = useState('');
-  const [major, setMajor] = useState('');
-  const [bio, setBio] = useState('');
-  const [selectedTags, setSelectedTags] = useState([]);
+const ProfileEditor = ({ show, onHide, userData }) => {
+  const [name, setName] = useState(userData.name);
+  const [year, setYear] = useState(userData.year);
+  const [pronouns, setPronouns] = useState(userData.pronouns);
+  const [major, setMajor] = useState(userData.major);
+  const [bio, setBio] = useState(userData.bio);
+  const [selectedTags, setSelectedTags] = useState(userData.tags);
   const [selectedImages, setSelectedImages] = useState([]);
   const bioPlaceholder = "Hey, I'm Daemon. In my free time, I run silently in the background to monitor subsystems to ensure that my current operating system runs properly. I am going to make this bio longer to see how things may look if a user's bio becomes long. Right now, what you see is what you get. We are going to try to make this as long as possible."
 
   const handleSave = () => {
     // Add logic to save the input data
+    updateUserData();
+    console.log(userData.pronouns);
     onHide();
+  };
+
+  const updateUserData = async () => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/users/${userData._id}`, {
+        "name": name,
+        "bio": bio,
+        "major": major,
+        "pronouns": pronouns,
+        "year": year,
+        "tags": selectedTags,
+      });
+      console.log(bio);
+      console.log(response.data); // Handle the response from the server
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
   };
 
   const tags = ["Funny", "Introverted", "Extroverted", "Casual", "Adventurous", "Creative", "Organized", "Laid-back", "Optimistic", "Reserved"];
@@ -85,15 +105,15 @@ const ProfileEditor = ({ show, onHide }) => {
         <div style={{ display: 'flex', gap: '16px' }}>
           {/* Email */}
           <div style={{ flex: 1 }}>
-            <InputLabel htmlFor="email">Email</InputLabel>
+            <InputLabel htmlFor="pronouns">Pronouns</InputLabel>
             <TextField
               margin="dense"
-              id="email"
-              type="email"
+              id="pronouns"
+              type="text"
               fullWidth
-              placeholder='daemon17@us.gov'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Pronouns'
+              value={pronouns}
+              onChange={(e) => setPronouns(e.target.value)}
             />
           </div>
 
@@ -150,6 +170,7 @@ const ProfileEditor = ({ show, onHide }) => {
             />
           ))}
         </div>
+
 
         <div style={{ marginTop: '24px', marginBottom: '24px' }}>
           {/* Image Upload */}

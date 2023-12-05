@@ -90,23 +90,25 @@ const getUser = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
     // need id and updated traits/tags
     const { tags, attractiveness, conversation,
-            activity, humor, decency, after, matches, incoming, } = req.body;
+            activity, humor, decency, after, matches, incoming, bio, year } = req.body;
 
     const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
+    const simpleUpdates = ['bio', 'year', 'major', 'name', 'pronouns'];
 
     console.log("here")
 
     const user = await User.findById(req.params.id);
 
     if (user) {
+
         if (tags){
-            user.tags = tags;
+            console.log(tags);
+            user[tags] = tags;
         }
 
         for (const key in req.body) {
             const value = req.body[key];
             
-            // Exclude the 'tags' key
             if (includedKeys.includes(key)) {
                 // Check if the value exists before updating the user property
                 if (value !== undefined && value !== null) {
@@ -118,9 +120,16 @@ const updateUser = asyncHandler(async (req, res) => {
                     user[key][1] += 1;
                 }
             }
+
+            if (simpleUpdates.includes(key)){
+                if (value !== undefined && value !== "") {
+                    user[key] = value;
+                }
+            }
+
+
         }
 
-        console.log("Matches is null?" + (matches === null));
         if (matches){
             if (matches.type==="remove"){
                 console.log("Hee");

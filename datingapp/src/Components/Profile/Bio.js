@@ -46,7 +46,8 @@ const dividerStyles = {
 }
 
 
-const Bio = () => {
+const Bio = ({userData}) => {
+  console.log(userData)
   return (
     <div className='glass'>
     <Box sx={{ width: '100%', maxWidth: 360, }}>
@@ -55,13 +56,7 @@ const Bio = () => {
           About Me
         </Typography>
         <Typography color="#FAF9F6" variant="body2">
-          Hey, I'm Daemon. In my free time, I run silently 
-          in the background to monitor subsystems to ensure
-          that my current operating system runs properly. I
-          am going to make this bio longer to see how things
-          may look if a user's bio becomes long. Right now,
-          what you see is what you get. We are going to try
-          to make this as long as possible.
+          {userData.bio}
         </Typography>
       </Box>
       <Box sx={{ m: 2 }}>
@@ -72,15 +67,14 @@ const Bio = () => {
       </Box>
       <Divider style={dividerStyles} variant="middle" color="white" />
       <Box sx={{ m: 2 }}>
-        <Typography theme={theme} fontSgutterBottom variant="h4" component="div">
+        <Typography theme={theme} fontsgutterbottom="true" variant="h4" component="div">
           Interests
         </Typography>
         <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
-            <Chip style={chipStyles} variant="outlined" label="CS 111" />
-            <Chip style={chipStyles} variant="outlined" label="Eggert" />
-            <Chip style={chipStyles} variant="outlined" label="Enrollment Pass" />
-            <Chip style={chipStyles} variant="outlined" label="Linux" />
+            {userData.tags.map((item) => (
+              <Chip style={chipStyles} variant="outlined" label={item}></Chip>
+            ))}
           </Stack>
         </Box>
         <Box sx={{ my: 1 }}>
