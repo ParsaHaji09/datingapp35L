@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/reduxActions';
 import Search from './Search';
 import axios from 'axios';
+import GenericProfile from '../Profile/GenericProfile';
 
 function Explore() {
 
@@ -14,8 +15,11 @@ function Explore() {
   const { userInfo } = userLogin;
   
   const navigate = useNavigate();
+  const [selfLoading, setselfLoading] = useState(true); 
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState({});
+
+  const [users, setUsers] = useState({});
  
 useEffect(() => {
   const prevData = localStorage.getItem("saveData");
@@ -24,6 +28,7 @@ useEffect(() => {
   } else {
     const parsedData = JSON.parse(prevData);
     getUser(parsedData._id);
+    getAllUsers(parsedData._id);
   }
 }, [navigate])
 
@@ -36,8 +41,22 @@ const getUser = async (uid) => {
     console.error('Error updating user data:', error);
   }
   finally {
+    setselfLoading(false); // Set loading to false once data is fetched or if an error occurs
+  }
+};
+
+const getAllUsers = async (uid) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/api/users/all-users`);
+    console.log(response.data); // Handle the response from the server
+    setUsers(response.data);
+  } catch (error) {
+    console.error('Error updating user data:', error);
+  }
+  finally {
     setLoading(false); // Set loading to false once data is fetched or if an error occurs
   }
+  
 };
 
 
@@ -54,17 +73,21 @@ const getUser = async (uid) => {
 
   return (
     <div>
-    {loading ? (
+    {loading | selfLoading ? (
       // Display a loading indicator or message while data is being fetched
       <p>Loading Page...</p>
     ): (
       <div>
-      <h1>{ userData.name }</h1>
-      <img src={userData.pic[0]} style={{ width: '100px' }} />
-      <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
-      <Button type = "submit" onClick = {toRating}>To Rating</Button>
-      <Search />
-    </div>
+        <h1>{ userData.name }</h1>
+        <img src={userData.pic[0]} style={{ width: '100px' }} />
+        <Button type = "submit" onClick = {logoutHandler}>Logout</Button>
+        <Button type = "submit" onClick = {toRating}>To Rating</Button>
+        <Search />
+        {users.map((user, index) => (
+             <GenericProfile userData={user}></GenericProfile>
+        ))}
+       
+      </div>
     )}
     </div>
     
