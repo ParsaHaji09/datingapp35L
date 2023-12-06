@@ -27,7 +27,7 @@ function Navbar(){
     }
 
     if (window.location.pathname === "/") return null;
-
+    if (window.location.pathname === "/register") return null;
     return(
         <nav className="nav">
             <Link to="/" className="sitename">DateWalk</Link>
