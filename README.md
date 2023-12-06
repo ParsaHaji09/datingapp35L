@@ -47,6 +47,7 @@ Welcome to DateWalk, where meaningful connections start with a stroll. DateWalk 
   - Bio
   - Unique tags
   - Profile images
+  - and more...
 ### Explore
 - Navigate to the explore page to discover potential matches
 - Profiles are sorted based on a unique rating system
