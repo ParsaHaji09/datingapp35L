@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Category from './Category';
-import Comment from './Comment';
 import './RatingForm.css';
 import CustomizedRating from './StyledRating';
 import Submit from './Submit';

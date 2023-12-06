@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import RatingForm from './RatingForm';
 import MatchList from './MatchList';
 import './Rating.css';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import NavBar from '../NavBar/Navbar.js';
 
 function Rating(){
