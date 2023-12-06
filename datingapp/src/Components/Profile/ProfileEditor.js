@@ -26,6 +26,12 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const [selectedImages, setSelectedImages] = useState(userData.pic);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [instagram, setInstagram] = useState(userData.instagram);
+  const [facebook, setFacebook] = useState(userData.facebook);
+  const [tiktok, setTiktok] = useState(userData.tiktok);
+  const [snapchat, setSnapchat] = useState(userData.snapchat);
+  const [spotify, setSpotify] = useState(userData.spotify);
+  const [twitter, setTwitter] = useState(userData.twitter);
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -38,8 +44,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   //@aland figure out async and stuff???
   // np baebae :kiss:
   const uploadImage = (pics) => {
-    setLoading(true);
-    const imCount = Math.min(pics.length, 4);
+    const imCount = Math.min(pics.length, 5);
     let imUrls = [];
 
     for (let i=0; i < imCount; i++){
@@ -86,6 +91,12 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         "year": year,
         "tags": selectedTags,
         "pic": selectedImages,
+        "instagram": instagram,
+        "facebook": facebook,   // Include Facebook
+        "snapchat": snapchat,   // Include Snapchat
+        "twitter": twitter,     // Include Twitter
+        "tiktok": tiktok,       // Include TikTok
+        "spotify": spotify,  
       });
       console.log('successful udata upload');
       console.log(response.data); // Handle the response from the server
@@ -246,8 +257,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                     type="text"
                     fullWidth
                     placeholder='Instagram Username'
-                    value={name} // change me
-                    onChange={(e) => setName(e.target.value)} // change me
+                    value={instagram} // change me
+                    onChange={(e) => setInstagram(e.target.value)} // change me
                   />
               </div>
               {/* Facebook */}
@@ -259,8 +270,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                     type="text"
                     fullWidth
                     placeholder='Facebook Username'
-                    value={name} // change me
-                    onChange={(e) => setName(e.target.value)} // change me
+                    value={facebook} // change me
+                    onChange={(e) => setFacebook(e.target.value)} // change me
                   />
               </div>
             </div>
@@ -275,8 +286,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                     type="text"
                     fullWidth
                     placeholder='Snapchat Username'
-                    value={name} // change me
-                    onChange={(e) => setName(e.target.value)} // change me
+                    value={snapchat} // change me
+                    onChange={(e) => setSnapchat(e.target.value)} // change me
                   />
               </div>
               {/* Twitter */}
@@ -288,8 +299,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                     type="text"
                     fullWidth
                     placeholder='Twitter Username'
-                    value={name} // change me
-                    onChange={(e) => setName(e.target.value)} // change me
+                    value={twitter} // change me
+                    onChange={(e) => setTwitter(e.target.value)} // change me
                   />
               </div>
             </div>
@@ -304,8 +315,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                     type="text"
                     fullWidth
                     placeholder='Tiktok Username'
-                    value={name} // change me
-                    onChange={(e) => setName(e.target.value)} // change me
+                    value={tiktok} // change me
+                    onChange={(e) => setTiktok(e.target.value)} // change me
                   />
               </div>
               {/* Spotify */}
@@ -317,8 +328,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                     type="text"
                     fullWidth
                     placeholder='Spotify Username'
-                    value={name} // change me
-                    onChange={(e) => setName(e.target.value)} // change me
+                    value={spotify} // change me
+                    onChange={(e) => setSpotify(e.target.value)} // change me
                   />
               </div>
             </div>

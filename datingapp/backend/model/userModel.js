@@ -48,6 +48,30 @@ const userSchema = mongoose.Schema(
             type: String,
             default: ""
         },
+        instagram: {
+            type: String,
+            default: ""
+        },
+        snapchat: {
+            type: String,
+            default: ""
+        },
+        facebook: {
+            type: String,
+            default: ""
+        },
+        twitter: {
+            type: String,
+            default: ""
+        },
+        spotify: {
+            type: String,
+            default: ""
+        },
+        tiktok: {
+            type: String,
+            default: ""
+        },
         phone: {
             type: String,
             default: ""

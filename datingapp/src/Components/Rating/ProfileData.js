@@ -22,24 +22,33 @@ function ProfileData({userID}){
       
         fetchData();
       }, [userID]);
+
+      const containerStyles = {
+        width: "300px",
+        height: "300px",
+        margin: "0 auto",
+        zIndex: 1,
+      };
     
       return (
-        <div className="prof">
+        <div className="prof" >
           {profile ? (
-            <div>
-              <div style={{ position: 'relative', height: '400px' }}>
-            {/* Integrate the ImageSlider component */}
-            <ImageDisplay slides={profile.pic} parentWidth={400} userData={profile} />
-              </div>
-
-              <p>{profile.tags.join(', ')}</p>
-              <p>{profile.birthday}&nbsp;&nbsp;{profile.phone}</p>
-            </div>
-            
-          ) : (
-            <p>Loading...</p>
-          )}
+            <>
+        <div className="image">
+        <div style={containerStyles}>
+          <ImageDisplay userData={profile} slides={profile.pic} parentWidth={300} />
         </div>
+      </div>
+      <div className="info" >
+      <p>{profile.bio}</p>
+        <p>{profile.tags.join(', ')}</p>
+        <p>{"Phone #: "+profile.phone}</p>
+      </div>
+        </>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
       );
     }
     

@@ -1,6 +1,8 @@
 .nav {
     background-color: rgb(231, 75, 130);
-    
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
     justify-content: space-between;
 }
 

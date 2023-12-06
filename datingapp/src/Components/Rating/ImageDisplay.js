@@ -6,6 +6,7 @@ const slideStyles = {
   height: "100%",
   backgroundSize: "cover",
   backgroundPosition: "center",
+  borderRadius: "20px",
 };
 
 const sliderStyles = {
@@ -19,6 +20,7 @@ const infoStyles = {
   left: "0",
   right: "0",
   bottom: "0",
+  borderRadius: "20px",
   zIndex: 2,
   display: "flex",
   flexDirection: "column",
@@ -29,19 +31,19 @@ const infoStyles = {
   color: "#fff",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
   textAlign: "left",
-  padding: "2.3rem 2.2rem 0.2rem",
+  padding: "2.3rem 1.2rem 0.2rem",
   h2: {
     padding: "3rem 0rem 0rem",
-    fontSize: "48px",
+    fontSize: "24px",
     fontFamily: 'Jost, sans-serif',
   },
   p: {
-    fontSize: "18px",
+    fontSize: "14px",
     color: "#e6e6e6",
     fontFamily: 'Nunito, sans-serif',
   },
   pronouns: {
-    fontSize: "18px",
+    fontSize: "14px",
     color: "#808080",
     fontFamily: 'Nunito, sans-serif',
   },
