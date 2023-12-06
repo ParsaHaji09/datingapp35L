@@ -36,17 +36,21 @@ const chipIconStyles = {
   padding: '0px 0px 0px 3px',
 };
 
-const socialIconStyles = {
-  color: 'white',
-  fontSize: '36',
-}
-
 const dividerStyles = {
   height: '3px'
 }
 
+
 const Bio = ({userData, other_uid}) => {
-  //console.log(userData)
+
+  const hasInstagram = (userData.instagram).trim() !== "";
+  const hasSnapchat = (userData.snapchat).trim() !== "";
+  const hasFacebook = (userData.facebook).trim() !== "";
+  const hasSpotify = (userData.spotify).trim() !== "";
+  const hasTwitter = (userData.twitter).trim() !== "";
+  const hasTiktok = (userData.tiktok).trim() !== "";
+  const hasAnySocial = hasInstagram || hasSnapchat || hasFacebook || hasSpotify || hasTwitter || hasTiktok;
+
   return (
     <div className='glass'>
     <Box sx={{ width: '100%', maxWidth: 360, }}>
@@ -74,20 +78,21 @@ const Bio = ({userData, other_uid}) => {
         </Box>
       </Box>
       <Divider style={dividerStyles} variant="middle" color="white" />
+      {hasAnySocial && (
       <Box sx={{ mx: 2, my: 2 }}>
         <Typography theme={theme} gutterBottom variant="h4" component="div">
           Socials
         </Typography>
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center' }}>
-          <SocialButton socialMedia="instagram" userName={userData.instagram} />
-          <SocialButton socialMedia="snapchat" userName={userData.snapchat} />
-          <SocialButton socialMedia="facebook" userName={userData.facebook} />
-          <SocialButton socialMedia="spotify" userName={userData.spotify} />
-          <SocialButton socialMedia="twitter" userName={userData.twitter} />
-          <SocialButton socialMedia="tiktok" userName={userData.tiktok} />
-
-        </div>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center' }}>
+            {hasInstagram &&( <SocialButton socialMedia="instagram" userName={userData.instagram} /> )}
+            {hasSnapchat && ( <SocialButton socialMedia="snapchat" userName={userData.snapchat} /> )}
+            {hasFacebook && ( <SocialButton socialMedia="facebook" userName={userData.facebook} /> )}
+            {hasSpotify && ( <SocialButton socialMedia="spotify" userName={userData.spotify} /> )}
+            {hasTwitter && ( <SocialButton socialMedia="twitter" userName={userData.twitter} /> )}
+            {hasTiktok && ( <SocialButton socialMedia="tiktok" userName={userData.tiktok} /> )}
+          </div>
       </Box>
+      )}
       {other_uid && (
         <Box sx={{ m: 2 }}>
           <Stack direction="row" spacing={1}>
