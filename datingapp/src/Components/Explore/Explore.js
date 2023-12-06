@@ -7,6 +7,7 @@ import Search from './Search';
 import axios from 'axios';
 import GenericProfile from '../Profile/GenericProfile';
 import './Explore.css'
+import NavBar from '../NavBar/Navbar.js';
 
 
 /*TODO: Explore page match processing
@@ -177,6 +178,9 @@ const getAllUsers = async (currUser) => {
 
   return (
     <div>
+    <NavBar />
+    <div className="content-container">
+    <div>
     {loading | selfLoading ? (
       // Display a loading indicator or message while data is being fetched
       <p>Loading Page...</p>
@@ -195,6 +199,8 @@ const getAllUsers = async (currUser) => {
       </div>
     )}
     </div>
+    </div>
+        </div>
     
   )
     

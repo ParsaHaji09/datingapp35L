@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Category from './Category';
-import Comment from './Comment';
 import './RatingForm.css';
 import CustomizedRating from './StyledRating';
 import Submit from './Submit';
@@ -78,7 +77,7 @@ function RatingForm({user, onListChange}) {
 
   return (
     
-    <div className="rating">
+    <div className="rating-r">
       <div className ="profileName">
         <ProfileData userID={user}/>
       </div>
@@ -110,14 +109,14 @@ function RatingForm({user, onListChange}) {
           <Category  name={"after"}onRatingChange={handleRatingChange}image={afterDate}/>
         </div>
       </div>
-      
+      <div className="styledRating">
+        <CustomizedRating value={averageRating} size="large" name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange}/>
+      </div>
       <div className="submit-container">
       <Submit onSubmit={handleSubmit} />
     </div>
       
-      <div className="styledRating">
-        <CustomizedRating value={averageRating} size="large" name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange}/>
-      </div>
+      
       </div>
       )}
     </div>

@@ -1,16 +1,10 @@
-.submit{
-    height: 60px;
-    width: 130px;
-    font-size: 18px;
-    border: 2px solid rgb(8, 17, 143);
-    color: rgb(8, 17, 143);
-  /* Adjust the border-radius for a circular effect */
-    background-color: rgb(255, 255, 255);
-    
+button{
+  background-color:  rgb(231, 75, 130);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
 }
-.submit:hover {
-    outline: none; /* Remove the default focus outline */
-    color: rgb(8, 17, 143);
-    border-color: #090080; /* Change the border color on focus */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */
-  }
+
+button:hover {
+  transform: scale(1.1); /* Scale the button on hover */
+  background-color: rgb(255, 209, 216); /* Change the background color on hover */
+}

@@ -33,17 +33,33 @@ function Navbar(){
 
     if (window.location.pathname === "/") return null;
     if (window.location.pathname === "/register") return null;
-    return(
+    // return(
+    //     <nav className="nav">
+    //         <Link to="/" className="sitename">DateWalk</Link>
+    //         <div className="links">
+    //             <a href="/profile" className="profile">Profile</a>
+    //             <a href="/" className="explore">Explore</a>
+    //             <a href="/rating" className="rating">Rating</a>
+    //             <button className="logout" onClick= {logoutHandler}>Log Out</button>
+    //         </div>
+    //     </nav>
+    // )
+
+    return (
         <nav className="nav">
-            <Link to="/" className="sitename">DateWalk</Link>
+            <Link to="/" className="sitename">
+                <span>DateWalk</span>
+                <img src="/dateWalkLogo.png" alt="logo" className="logo-image"  />
+            </Link>
             <div className="links">
                 <a href="/profile" className="profile">Profile</a>
                 <a href="/" className="explore">Explore</a>
                 <a href="/rating" className="rating">Rating</a>
-                <button className="logout" onClick= {logoutHandler}>Log Out</button>
+                <button className="logout" onClick={logoutHandler}>Log Out</button>
             </div>
         </nav>
-    )
+    );
+    
 }
 
 export default Navbar;

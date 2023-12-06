@@ -41,7 +41,7 @@ const dividerStyles = {
 }
 
 
-const Bio = ({userData, other_uid}) => {
+const Bio = ({userData}) => {
 
   const hasInstagram = (userData.instagram).trim() !== "";
   const hasSnapchat = (userData.snapchat).trim() !== "";
@@ -93,18 +93,7 @@ const Bio = ({userData, other_uid}) => {
           </div>
       </Box>
       )}
-      {/* {other_uid && (
-        <Box sx={{ m: 2 }}>
-          <Stack direction="row" spacing={1}>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <CheckIcon />
-            </Fab>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <ClearIcon />
-            </Fab>
-          </Stack>
-        </Box>
-      )} */}
+
     </Box>
     </div>
     

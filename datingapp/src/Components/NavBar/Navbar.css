@@ -5,8 +5,16 @@
     z-index: 1000;
     justify-content: space-between;
 }
+.logo-image {
+    width: 45px; /* Adjust the width of the image as needed */
+    height: auto;
+    margin-left: 15px; /* Adjust the margin between text and image as needed */
+    margin-top: -10px; /* Adjust the negative margin to move the image up */
+
+}
 
 .sitename{
+    margin-left: 8px; /* Adjust the margin between text and image as needed */
     font-size: 35px;
     font-weight: bold;
     text-align: center;
@@ -40,4 +48,6 @@
     font-weight: bold;
     margin-right: 10px;
     text-align: center;
+    margin-right: 45px;
+    display: flex;
 }
