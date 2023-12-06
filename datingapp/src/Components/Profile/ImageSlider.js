@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from "@material-ui/core/IconButton";
@@ -102,11 +102,7 @@ const infoStyles = {
 
 };
 
-const chipStyles = {
-  color: "white"
-}
-
-const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject }) => {
+const ImageSlider = ({ slides, parentWidth, userData, other_uid }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
