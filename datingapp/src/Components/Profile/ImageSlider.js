@@ -92,6 +92,7 @@ const infoStyles = {
     fontSize: "18px",
     color: "#e6e6e6",
     fontFamily: 'Nunito, sans-serif',
+    paddingBottom: '15px',
   },
 
   pronouns: {
@@ -194,15 +195,14 @@ const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject })
       </div>
       { console.log("OtherID: " + otherId) }
       {otherId && (
-        <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076', }} aria-label="add" onClick = {() => accept(userData, otherId)}>
+        <div style={{ display: 'flex', position: 'absolute', bottom: '12px', right: '24px', gap: '4px', zIndex: 3}}>
+          <IconButton style={{ color: '#e90076' }} aria-label="add" onClick = {() => accept(userData, otherId)}>
             <CheckIcon style={{ fontSize: 48 }} />
           </IconButton>
           <IconButton style={{ color: '#D70040' }} aria-label="add" onClick = {() => reject(userData, otherId)}>
             <ClearIcon style={{ fontSize: 48 }} />
           </IconButton>
         </div>
-      )}
       )}
     </div>
   );
