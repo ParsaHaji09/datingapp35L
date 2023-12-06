@@ -26,14 +26,26 @@ function Explore() {
     } else {
       const parsedData = JSON.parse(prevData);
       await getUser(parsedData._id);
-      await getAllUsers(parsedData);
+      
     }
   };
+
+  useEffect (() => {
+    load();
+  }, [curProfile])
 
   
 useEffect(() => {
   
-  load();
+  const prevData = localStorage.getItem("saveData");
+    if (!prevData) {
+      navigate('/');
+    }
+    else {
+      const parsedData = JSON.parse(prevData);
+      getAllUsers(parsedData);
+      
+    }
 
 }, [navigate])
 
