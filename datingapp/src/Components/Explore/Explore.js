@@ -7,9 +7,13 @@ import Search from './Search';
 import axios from 'axios';
 import GenericProfile from '../Profile/GenericProfile';
 import './Explore.css'
+
 import TextField from "@mui/material/TextField";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+
+import NavBar from '../NavBar/Navbar.js';
+
 
 
 /*TODO: Explore page match processing
@@ -138,6 +142,9 @@ const getAllUsers = async (currUser) => {
 
   return (
     <div>
+    <NavBar />
+    <div className="content-container">
+    <div>
     {loading | selfLoading ? (
       // Display a loading indicator or message while data is being fetched
       <p>Loading Page...</p>
@@ -165,12 +172,14 @@ const getAllUsers = async (currUser) => {
           </div>
         </div>
         {users.map((user, index) => (
-             <GenericProfile userData={user} other_uid={userData._id}></GenericProfile>
+             <GenericProfile key={index} userData={user} other_uid={userData._id}></GenericProfile>
         ))}
        
       </div>
     )}
     </div>
+    </div>
+        </div>
     
   )
     

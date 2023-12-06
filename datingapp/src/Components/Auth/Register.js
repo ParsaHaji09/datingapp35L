@@ -109,13 +109,17 @@ const Register = (props) => {
     }
   }
 
+  function capitalizeWords(str) {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
   return (
     <div className = "App">
     <div className="auth-form-container">
     <form className="login-form" onSubmit={handleSubmit}>
 
     <label htmlFor="name">Full Name</label>
-      <input value={name} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="Enter here"/>
+      <input value={capitalizeWords(name)} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="Enter here"/>
 
     <div className ="flex-container">
 
@@ -131,10 +135,10 @@ const Register = (props) => {
         <div className="flex-item">
           <label htmlFor="year">Year</label>
           <select value={year} onChange={(e) => setYear(e.target.value)} id="year" name="year">
-          <option value="First Year">First Year</option>
-          <option value="Second Year">Second Year</option>
-          <option value="Third Year">Third Year</option>
-          <option value="Fourth Year+">Fourth Year+</option>
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+          <option value="3rd">3rd</option>
+          <option value="4th+">4th+</option>
         </select>
         </div>
 
@@ -145,7 +149,7 @@ const Register = (props) => {
 
       </div>
       <label htmlFor="major">Major</label>
-      <input value={major} onChange={(e) => setMajor(e.target.value)} name="major" id="major" placeholder="Enter here"/>
+      <input value={capitalizeWords(major)} onChange={(e) => setMajor(e.target.value)} name="major" id="major" placeholder="Enter here"/>
 
       <label htmlFor ="email">Email</label>
       <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter here" id="email" name="email"/>

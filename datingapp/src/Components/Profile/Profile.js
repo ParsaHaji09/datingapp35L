@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ProfileEditor from "./ProfileEditor";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import NavBar from '../NavBar/Navbar.js';
 
 const Profile = () => {
 
@@ -66,9 +66,11 @@ const getUser = async (uid) => {
     { url: "http://localhost:3000/image-5.jpg", title: "italy" },
   ];
 
-  
 
   return (
+    <div>
+    <NavBar />
+    <div className="content-container">
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center" }}>
       {loading ? (
           // Display a loading indicator or message while data is being fetched
@@ -86,6 +88,7 @@ const getUser = async (uid) => {
               <CreateIcon />
             </IconButton>
           </React.Fragment>
+          
 
           <ProfileEditor show={show} onHide={handleClose} userData={userData} setUserData = {setUserData}/>
         
@@ -94,6 +97,8 @@ const getUser = async (uid) => {
       
 
     </div>
+    </div>
+        </div>
   );
 };
 

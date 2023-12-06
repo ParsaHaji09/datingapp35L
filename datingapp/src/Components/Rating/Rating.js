@@ -4,6 +4,7 @@ import MatchList from './MatchList';
 import './Rating.css';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import NavBar from '../NavBar/Navbar.js';
 
 function Rating(){
     const [list, setList] = useState({});
@@ -45,6 +46,9 @@ function Rating(){
 
 
     return (
+        <div>
+        <NavBar />
+        <div className="content-container">
         <div className="page">
             <div className="list">
                 <MatchList userID={userData._id} onPersonClick={handlePersonClick} onListChange={handleListChange}/>
@@ -53,6 +57,8 @@ function Rating(){
             <div className="ratingForm">
             {currentPerson && <RatingForm key={currentPerson} user={currentPerson} onListChange={handleListChange}/>}
             </div>
+        </div>
+        </div>
         </div>
     );
 
