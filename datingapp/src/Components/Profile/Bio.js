@@ -40,14 +40,15 @@ const dividerStyles = {
   height: '3px'
 }
 
-const hasInstagram = /^\s*$/.test(userData.instagram);
-const hasSnapchat = /^\s*$/.test(userData.snapchat);
-const hasFacebook = /^\s*$/.test(userData.facebook);
-const hasSpotify = /^\s*$/.test(userData.spotify);
-const hasTwitter = /^\s*$/.test(userData.twitter);
-const hasTiktok = /^\s*$/.test(userData.tiktok);
+
 
 const Bio = ({userData, other_uid}) => {
+  const hasInstagram = /^\s*$/.test(userData.instagram);
+  const hasSnapchat = /^\s*$/.test(userData.snapchat);
+  const hasFacebook = /^\s*$/.test(userData.facebook);
+  const hasSpotify = /^\s*$/.test(userData.spotify);
+  const hasTwitter = /^\s*$/.test(userData.twitter);
+  const hasTiktok = /^\s*$/.test(userData.tiktok);
   //console.log(userData)
   return (
     <div className='glass'>

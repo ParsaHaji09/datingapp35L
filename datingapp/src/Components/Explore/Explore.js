@@ -7,6 +7,9 @@ import Search from './Search';
 import axios from 'axios';
 import GenericProfile from '../Profile/GenericProfile';
 import './Explore.css'
+import TextField from "@mui/material/TextField";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 /*TODO: Explore page match processing
@@ -102,7 +105,7 @@ const recommendationAlg = (users, currUser) => {
     console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
   }
   // Sort the list based on points
-  return users.sort(compareUsers);
+  return users.sort(compareUsers).slice(1);
 };
 
 const getAllUsers = async (currUser) => {
@@ -145,7 +148,21 @@ const getAllUsers = async (currUser) => {
             <h1>{ userData.name }</h1>
             <img src={userData.pic[0]} style={{ width: '100px' }} />
           </div>
-          <div className='search'><Search /></div>
+          <div className="search">
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              fullWidth
+              label="Search"
+            />
+          </div>
+          <div className="gender-drop">
+            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+              <Dropdown.Item href="#/action-1">He/Him</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">She/Her</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">They/Them</Dropdown.Item>
+            </DropdownButton>
+          </div>
         </div>
         {users.map((user, index) => (
              <GenericProfile userData={user} other_uid={userData._id}></GenericProfile>
