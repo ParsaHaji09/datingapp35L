@@ -28,7 +28,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const [selectedImages, setSelectedImages] = useState(userData.pic);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [instagram, setInstagram] = useState(userData.instagram);
   const [facebook, setFacebook] = useState(userData.facebook);
   const [tiktok, setTiktok] = useState(userData.tiktok);
