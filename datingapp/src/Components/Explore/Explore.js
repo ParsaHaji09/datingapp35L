@@ -134,7 +134,36 @@ const getAllUsers = async (currUser) => {
     navigate('/rating', { state: { data } });
   }
 
-  const acceptProfile = (other_data, cur_data) => {
+  const acceptProfile = async (other_data, cur_data) => {
+    var incoming = [];
+    var match = [];
+
+    if (other_data.incoming.includes(cur_data._id)) {
+      incoming = cur_data.incoming.filter((id) => id === cur_data._id);
+      match = [...cur_data.match, cur_data._id];
+      try {
+        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+          "incoming": incoming,
+          "match": match,
+        });
+        localStorage.setItem('saveData', JSON.stringify(response.data));
+        console.log("Successfully added " + cur_data.id + " to the match array of " + other_data._id);
+      } catch (error) {
+        console.error('Error updating user data:', error);
+      }
+    } else {
+      incoming = [...other_data.incoming, cur_data._id]
+      try {
+        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+          "incoming": incoming,
+        });
+        localStorage.setItem('saveData', JSON.stringify(response.data));
+        console.log("Successfully added " + cur_data.id + " to the incoming array of " + other_data._id);
+      } catch (error) {
+        console.error('Error updating user data:', error);
+      }
+    }
+    
     setCurProfile(curProfile + 1);
   }
 

@@ -203,10 +203,10 @@ const ImageSlider = ({ slides, parentWidth, userData, other_uid, accept, reject 
       )} */}
 
     <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076', }} aria-label="add" onClick={accept}>
+          <IconButton style={{ color: '#e90076', }} aria-label="add" onClick={() => accept(0, 0)}>
             <CheckIcon style={{ fontSize: 48 }} />
           </IconButton>
-          <IconButton style={{ color: '#D70040' }} aria-label="add" onClick={reject}>
+          <IconButton style={{ color: '#D70040' }} aria-label="add" onClick={() => reject(0, 0)}>
             <ClearIcon style={{ fontSize: 48 }} />
           </IconButton>
         </div>
