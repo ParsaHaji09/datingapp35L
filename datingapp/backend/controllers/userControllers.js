@@ -141,7 +141,7 @@ const updateUser = asyncHandler(async (req, res) => {
             }
 
             if (simpleUpdates.includes(key)){
-                if (value !== undefined && value !== "") {
+                if (value !== undefined) {
                     user[key] = value;
                 }
             }
