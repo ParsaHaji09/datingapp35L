@@ -61,6 +61,19 @@ const verifyUser = asyncHandler(async (req, res) => {
             email: user.email,
             tags: user.tags,
             pic: user.pic,
+            birthday: user.birthday,
+            major: user.major,
+            year: user.year,
+            pronouns: user.year,
+            phone: user.phone,
+            attractiveness: user.attractiveness,
+            conversation: user.conversation,
+            decency: user.decency,
+            activity: user.activity,
+            humor: user.humor,
+            after: user.after,
+            matches: user.matches,
+            incoming: user.incoming,
             token: generateToken(user._id)
         })
     } else {
