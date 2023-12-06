@@ -46,6 +46,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const uploadImage = (pics) => {
     const imCount = Math.min(pics.length, 5);
     let imUrls = [];
+    setLoading(true);
 
     for (let i=0; i < imCount; i++){
       let pic = pics[i];
@@ -59,10 +60,13 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
             method: 'post',
             body: data,
         }).then((res) => res.json()).then((data) => {
-            console.log(data);
+            console.log(data);   // logs when we see the stuff
             imUrls.push(data.url.toString());
 
-            if (imUrls.length === imCount) setSelectedImages(imUrls);
+            if (imUrls.length === imCount) {
+              setSelectedImages(imUrls);
+              setLoading(false); 
+            }
 
         }).catch((err) => {
             console.log(err);
@@ -71,7 +75,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         console.log("Unsupported Image Format");
         }
     } 
-    setLoading(false);  
   }
 
   const handleSave = () => {
@@ -364,12 +367,10 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
             Cancel
           </Button>
 
-          {
-          loading === false ? 
-            (<Button onClick={handleSave} color="primary" variant="contained">
+          <Button onClick={handleSave} color="primary" variant="contained" disabled = {loading}>
               Save
-            </Button>) : null
-          }
+          </Button>
+          
         </div>
       </DialogActions>
     </Dialog>
