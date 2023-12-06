@@ -68,13 +68,6 @@ const Bio = ({userData, other_uid}) => {
             <Chip style={chipStyles} variant="outlined" label={item}></Chip>
           ))}
         </div>
-        {/* <Box sx={{ my: 1 }}>
-          <Stack direction="row" spacing={1}>
-            {userData.tags.map((item) => (
-              <Chip style={chipStyles} variant="outlined" label={item}></Chip>
-            ))}
-          </Stack>
-        </Box> */}
         <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
           </Stack>
