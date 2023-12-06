@@ -42,6 +42,7 @@ const dividerStyles = {
 
 
 const Bio = ({userData, other_uid}) => {
+
   const hasInstagram = (userData.instagram).trim() !== "";
   const hasSnapchat = (userData.snapchat).trim() !== "";
   const hasFacebook = (userData.facebook).trim() !== "";
@@ -49,6 +50,7 @@ const Bio = ({userData, other_uid}) => {
   const hasTwitter = (userData.twitter).trim() !== "";
   const hasTiktok = (userData.tiktok).trim() !== "";
   const hasAnySocial = hasInstagram || hasSnapchat || hasFacebook || hasSpotify || hasTwitter || hasTiktok;
+
   return (
     <div className='glass'>
     <Box sx={{ width: '100%', maxWidth: 360, }}>

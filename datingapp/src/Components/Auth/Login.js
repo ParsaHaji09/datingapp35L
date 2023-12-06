@@ -44,8 +44,17 @@ const Login = (props) => {
     dispatch(login(email, pass));
   }
   return (
+
+
     <div className="App" style = {{display: "flex", flexDirection: "column"}}>
       {error ? <ErrorRedirect ErrorMessage={ error }/> : null}
+      <div className="image-container">
+        <img src="/dateWalkLogo.png" alt="logo" style={{ width: '45%', marginBottom: '-40px' }} />
+        {/* <p style={{ textAlign: 'center', marginTop: '10px' }}>DateWalk</p> */}
+        <p style={{ fontSize: '55px', fontWeight: 'bold', textAlign: 'center', color: 'white', textDecoration: 'none' }}>DateWalk</p>
+
+      </div>
+
     <div className="auth-form-container">
     <form className="login-form" onSubmit={handleSubmit}>
       <label htmlFor ="email">Email</label>
