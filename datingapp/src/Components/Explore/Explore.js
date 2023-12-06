@@ -28,6 +28,7 @@ function Explore() {
   const [selfLoading, setselfLoading] = useState(true); 
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
+  const [curProfile, setCurProfile] = useState(0);
 
   const [users, setUsers] = useState([]);
  
@@ -103,7 +104,8 @@ const recommendationAlg = (users, currUser) => {
     console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
   }
   // Sort the list based on points
-  return users.sort(compareUsers);
+  const sortedUsers = users.sort(compareUsers);
+  return sortedUsers;
 };
 
 const getAllUsers = async (currUser) => {
@@ -133,6 +135,46 @@ const getAllUsers = async (currUser) => {
     navigate('/rating', { state: { data } });
   }
 
+  const acceptProfile = async (other_data, userId) => {
+    var inc = [];
+    console.log("Other data: " + other_data);
+    console.log("User ID: " + userId);
+
+    if (userData.incoming.includes(other_data._id)) {
+      inc = other_data.incoming.filter((id) => id === userId);
+      try {
+        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+          "incoming": inc,
+          "matches": {
+            "type": "",
+            "value": userId,
+          }
+        });
+        localStorage.setItem('saveData', JSON.stringify(response.data));
+        console.log("Successfully added " + userId + " to the match array of " + other_data._id);
+      } catch (error) {
+        console.error('Error updating user data through matches and incoming:', error);
+      }
+    } else {
+      inc = [...other_data.incoming, userId]
+      try {
+        console.log("INC RN: " + inc);
+        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+          "incoming": inc,
+        });
+        localStorage.setItem('saveData', JSON.stringify(response.data));
+        console.log("Successfully added " + userId + " to the incoming array of " + other_data._id);
+      } catch (error) {
+        console.error('Error updating user data through incoming:', error);
+      }
+    }
+
+    setCurProfile(curProfile + 1);
+  }
+
+  const rejectProfile = async (other_data, userId) => {
+    setCurProfile(curProfile + 1);
+  }
 
   return (
     <div>
@@ -144,16 +186,15 @@ const getAllUsers = async (currUser) => {
       <p>Loading Page...</p>
     ): (
       <div>
-        <div className='search-personal'>
+        <div className='search-personal' style = {{marginBottom: 30}}>
           <div className='personal-info-wrapper'>
             <h1>{ userData.name }</h1>
             <img src={userData.pic[0]} style={{ width: '100px' }} />
           </div>
           <div className='search'><Search /></div>
         </div>
-        {users.map((user, index) => (
-             <GenericProfile key={index} userData={user} other_uid={userData._id}></GenericProfile>
-        ))}
+        { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
+        <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
        
       </div>
     )}
