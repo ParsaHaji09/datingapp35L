@@ -7,6 +7,7 @@ import ImageDisplay from './ImageDisplay'
 
 function ProfileData({userID}){
     const [profile,setProfile]=useState(null);
+    const [showInfo, setShowInfo] = useState(false);
     const infoRef = useRef();
     const [fontSize, setFontSize] = useState('100%');
 
@@ -52,17 +53,45 @@ function ProfileData({userID}){
         margin: "0 auto",
         zIndex: 1,
       };
+      const buttonContainerStyles = {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 1,
+      };
+
+      const buttonStyles = {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        padding: '10px',
+        background: "rgba(255, 255, 255, 0.8)",
+        border: "none",
+        borderRadius: "20px",
+        cursor: "pointer",
+        zIndex: 3,
+      };
     
       return (
-        <div className="prof" >
+        <div className="prof">
           {profile ? (
             <>
-        <div className="image">
-        <div style={containerStyles}>
+        <div className="image" style={containerStyles}>
           <ImageDisplay userData={profile} slides={profile.pic} parentWidth={300} />
-        </div>
+        <div style={buttonContainerStyles}>
+        <button style={buttonStyles}
+            onClick={() => setShowInfo(!showInfo)}>
+
+            {'Info'}
+
+          </button>
+          </div>
       </div>
+      {showInfo &&(
       <div className="info"ref={infoRef} >
+        
         <div className='content'style={{ fontSize }}>
         <p style={{fontWeight:'bold'}}>{"ADDITIONAL INFO"} </p>
         <p>{"Phone #: "+profile.phone}</p>
@@ -71,6 +100,7 @@ function ProfileData({userID}){
         </div>
         
       </div>
+      )}
         </>
         ) : (
           <p>Loading...</p>

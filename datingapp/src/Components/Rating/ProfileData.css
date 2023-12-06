@@ -20,6 +20,7 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
     position: relative;
     z-index: 0;
+    gap: 40px;
     
     overflow: hidden;
   }
@@ -33,39 +34,23 @@
   .image {
     flex: 1; /* Allow the image container to grow and take available space */
     position: relative;
-    padding: 5px;
-    padding-right: 40px;
+    padding-right: 0px;
     width: 50%;
     border-radius: 20px;
+    
   }
   .info {
     flex: 1;
-    padding:5px;
     
-    width: 50%;
-    border: 1px solid #ddd; /* Add border */
+    margin-left: 40px;
+    width: 300px;
     border-radius: 20px; /* Add rounded corners */
     overflow-y: auto; /* Add vertical scrollbar if content overflows */
     margin: auto;
     background-color:rgb(255, 209, 216);
-    height:300px;
-    width:300px;
+    height: 95%;
+    padding: 20px;
+    box-sizing: border-box;
   }
   
-  .info-header {
-    background-color: #f0f0f0; /* Add background color to the header */
-    padding: 10px;
-    border-bottom: 1px solid #ddd; /* Add border at the bottom of the header */
-  }
   
-  .info-header h2 {
-    margin: 0; /* Remove default margin for h2 */
-  }
-  
-  .info-content {
-    padding: 20px; /* Add padding to the content */
-  }
-  
-  .info-content p {
-    margin: 0 0 10px 0; /* Adjust margins for paragraphs */
-  }
