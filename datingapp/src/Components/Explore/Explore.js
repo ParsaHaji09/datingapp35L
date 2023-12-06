@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 	
-import {Select, MenuItem} from "@mui/material";
+import {Select, MenuItem, FormControl, InputLabel, FormHelperText} from "@mui/material";
 import NavBar from '../NavBar/Navbar.js';
 
 
@@ -36,9 +36,54 @@ function Explore() {
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
   const [curProfile, setCurProfile] = useState(0);
-
   const [users, setUsers] = useState([]);
- 
+  const [filtered, setFiltered] = useState([]);
+
+
+  const acceptProfile = async (other_data, userId) => {
+    var inc = [];
+    console.log("Other data: " + other_data);
+    console.log("User ID: " + userId);
+
+    if (userData.incoming.includes(other_data._id)) {
+      inc = other_data.incoming.filter((id) => id === userId);
+      try {
+        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+          "incoming": inc,
+          "matches": {
+            "type": "",
+            "value": userId,
+          }
+        });
+        localStorage.setItem('saveData', JSON.stringify(response.data));
+        console.log("Successfully added " + userId + " to the match array of " + other_data._id);
+      } catch (error) {
+        console.error('Error updating user data through matches and incoming:', error);
+      }
+    } else {
+      inc = [...other_data.incoming, userId]
+      try {
+        console.log("INC RN: " + inc);
+        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+          "incoming": inc,
+        });
+        localStorage.setItem('saveData', JSON.stringify(response.data));
+        console.log("Successfully added " + userId + " to the incoming array of " + other_data._id);
+      } catch (error) {
+        console.error('Error updating user data through incoming:', error);
+      }
+    }
+    
+    setCurProfile(curProfile + 1);
+    console.log(filtered.length)
+    if(curProfile === filtered.length-1) setCurProfile(0);
+  }
+
+  const rejectProfile = async (other_data, userId) => {
+    
+    setCurProfile(curProfile + 1);
+    if(curProfile === filtered.length-1) setCurProfile(0);
+  }
 useEffect(() => {
   const prevData = localStorage.getItem("saveData");
   if (!prevData) {
@@ -122,6 +167,7 @@ const getAllUsers = async (currUser) => {
     const sorted_users = recommendationAlg(response.data, currUser)
 
     setUsers(sorted_users);
+    setFiltered(sorted_users);
   } catch (error) {
     console.error('Error updating user data:', error);
   }
@@ -132,62 +178,64 @@ const getAllUsers = async (currUser) => {
 };
 
 
-const filteredData = data.filter((el) => {
-  //if no input the return the original
-  if (props.input === '') {
-      return el;
-  }
-  //return the item which contains the user input
-  else {
-      return el.text.toLowerCase().includes(props.input)
-  }
-})
 
 let inputHandler = (e) => {
   //convert input text to lower case
-  var lowerCase = e.target.value.toLowerCase();
-  setInputText(lowerCase);
-};
-const acceptProfile = async (other_data, userId) => {
-    var inc = [];
-    console.log("Other data: " + other_data);
-    console.log("User ID: " + userId);
-
-    if (userData.incoming.includes(other_data._id)) {
-      inc = other_data.incoming.filter((id) => id === userId);
-      try {
-        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
-          "incoming": inc,
-          "matches": {
-            "type": "",
-            "value": userId,
-          }
-        });
-        localStorage.setItem('saveData', JSON.stringify(response.data));
-        console.log("Successfully added " + userId + " to the match array of " + other_data._id);
-      } catch (error) {
-        console.error('Error updating user data through matches and incoming:', error);
-      }
-    } else {
-      inc = [...other_data.incoming, userId]
-      try {
-        console.log("INC RN: " + inc);
-        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
-          "incoming": inc,
-        });
-        localStorage.setItem('saveData', JSON.stringify(response.data));
-        console.log("Successfully added " + userId + " to the incoming array of " + other_data._id);
-      } catch (error) {
-        console.error('Error updating user data through incoming:', error);
-      }
+  
+  var inputs = e.target.value;
+  //const prevData = localStorage.getItem("saveData");
+  //setInputText(lowerCase);
+  console.log(inputs)
+  console.log(users)
+  setFiltered(users.filter((el) => {
+    //if no input the return the original
+    if (inputs === '') {
+      // const parsedData = JSON.parse(prevData);  
+      // getAllUsers(parsedData);
+      return el;
     }
+    //return the item which contains the user input
+    else {
+        for(let i = 0; i < el.tags.length; i++){
+          if(el.tags[i].includes(inputs)){
+            return el;
+          }
+        }
+    }
+  }));
+  console.log(users)
+  
+};
 
-    setCurProfile(curProfile + 1);
-  }
+let inputHandler2 = (e) => {
+  //convert input text to lower case
+  
+  var inputs = e.target.value;
+  //const prevData = localStorage.getItem("saveData");
+  //setInputText(lowerCase);
+  console.log(inputs)
+  console.log(users)
+  setFiltered(users.filter((el) => {
+    //if no input the return the original
+    if (inputs === '') {
+      // const parsedData = JSON.parse(prevData);  
+      // getAllUsers(parsedData);
+      return el;
+    }
+    //return the item which contains the user input
+    else {
+        
+          if(el.pronouns.includes(inputs)){
+            return el;
+          }
+        
+    }
+  }));
+  console.log(users)
+  
+};
 
-  const rejectProfile = async (other_data, userId) => {
-    setCurProfile(curProfile + 1);
-  }
+
   return (
     <div>
     <NavBar />
@@ -214,26 +262,26 @@ const acceptProfile = async (other_data, userId) => {
               />
             </div>
             <div className="gender-drop">
-            <Select
-              sx={{
-                    
+            
+            <FormControl variant="outlined"
+              sx={{ 
                 width: 250,
-                height: 55,
-              }}
-            >
-              <MenuItem disabled value="">
-                Preferred Sex
-              </MenuItem>
-              <MenuItem value={1}>He/Him</MenuItem>
-              <MenuItem value={2}>She/Her</MenuItem>
-              <MenuItem value={3}>They/Them</MenuItem>
+                height: 55, }}>  
+              <InputLabel shrink>Sex</InputLabel>  
+              <Select label="Sexes" onChange={inputHandler2}>     
+              <MenuItem value={"he/him"}>He/Him</MenuItem>
+              <MenuItem value={"She/Her"}>She/Her</MenuItem>
+              <MenuItem value={"they/them"}>They/Them</MenuItem> 
+              </Select>  
               
-            </Select>
+            </FormControl>
+            
+            
             </div>
           </div>
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
-        <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
+        <GenericProfile userData={filtered[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
        
       </div>
     )}
