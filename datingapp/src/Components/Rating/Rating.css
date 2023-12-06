@@ -22,3 +22,17 @@
     flex-grow: 1; 
   }
   
+
+  .nav {
+    background-color: rgb(231, 75, 130);
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    justify-content: space-between;
+    padding-top: 0px; /* Adjust the padding based on your navbar height */
+
+}
+
+.content-container {
+    padding-top: 100px; /* Adjust the padding based on your navbar height */
+}
