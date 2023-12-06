@@ -42,10 +42,10 @@ function Navbar(){
 
     return (
         <nav className="nav">
-            <Link to="/" className="sitename">
+            <a href="/" className="sitename">
                 <span>DateWalk</span>
                 <img src="/dateWalkLogo.png" alt="logo" className="logo-image"  />
-            </Link>
+            </a>
             <div className="links">
                 <a href="/profile" className="profile">Profile</a>
                 <a href="/" className="explore">Explore</a>
