@@ -30,7 +30,7 @@ function Explore() {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  
+  const [inputText, setInputText] = useState("");
   const navigate = useNavigate();
   const [selfLoading, setselfLoading] = useState(true); 
   const [loading, setLoading] = useState(true); 
@@ -111,12 +111,8 @@ const recommendationAlg = (users, currUser) => {
     console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
   }
   // Sort the list based on points
-<<<<<<< HEAD
-  return users.sort(compareUsers).slice(1);
-=======
   const sortedUsers = users.sort(compareUsers);
   return sortedUsers;
->>>>>>> 12402d8ae7f7daf6faf8313e98818afdaa5e5f96
 };
 
 const getAllUsers = async (currUser) => {
@@ -136,17 +132,23 @@ const getAllUsers = async (currUser) => {
 };
 
 
-  const logoutHandler = () => {
-    dispatch(logout());
-    navigate('/');
+const filteredData = data.filter((el) => {
+  //if no input the return the original
+  if (props.input === '') {
+      return el;
   }
-
-  const toRating = () => {
-    const data = { userData };
-    navigate('/rating', { state: { data } });
+  //return the item which contains the user input
+  else {
+      return el.text.toLowerCase().includes(props.input)
   }
+})
 
-  const acceptProfile = async (other_data, userId) => {
+let inputHandler = (e) => {
+  //convert input text to lower case
+  var lowerCase = e.target.value.toLowerCase();
+  setInputText(lowerCase);
+};
+const acceptProfile = async (other_data, userId) => {
     var inc = [];
     console.log("Other data: " + other_data);
     console.log("User ID: " + userId);
@@ -186,7 +188,6 @@ const getAllUsers = async (currUser) => {
   const rejectProfile = async (other_data, userId) => {
     setCurProfile(curProfile + 1);
   }
-
   return (
     <div>
     <NavBar />
@@ -208,6 +209,7 @@ const getAllUsers = async (currUser) => {
                 id="outlined-basic"
                 variant="outlined"
                 fullWidth
+                onChange={inputHandler}
                 label="Search Tags"
               />
             </div>
