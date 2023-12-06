@@ -7,7 +7,11 @@ import { FaSpotify as SpotifyIcon } from "react-icons/fa";
 import { BiLogoSnapchat as SnapchatIcon } from "react-icons/bi";
 
 const SocialButton = ({ socialMedia, userName }) => {
-  const socialIconStyles = { fontSize: 40 };
+  const socialIconStyles = { 
+    fontSize: 34,
+    color: 'white'
+  };
+
 
   const openSocialLink = () => {
     let socialUrl = '';

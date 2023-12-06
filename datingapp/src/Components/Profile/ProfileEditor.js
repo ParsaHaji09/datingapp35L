@@ -137,7 +137,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   };
 
   return (
-    <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '100vh', height: '100vh' }}>
+    <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '95vh', height: '95vh' }}>
       <IconButton onClick={onHide} style={{ position: 'absolute', right: '6px', top: '6px' }}>
         <CloseIcon />
       </IconButton>

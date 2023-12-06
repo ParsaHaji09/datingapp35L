@@ -31,7 +31,7 @@ function App() {
     <>
       <div>
         <Router>
-          <Navbar/>
+          <Navbar />
           <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/register" element={<Register />} />
