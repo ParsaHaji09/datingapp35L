@@ -41,7 +41,7 @@ const dividerStyles = {
 }
 
 
-const Bio = ({userData, other_uid}) => {
+const Bio = ({userData}) => {
 
   const hasInstagram = (userData.instagram).trim() !== "";
   const hasSnapchat = (userData.snapchat).trim() !== "";
@@ -68,8 +68,8 @@ const Bio = ({userData, other_uid}) => {
           Interests
         </Typography>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center', paddingTop: "12px" }}>
-          {userData.tags.map((item) => (
-            <Chip style={chipStyles} variant="outlined" label={item}></Chip>
+          {userData.tags.map((item, index) => (
+            <Chip key={index} style={chipStyles} variant="outlined" label={item}></Chip>
           ))}
         </div>
         <Box sx={{ my: 1 }}>
@@ -93,18 +93,7 @@ const Bio = ({userData, other_uid}) => {
           </div>
       </Box>
       )}
-      {other_uid && (
-        <Box sx={{ m: 2 }}>
-          <Stack direction="row" spacing={1}>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <CheckIcon />
-            </Fab>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <ClearIcon />
-            </Fab>
-          </Stack>
-        </Box>
-      )}
+      
     </Box>
     </div>
     
