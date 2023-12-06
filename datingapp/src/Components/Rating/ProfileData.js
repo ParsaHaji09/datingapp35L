@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProfileData.css'
+import ImageDisplay from './ImageDisplay'
 
 
 
@@ -26,11 +27,11 @@ function ProfileData({userID}){
         <div className="prof">
           {profile ? (
             <div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-              {profile.pic && <img src={profile.pic} alt="img" style={{ width: '120px', height: '120px', borderRadius: '10px',objectFit: 'cover' }}/>}
-              
-              <h2>{profile.name}</h2>
+              <div style={{ position: 'relative', height: '400px' }}>
+            {/* Integrate the ImageSlider component */}
+            <ImageDisplay slides={profile.pic} parentWidth={400} userData={profile} />
               </div>
+
               <p>{profile.tags.join(', ')}</p>
               <p>{profile.birthday}&nbsp;&nbsp;{profile.phone}</p>
             </div>
