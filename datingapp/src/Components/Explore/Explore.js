@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../actions/reduxActions';
 import Search from './Search';
 import axios from 'axios';
 import GenericProfile from '../Profile/GenericProfile';
@@ -10,20 +7,14 @@ import './Explore.css'
 import NavBar from '../NavBar/Navbar.js';
 
 
-/*TODO: Explore page match processing
-  - some sort of algorithm to rank all other users in terms of compatibility (on page load)
-  - remember to filter our users that the user has already seen somehow??
-  - implement like/dislike feature (pass data in generic profile -> bio?) add to other user's incoming first, then check if the other user is in incoming list 
-    then add to match list... i can explain more if u want.
+/*TODO: hide viewed profiles @aland
+  - create a filter function and call if in getAllUsers before the algorithm call
+    - this can filter by viewed?
+  - create add a viewed arr to backend api and call it correspondingly
 */
 
 
 function Explore() {
-
-  const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-  
   const navigate = useNavigate();
   const [selfLoading, setselfLoading] = useState(true); 
   const [loading, setLoading] = useState(true); 
@@ -49,7 +40,6 @@ useEffect(() => {
 const getUser = async (uid) => {
   try {
     const response = await axios.get(`http://localhost:5000/api/users/${uid}`);
-    //console.log(response.data); // Handle the response from the server
     setUserData(response.data);
   } catch (error) {
     console.error('Error updating user data:', error);
@@ -102,7 +92,7 @@ const recommendationAlg = (users, currUser) => {
 
   const temp = users.sort(compareUsers);
   for (let i = 0; i < temp.length; i++) {
-    console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
+    // console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
   }
   // Sort the list based on points
   const sortedUsers = users.sort(compareUsers);
@@ -126,44 +116,40 @@ const getAllUsers = async (currUser) => {
   
 };
 
-
-  const logoutHandler = () => {
-    dispatch(logout());
-    navigate('/');
+  const matchingLogic = async (other_data, user_data) => {
+    var inc = other_data.incoming.filter((id) => id !== user_data._id);
+    try {
+      const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+        "incoming": inc,
+        "matches": {
+          "type": "",
+          "value": user_data._id,
+        }
+      });
+      console.log(response);
+    } catch (error) {
+      console.error('Error updating user data through matches and incoming:', error);
+    }
   }
 
-  const toRating = () => {
-    const data = { userData };
-    navigate('/rating', { state: { data } });
-  }
-
-  const acceptProfile = async (other_data, userId) => {
-    var inc = [];
+  const acceptProfile = async (other_data, user_data) => {
+    
     console.log("Other data: " + other_data);
-    console.log("User ID: " + userId);
+    console.log("User data: " + user_data);
 
     if (userData.incoming.includes(other_data._id)) {
-      inc = other_data.incoming.filter((id) => id === userId);
-      try {
-        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
-          "incoming": inc,
-          "matches": {
-            "type": "",
-            "value": userId,
-          }
-        });
-        console.log("Successfully added " + userId + " to the match array of " + other_data._id);
-      } catch (error) {
-        console.error('Error updating user data through matches and incoming:', error);
-      }
+      
+      await matchingLogic(other_data, user_data);
+      await matchingLogic(user_data, other_data);
+      
     } else {
-      inc = [...other_data.incoming, userId]
+      var inc = [...other_data.incoming, user_data._id]
       try {
         console.log("INC RN: " + inc);
         const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
           "incoming": inc,
         });
-        console.log("Successfully added " + userId + " to the incoming array of " + other_data._id);
+        console.log(response);
       } catch (error) {
         console.error('Error updating user data through incoming:', error);
       }
@@ -194,7 +180,7 @@ const getAllUsers = async (currUser) => {
           <div className='search'><Search /></div>
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
-        { curProfile < sizeOfAll ? <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile> : <div>OUT OF BOUND</div> }
+        { curProfile < sizeOfAll ? <GenericProfile otherData={users[curProfile]} userData={userData} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}

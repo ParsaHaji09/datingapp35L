@@ -23,9 +23,6 @@ const Register = (props) => {
 
 
   const dispatch = useDispatch();
-
-  const userRegister = useSelector((state) => state.userRegister);
-
   const MAX_SELECTED_TAGS = 10; // Set the maximum number of selected tags
 
   const tagsArray = [
@@ -160,14 +157,6 @@ const Register = (props) => {
     }
   };
 
-
-  const [uploadedFile, setUploadedFile] = useState(null);
-
-  const onFileChange = async (event) => {
-    const file = event.target.files[0];
-    setPic(file.name)
-    console.log(file.name)
-  };
 
   const navigate = useNavigate();
   const handleClick = () => {
