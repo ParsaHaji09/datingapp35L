@@ -71,7 +71,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         "tags": selectedTags,
         "pic": selectedImages,
       });
-      console.log(bio);
+      console.log('successful udata upload');
       console.log(response.data); // Handle the response from the server
       setCurData(response.data);
       setUserData(response.data);
@@ -100,7 +100,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     if (files.length <= 4) {
       setSelectedImages(files);
     } else {
-      // Display a message or take appropriate action for exceeding the limit
       console.log("You can only select up to 4 images");
     }
     console.log(files);
