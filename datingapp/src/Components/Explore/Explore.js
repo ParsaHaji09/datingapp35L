@@ -11,7 +11,8 @@ import './Explore.css'
 import TextField from "@mui/material/TextField";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-
+	
+import {Select, MenuItem} from "@mui/material";
 import NavBar from '../NavBar/Navbar.js';
 
 
@@ -152,23 +153,35 @@ const getAllUsers = async (currUser) => {
       <div>
         <div className='search-personal'>
           <div className='personal-info-wrapper'>
-            <h1>{ userData.name }</h1>
+            <h2>Welcome back { userData.name }! Have a fantastic day!</h2>
             <img src={userData.pic[0]} style={{ width: '100px' }} />
           </div>
-          <div className="search">
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              fullWidth
-              label="Search"
-            />
-          </div>
-          <div className="gender-drop">
-            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-              <Dropdown.Item href="#/action-1">He/Him</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">She/Her</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">They/Them</Dropdown.Item>
-            </DropdownButton>
+          <div className='search-info-wrapper'>
+            <div className="search">
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                fullWidth
+                label="Search Tags"
+              />
+            </div>
+            <div className="gender-drop">
+            <Select
+              sx={{
+                    
+                width: 250,
+                height: 55,
+              }}
+            >
+              <MenuItem disabled value="">
+                Preferred Sex
+              </MenuItem>
+              <MenuItem value={1}>He/Him</MenuItem>
+              <MenuItem value={2}>She/Her</MenuItem>
+              <MenuItem value={3}>They/Them</MenuItem>
+              
+            </Select>
+            </div>
           </div>
         </div>
         {users.map((user, index) => (

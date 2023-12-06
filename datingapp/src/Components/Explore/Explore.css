@@ -14,13 +14,28 @@ body {
     width: 70%;
 }
 .search{
-    float:left;
-    padding-left: 100px;
-    width: 30%;
+    
+    width: 40%;
 }
+
+.search-info-wrapper {
+    display: flex; /* Use flexbox to arrange child elements in a row */
+  }
+  
+  .search,
+  .gender-drop {
+    flex: 1; /* Make both elements share the available space equally */
+    margin-right: 10px; /* Add some space between the elements */
+  }
+  
+  /* Adjust styling for the TextField if needed */
+  .search .MuiInputBase-root {
+    height: 100%; /* Make the TextField take the full height of its parent */
+  }
+
 .search-personal{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
 }
 
 .nav {
