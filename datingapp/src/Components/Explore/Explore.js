@@ -93,7 +93,7 @@ const getAllUsers = async (uid) => {
         <Button type = "submit" onClick = {toRating}>To Rating</Button>
         <Search />
         {users.map((user, index) => (
-             <GenericProfile userData={user} other_uid={userData._id}></GenericProfile>
+             <GenericProfile key={index} userData={user} other_uid={userData._id}></GenericProfile>
         ))}
        
       </div>
