@@ -192,7 +192,7 @@ const ImageSlider = ({ slides, parentWidth, userData, other_uid }) => {
           </div>
         ))}
       </div>
-      {/* {other_uid && (
+      {other_uid && (
         <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
           <IconButton style={{ color: '#e90076', }} aria-label="add">
             <CheckIcon style={{ fontSize: 48 }} />
@@ -201,16 +201,7 @@ const ImageSlider = ({ slides, parentWidth, userData, other_uid }) => {
             <ClearIcon style={{ fontSize: 48 }} />
           </IconButton>
         </div>
-      )} */}
-
-    <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076', }} aria-label="add">
-            <CheckIcon style={{ fontSize: 48 }} />
-          </IconButton>
-          <IconButton style={{ color: '#D70040' }} aria-label="add">
-            <ClearIcon style={{ fontSize: 48 }} />
-          </IconButton>
-        </div>
+      )}
     </div>
   );
 };
