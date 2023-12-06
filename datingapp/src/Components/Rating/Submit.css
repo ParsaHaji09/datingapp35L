@@ -6,7 +6,6 @@
     color: rgb(8, 17, 143);
   /* Adjust the border-radius for a circular effect */
     background-color: rgb(255, 255, 255);
-    
 }
 .submit:hover {
     outline: none; /* Remove the default focus outline */

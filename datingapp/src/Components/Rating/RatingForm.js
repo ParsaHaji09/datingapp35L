@@ -78,7 +78,7 @@ function RatingForm({user, onListChange}) {
 
   return (
     
-    <div className="rating">
+    <div className="rating-r">
       <div className ="profileName">
         <ProfileData userID={user}/>
       </div>

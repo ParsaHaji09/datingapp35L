@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import './ProfileData.css'
 import ImageDisplay from './ImageDisplay'
@@ -7,6 +7,9 @@ import ImageDisplay from './ImageDisplay'
 
 function ProfileData({userID}){
     const [profile,setProfile]=useState(null);
+    const infoRef = useRef();
+    const [fontSize, setFontSize] = useState('100%');
+
 
     useEffect(() => {
         console.log('Fetching data...');
@@ -22,6 +25,26 @@ function ProfileData({userID}){
       
         fetchData();
       }, [userID]);
+
+
+      useEffect(() => {
+        const infoBox = infoRef.current;
+    
+        if (infoBox) {
+          const content = infoBox.querySelector('.content');
+    
+          if (content) {
+            content.style.fontSize = '100%'; // Reset font size before checking overflow
+    
+            if (content.scrollHeight > infoBox.clientHeight) {
+              // Content overflows, adjust font size
+              const ratio = infoBox.clientHeight / content.scrollHeight;
+              const newFontSize = `${ratio * 100}%`;
+              setFontSize(newFontSize);
+            }
+          }
+        }
+      }, [profile]);
 
       const containerStyles = {
         width: "300px",
@@ -39,10 +62,14 @@ function ProfileData({userID}){
           <ImageDisplay userData={profile} slides={profile.pic} parentWidth={300} />
         </div>
       </div>
-      <div className="info" >
-      <p>{profile.bio}</p>
-        <p>{profile.tags.join(', ')}</p>
+      <div className="info"ref={infoRef} >
+        <div className='content'style={{ fontSize }}>
+        <p>{"ADDITIONAL INFO"}</p>
         <p>{"Phone #: "+profile.phone}</p>
+        <p>{"\n"+profile.tags.join(', ')}</p>
+        <p> {profile.bio}</p>
+        </div>
+        
       </div>
         </>
         ) : (

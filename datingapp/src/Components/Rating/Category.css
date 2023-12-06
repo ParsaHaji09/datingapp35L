@@ -7,7 +7,7 @@
     width: 300px;
     text-align: center;
     background-color:rgb(255, 209, 216);
-    color: rgb(255, 86, 142);
+    color: rgb(231, 75, 130);
   }
   .category:hover{
     outline: none; /* Remove the default focus outline */
@@ -21,8 +21,8 @@
   .cat-name {
     font-size: 25px;
     text-align: center;
-    margin: 5px;
-    padding: 20px;
+    margin: 25px;
+    
   }
   
   .star-row {
@@ -38,7 +38,7 @@
   }
   
   .image img {
-    margin: 10px;
+    
     max-width: 100%;
     max-height: 100%;
   }
