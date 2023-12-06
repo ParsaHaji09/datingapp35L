@@ -3,9 +3,9 @@
   .prof p {
     text-align: center;
     font-weight: normal;
-    color: rgb(231, 75, 130);;; /* Dark gray color for the subtitle */
-
+    color: rgb(231, 75, 130);
     margin-top: 5px; /* Add some space above the subtitle */
+    font-size: 20px;
   }
   
   .prof {
@@ -40,17 +40,21 @@
   }
   .info {
     flex: 1;
-    padding:5px;
-    
+    padding: 10px; /* Increased padding for a softer look */
     width: 50%;
-    border: 1px solid #ddd; /* Add border */
-    border-radius: 20px; /* Add rounded corners */
-    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Adjusted transparency for the border */
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.15); /* Increased shadow for a frostier effect */
+    backdrop-filter: blur(15px); /* Increased blur for a frosty appearance */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    overflow-y: auto;
     margin: auto;
-    background-color:rgb(255, 209, 216);
-    height:300px;
-    width:300px;
-  }
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); /* Adjusted transparency for the gradient */
+    color: #fff;
+    height: 300px;
+    width: 300px;
+    transition: box-shadow 0.3s ease; /* Added transition for a smooth effect on hover or state change */
+}
   
   .info-header {
     background-color: #f0f0f0; /* Add background color to the header */
