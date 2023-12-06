@@ -32,6 +32,7 @@
     text-align: center;
     left: 300px; /* Set the right margin to 300 pixels */
     padding: 10px;
+    
   }
   
   .styledRating:hover {
@@ -56,4 +57,6 @@
     z-index: 2; /* Set the z-index value */
     padding: 10px 20px;
     font-size: 16px;
+    border-radius: 20px;
+
   }

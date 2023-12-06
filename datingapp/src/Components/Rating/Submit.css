@@ -4,8 +4,9 @@
     font-size: 18px;
     border: 2px solid rgb(8, 17, 143);
     color: rgb(8, 17, 143);
-    border-radius: 10px; /* Adjust the border-radius for a circular effect */
+  /* Adjust the border-radius for a circular effect */
     background-color: rgb(255, 255, 255);
+    
 }
 .submit:hover {
     outline: none; /* Remove the default focus outline */
