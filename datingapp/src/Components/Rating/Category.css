@@ -1,14 +1,18 @@
 .category {
-    display: inline-block;
-    border: 2px ;
-    border-radius: 20px; /* Adjust the border-radius for a circular effect */
-    overflow: hidden;
-    margin-bottom: 10px;
-    width: 300px;
-    text-align: center;
-    background-color:rgb(255, 209, 216);
-    color: rgb(231, 75, 130);
-  }
+  display: inline-block;
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Adjusted transparency for the border */
+  border-radius: 20px; /* Adjust the border-radius for a circular effect */
+  overflow: hidden;
+  margin-bottom: 10px;
+  width: 300px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); /* Adjusted transparency for the gradient */
+  color: #fff;
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.15); /* Increased shadow for a frostier effect */
+  transition: box-shadow 0.3s ease; /* Added transition for a smooth effect on hover or state change */
+}
+
+
   .category:hover{
     outline: none; /* Remove the default focus outline */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */

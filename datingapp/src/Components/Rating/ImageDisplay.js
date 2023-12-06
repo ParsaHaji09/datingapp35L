@@ -20,7 +20,7 @@ const infoStyles = {
   left: "0",
   right: "0",
   bottom: "0",
-  borderRadius: "20px",
+  borderRadius:"0 0 20px 20px",
   zIndex: 2,
   display: "flex",
   flexDirection: "column",
@@ -31,7 +31,7 @@ const infoStyles = {
   color: "#fff",
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
   textAlign: "left",
-  padding: "2.3rem 1.2rem 0.2rem",
+  padding: "2rem 0.8rem 0.2rem",
   h2: {
     padding: "3rem 0rem 0rem",
     fontSize: "24px",

@@ -103,7 +103,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         "tiktok": tiktok,       // Include TikTok
         "spotify": spotify,  
       });
-      console.log('successful udata upload');
+      console.log(name);
       console.log(response.data); // Handle the response from the server
       setCurData(response.data);
       setUserData(response.data);
@@ -113,13 +113,80 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     }
   };
 
-  const tags = ["Funny", "Introverted", "Extroverted", "Casual", "Adventurous", "Creative", "Organized", "Laid-back", "Optimistic", "Reserved"];
+  const tags = [
+    "Foodie",
+    "Cooking",
+    "Restaurants",
+    "Street Food",
+    "Sushi",
+    "Vegetarian",
+    "Vegan",
+    "Gym",
+    "Yoga",
+    "Sports Enthusiast",
+    "Basketball",
+    "Soccer",
+    "Football",
+    "Hockey",
+    "Baseball",
+    "NBA",
+    "NFL",
+    "NHL",
+    "MLB",
+    "Dancing",
+    "Martial Arts",
+    "Astrology",
+    "90s Kid",
+    "History",
+    "Thrifting",
+    "Vintages",
+    "Antiques",
+    "Trying New Things",
+    "Party Animal",
+    "Going Out",
+    "Staying In",
+    "Dogs",
+    "Cats",
+    "Anime",
+    "Art",
+    "DIY",
+    "Movies",
+    "Star Wars",
+    "Marvel/DC",
+    "Netflix",
+    "K-Dramas",
+    "Study Cafes",
+    "Adventures",
+    "Hiking",
+    "Bird Watching",
+    "The Beach",
+    "Boating/Sailing",
+    "Nature",
+    "Traveling",
+    "Shopping",
+    "Fashion",
+    "Sneakerhead",
+    "Book Worm",
+    "Astronomy",
+    "Music",
+    "Bands",
+    "Concerts",
+    "K-Pop",
+    "Video Games", 
+    "Cars",
+    "Geek",
+    "Technology",
+    "Study Buddy",
+    "Casual",
+    "Serious",
+    "Long-Term",
+  ];
 
   const handleChipClick = (tag) => {
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((selectedTag) => selectedTag !== tag));
     } else {
-      if (selectedTags.length < 5) {
+      if (selectedTags.length < 10) {
         setSelectedTags([...selectedTags, tag]);
       }
     }
@@ -143,7 +210,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   }
 
   return (
-    <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '95vh', height: '95vh' }}>
+    <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '100vh', height: '100vh' }}>
       <IconButton onClick={onHide} style={{ position: 'absolute', right: '6px', top: '6px' }}>
         <CloseIcon />
       </IconButton>
@@ -238,7 +305,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
 
             <div style={{ marginTop: '16px', marginBottom: '26px' }}>
               {/* Tags */}
-              <InputLabel>Tags (Choose up to 5)</InputLabel>
+              <InputLabel>Tags (Choose up to 10)</InputLabel>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
               {tags.map((tag, index) => (

@@ -36,6 +36,8 @@ function Explore() {
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
   const [curProfile, setCurProfile] = useState(0);
+  const [sizeOfAll, setSizeOfAll] = useState(0);
+
   const [users, setUsers] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
@@ -157,6 +159,7 @@ const recommendationAlg = (users, currUser) => {
   }
   // Sort the list based on points
   const sortedUsers = users.sort(compareUsers);
+  setSizeOfAll(sortedUsers.length);
   return sortedUsers;
 };
 
@@ -282,6 +285,7 @@ let inputHandler2 = (e) => {
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
         <GenericProfile userData={filtered[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
+        { curProfile < sizeOfAll ? <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}
