@@ -1,56 +1,62 @@
+.rating{
+  position: relative;
+
+}
+
 .rating-container {
     
     display: grid;
     grid-template-columns: repeat(3,350px);
     justify-content: center;
     align-items: center;
-    width: calc(100%-300px);
-    margin-left: 300px;
-    margin-top:400px;
+    left: 300px;
+    padding-top: 20px;
     row-gap: 10px; /* Adjust the gap as needed */
     color: #000;
   }
   .styledRating{
+    /*border: 1px solid #ccc;*/
     text-align: center;
-    border: 2px solid rgb(0, 0, 0);
     border-radius: 5px; /* Adjust the border-radius value */
     width: 180px; /* Adjust the width */
     height: 80px; /* Adjust the height */
-    margin-left: 735px;
-    background-color: rgb(255, 209, 216);
-    color: rgb(0, 0, 0);
+    margin-left: 500px;
+    /*background-color: rgb(255, 209, 216);*/
+    color: indigo
+    
 
 
 
   }
   .submit-container{
     text-align: center;
-    margin-left: 150px; /* Set the right margin to 300 pixels */
-    width: calc(100%);
+    left: 300px; /* Set the right margin to 300 pixels */
     padding: 10px;
+    
   }
   
   .styledRating:hover {
     outline: none; /* Remove the default focus outline */
-    border-color: #090080; /* Change the border color on focus */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */
   }
   .profileName{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: relative;
     top: 0;
-    left: 300px; /* Set the right margin to 300 pixels */
-    width: calc(100% - 300px);
+    left: 0px; /* Set the right margin to 300 pixels */
     padding: 10px;
     
   }
   .toggle-button {
-    position: absolute;
-    left: calc(50% + 60px); /* Center horizontally and skip left 300 pixels */
+    position: relative;
+    left: 0px;
+     /* Center horizontally and skip left 300 pixels */
     top: calc(40% + 50px);
     z-index: 2; /* Set the z-index value */
     padding: 10px 20px;
     font-size: 16px;
+    border-radius: 20px;
+
   }

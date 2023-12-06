@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProfileData.css'
+import ImageDisplay from './ImageDisplay'
 
 
 
@@ -21,24 +22,33 @@ function ProfileData({userID}){
       
         fetchData();
       }, [userID]);
+
+      const containerStyles = {
+        width: "300px",
+        height: "300px",
+        margin: "0 auto",
+        zIndex: 1,
+      };
     
       return (
-        <div className="prof">
+        <div className="prof" >
           {profile ? (
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-              {profile.pic && <img src={profile.pic} alt="img" style={{ width: '120px', height: '120px', borderRadius: '10px',objectFit: 'cover' }}/>}
-              
-              <h2>{profile.name}</h2>
-              </div>
-              <p>{profile.tags.join(', ')}</p>
-              <p>{profile.birthday}&nbsp;&nbsp;{profile.phone}</p>
-            </div>
-            
-          ) : (
-            <p>Loading...</p>
-          )}
+            <>
+        <div className="image">
+        <div style={containerStyles}>
+          <ImageDisplay userData={profile} slides={profile.pic} parentWidth={300} />
         </div>
+      </div>
+      <div className="info" >
+      <p>{profile.bio}</p>
+        <p>{profile.tags.join(', ')}</p>
+        <p>{"Phone #: "+profile.phone}</p>
+      </div>
+        </>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
       );
     }
     

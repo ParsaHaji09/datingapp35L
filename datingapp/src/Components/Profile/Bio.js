@@ -68,13 +68,6 @@ const Bio = ({userData, other_uid}) => {
             <Chip style={chipStyles} variant="outlined" label={item}></Chip>
           ))}
         </div>
-        {/* <Box sx={{ my: 1 }}>
-          <Stack direction="row" spacing={1}>
-            {userData.tags.map((item) => (
-              <Chip style={chipStyles} variant="outlined" label={item}></Chip>
-            ))}
-          </Stack>
-        </Box> */}
         <Box sx={{ my: 1 }}>
           <Stack direction="row" spacing={1}>
           </Stack>
@@ -86,12 +79,13 @@ const Bio = ({userData, other_uid}) => {
           Socials
         </Typography>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center' }}>
-          <SocialButton socialMedia="instagram" userName="your_instagram_username" />
-          <SocialButton socialMedia="snapchat" userName="your_snapchat_username" />
-          <SocialButton socialMedia="facebook" userName="your_facebook_username" />
-          <SocialButton socialMedia="spotify" userName="your_spotify_username" />
-          <SocialButton socialMedia="twitter" userName="your_twitter_username" />
-          <SocialButton socialMedia="tiktok" userName="your_tiktok_username" />
+          <SocialButton socialMedia="instagram" userName={userData.instagram} />
+          <SocialButton socialMedia="snapchat" userName={userData.snapchat} />
+          <SocialButton socialMedia="facebook" userName={userData.facebook} />
+          <SocialButton socialMedia="spotify" userName={userData.spotify} />
+          <SocialButton socialMedia="twitter" userName={userData.twitter} />
+          <SocialButton socialMedia="tiktok" userName={userData.tiktok} />
+
         </div>
       </Box>
       {other_uid && (
