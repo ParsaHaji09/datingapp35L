@@ -27,14 +27,14 @@ function Navbar(){
     }
 
     if (window.location.pathname === "/") return null;
-
+    if (window.location.pathname === "/register") return null;
     return(
         <nav className="nav">
             <Link to="/" className="sitename">DateWalk</Link>
             <div className="links">
                 <Link to="/profile" className="profile">Profile</Link>
                 <Link to = "/" className="explore">Explore</Link>
-                <Link to="/ratings" className="rating">Ratings</Link>
+                <Link to="/rating" className="rating">Ratings</Link>
                 <button className="logout" onClick= {logoutHandler}>Log Out</button>
             </div>
         </nav>

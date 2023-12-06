@@ -25,13 +25,13 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const [selectedTags, setSelectedTags] = useState(userData.tags);
   const [selectedImages, setSelectedImages] = useState(userData.pic);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [instagram, setInstagram] = useState(userData.instagram);
   const [facebook, setFacebook] = useState(userData.facebook);
   const [tiktok, setTiktok] = useState(userData.tiktok);
   const [snapchat, setSnapchat] = useState(userData.snapchat);
   const [spotify, setSpotify] = useState(userData.spotify);
   const [twitter, setTwitter] = useState(userData.twitter);
-
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -46,6 +46,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const uploadImage = (pics) => {
     const imCount = Math.min(pics.length, 5);
     let imUrls = [];
+    setLoading(true);
 
     for (let i=0; i < imCount; i++){
       let pic = pics[i];
@@ -59,10 +60,13 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
             method: 'post',
             body: data,
         }).then((res) => res.json()).then((data) => {
-            console.log(data);
+            console.log(data);   // logs when we see the stuff
             imUrls.push(data.url.toString());
 
-            if (imUrls.length === imCount) setSelectedImages(imUrls);
+            if (imUrls.length === imCount) {
+              setSelectedImages(imUrls);
+              setLoading(false); 
+            }
 
         }).catch((err) => {
             console.log(err);
@@ -70,7 +74,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         } else {
         console.log("Unsupported Image Format");
         }
-    }   
+    } 
   }
 
   const handleSave = () => {
@@ -97,7 +101,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         "tiktok": tiktok,       // Include TikTok
         "spotify": spotify,  
       });
-      console.log(bio);
+      console.log('successful udata upload');
       console.log(response.data); // Handle the response from the server
       setCurData(response.data);
       setUserData(response.data);
@@ -117,19 +121,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         setSelectedTags([...selectedTags, tag]);
       }
     }
-  };
-
-  const handleImageUpload = (event) => {
-    
-    const files = [...event.target.files];  // Use the spread operator to convert FileList to an array
-  
-    if (files.length <= 5) {
-      setSelectedImages(files);
-    } else {
-      // Display a message or take appropriate action for exceeding the limit
-      console.log("You can only select up to 5 images");
-    }
-    console.log(files);
   };
 
   return (
@@ -339,6 +330,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
               <div style={{ display: 'flex', border: '1px solid #c8c4c4', borderRadius: '4px' }}>
                 <input style={{ }} type="file" accept="image/*" multiple onChange={(e) => { uploadImage(e.target.files); }} />
               </div>
+
+              {loading ? (<div class="alert alert-dark" role="alert" style = {{margin: 5, borderRadius: 10, border: "3px solid rgba(255, 255, 255, 0.3)" }}> Images Uploading... </div> ): null}
             </div>
           </div>
         )}
@@ -358,14 +351,15 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
             <ArrowForwardIosIcon/>
           </Button>
         </div>
-
         <div style={{ display: 'flex', gap: '8px' }}>
           <Button onClick={onHide} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSave} color="primary" variant="contained">
-            Save
+
+          <Button onClick={handleSave} color="primary" variant="contained" disabled = {loading}>
+              Save
           </Button>
+          
         </div>
       </DialogActions>
     </Dialog>
