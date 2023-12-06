@@ -108,6 +108,10 @@ const userSchema = mongoose.Schema(
             type: Array,
             default: []
         },
+        viewed: {
+            type: Array,
+            default: []
+        },
     }, // track time of creation and modification
     {
         timestamps: true,

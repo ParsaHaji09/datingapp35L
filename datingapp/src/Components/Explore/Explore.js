@@ -7,33 +7,33 @@ import './Explore.css'
 import NavBar from '../NavBar/Navbar.js';
 
 
-/*TODO: hide viewed profiles @aland
-  - create a filter function and call if in getAllUsers before the algorithm call
-    - this can filter by viewed?
-  - create add a viewed arr to backend api and call it correspondingly
-*/
-
 
 function Explore() {
   const navigate = useNavigate();
-  const [selfLoading, setselfLoading] = useState(true); 
+  const [selfLoading, setSelfLoading] = useState(true); 
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
   const [curProfile, setCurProfile] = useState(0);
   const [sizeOfAll, setSizeOfAll] = useState(0);
 
   const [users, setUsers] = useState([]);
+
  
+  const load = async () => {
+    const prevData = localStorage.getItem("saveData");
+    if (!prevData) {
+      navigate('/');
+    } else {
+      const parsedData = JSON.parse(prevData);
+      await getUser(parsedData._id);
+      await getAllUsers(parsedData);
+    }
+  };
+
+  
 useEffect(() => {
-  const prevData = localStorage.getItem("saveData");
-  if (!prevData) {
-    navigate('/');
-  } else {
-    const parsedData = JSON.parse(prevData);
-    
-    getUser(parsedData._id);
-    getAllUsers(parsedData);
-  }
+  
+  load();
 
 }, [navigate])
 
@@ -41,13 +41,16 @@ const getUser = async (uid) => {
   try {
     const response = await axios.get(`http://localhost:5000/api/users/${uid}`);
     setUserData(response.data);
+    localStorage.setItem('saveData', JSON.stringify(response.data));
   } catch (error) {
     console.error('Error updating user data:', error);
   }
   finally {
-    setselfLoading(false); // Set loading to false once data is fetched or if an error occurs
+    setSelfLoading(false); // Set loading to false once data is fetched or if an error occurs
+    
   }
 };
+
 
 const recommendationAlg = (users, currUser) => {
   function calculatePoints(otherUser) {
@@ -100,12 +103,17 @@ const recommendationAlg = (users, currUser) => {
   return sortedUsers;
 };
 
+const listFilter = (currUser, optionsArray) => {
+  // console.log("currUser " + currUser.name );
+  // console.log(currUser.viewed);
+  return optionsArray.filter(item => !currUser.viewed.includes(item._id) && item._id !== currUser._id );
+}
+
 const getAllUsers = async (currUser) => {
   try {
     const response = await axios.get(`http://localhost:5000/api/users/all-users`);
-    
-    const sorted_users = recommendationAlg(response.data, currUser)
-
+    const optionsArray = await listFilter(currUser, response.data);
+    const sorted_users = recommendationAlg(optionsArray, currUser)
     setUsers(sorted_users);
   } catch (error) {
     console.error('Error updating user data:', error);
@@ -154,11 +162,20 @@ const getAllUsers = async (currUser) => {
         console.error('Error updating user data through incoming:', error);
       }
     }
-
-    setCurProfile(curProfile + 1);
+    moveNext(other_data, user_data);
   }
 
-  const rejectProfile = async (other_data, userId) => {
+  const moveNext = async (other_data, user_data) => {
+    var vie = [...userData.viewed, other_data._id];
+    console.log(vie);
+    try {
+      const response = await axios.put(`http://localhost:5000/api/users/${user_data._id}`, {
+        "viewed": vie,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error('Error updating user data through matches and incoming:', error);
+    }
     setCurProfile(curProfile + 1);
   }
 
@@ -167,7 +184,7 @@ const getAllUsers = async (currUser) => {
     <NavBar />
     <div className="content-container">
     <div>
-    {loading | selfLoading ? (
+    {(loading || selfLoading) ? (
       // Display a loading indicator or message while data is being fetched
       <p>Loading Page...</p>
     ): (
@@ -180,7 +197,7 @@ const getAllUsers = async (currUser) => {
           <div className='search'><Search /></div>
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
-        { curProfile < sizeOfAll ? <GenericProfile otherData={users[curProfile]} userData={userData} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile> : <div>OUT OF BOUND</div> }
+        { curProfile < sizeOfAll ? <GenericProfile otherData={users[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}
