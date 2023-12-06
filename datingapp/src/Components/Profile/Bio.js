@@ -36,14 +36,16 @@ const chipIconStyles = {
   padding: '0px 0px 0px 3px',
 };
 
-const socialIconStyles = {
-  color: 'white',
-  fontSize: '36',
-}
-
 const dividerStyles = {
   height: '3px'
 }
+
+const hasInstagram = /^\s*$/.test(userData.instagram);
+const hasSnapchat = /^\s*$/.test(userData.snapchat);
+const hasFacebook = /^\s*$/.test(userData.facebook);
+const hasSpotify = /^\s*$/.test(userData.spotify);
+const hasTwitter = /^\s*$/.test(userData.twitter);
+const hasTiktok = /^\s*$/.test(userData.tiktok);
 
 const Bio = ({userData, other_uid}) => {
   console.log(userData)

@@ -1,7 +1,9 @@
 import { useCallback, useRef, useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import Chip from '@mui/material/Chip';
+import IconButton from "@material-ui/core/IconButton";
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 import "./Profile.css"
 
 const slideStyles = {
@@ -104,7 +106,7 @@ const chipStyles = {
   color: "white"
 }
 
-const ImageSlider = ({ slides, parentWidth, userData }) => {
+const ImageSlider = ({ slides, parentWidth, userData, other_uid }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
@@ -157,10 +159,8 @@ const ImageSlider = ({ slides, parentWidth, userData }) => {
   return (
     <div style={sliderStyles}>
       <div style={infoStyles}>
-
         <h2 style={infoStyles.h2}>{userData.name}, {calculateAge(userData.birthday)}</h2>
         <p style={infoStyles.p}>{userData.year} Year {userData.major} Major<span style={infoStyles.pronouns}><em>, {userData.pronouns}</em></span></p>
-
       </div>
       <div>
         <div onClick={goToPrevious} style={leftArrowStyles}>
@@ -191,6 +191,25 @@ const ImageSlider = ({ slides, parentWidth, userData }) => {
           </div>
         ))}
       </div>
+      {/* {other_uid && (
+        <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
+          <IconButton style={{ color: '#e90076', }} aria-label="add">
+            <CheckIcon style={{ fontSize: 48 }} />
+          </IconButton>
+          <IconButton style={{ color: '#D70040' }} aria-label="add">
+            <ClearIcon style={{ fontSize: 48 }} />
+          </IconButton>
+        </div>
+      )} */}
+
+    <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
+          <IconButton style={{ color: '#e90076', }} aria-label="add">
+            <CheckIcon style={{ fontSize: 48 }} />
+          </IconButton>
+          <IconButton style={{ color: '#D70040' }} aria-label="add">
+            <ClearIcon style={{ fontSize: 48 }} />
+          </IconButton>
+        </div>
     </div>
   );
 };
