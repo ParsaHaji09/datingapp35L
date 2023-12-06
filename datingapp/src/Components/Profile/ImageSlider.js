@@ -106,7 +106,7 @@ const chipStyles = {
   color: "white"
 }
 
-const ImageSlider = ({ slides, parentWidth, userData, other_uid, accept, reject }) => {
+const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
@@ -191,25 +191,17 @@ const ImageSlider = ({ slides, parentWidth, userData, other_uid, accept, reject 
           </div>
         ))}
       </div>
-      {/* {other_uid && (
+      { console.log("OtherID: " + otherId) }
+      {otherId && (
         <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076', }} aria-label="add">
+          <IconButton style={{ color: '#e90076', }} aria-label="add" onClick = {() => accept(userData, otherId)}>
             <CheckIcon style={{ fontSize: 48 }} />
           </IconButton>
-          <IconButton style={{ color: '#D70040' }} aria-label="add">
+          <IconButton style={{ color: '#D70040' }} aria-label="add" onClick = {() => reject(userData, otherId)}>
             <ClearIcon style={{ fontSize: 48 }} />
           </IconButton>
         </div>
-      )} */}
-
-    <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076', }} aria-label="add" onClick={() => accept(0, 0)}>
-            <CheckIcon style={{ fontSize: 48 }} />
-          </IconButton>
-          <IconButton style={{ color: '#D70040' }} aria-label="add" onClick={() => reject(0, 0)}>
-            <ClearIcon style={{ fontSize: 48 }} />
-          </IconButton>
-        </div>
+      )}
     </div>
   );
 };

@@ -125,6 +125,11 @@ const updateUser = asyncHandler(async (req, res) => {
             user["tags"] = tags;
         }
 
+        if (incoming) {
+            user["incoming"] = incoming;
+        }
+
+
         for (const key in req.body) {
             const value = req.body[key];
             
