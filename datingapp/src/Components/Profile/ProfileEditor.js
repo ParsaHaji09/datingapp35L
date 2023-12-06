@@ -343,6 +343,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
               <div style={{ display: 'flex', border: '1px solid #c8c4c4', borderRadius: '4px' }}>
                 <input style={{ }} type="file" accept="image/*" multiple onChange={(e) => { uploadImage(e.target.files); }} />
               </div>
+
+              {loading ? (<div class="alert alert-dark" role="alert" style = {{margin: 5, borderRadius: 10, border: "3px solid rgba(255, 255, 255, 0.3)" }}> Images Uploading... </div> ): null}
             </div>
           </div>
         )}
