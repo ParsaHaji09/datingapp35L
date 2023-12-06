@@ -49,8 +49,7 @@ const Login = (props) => {
     <div className="App" style = {{display: "flex", flexDirection: "column"}}>
       {error ? <ErrorRedirect ErrorMessage={ error }/> : null}
       <div className="image-container">
-        <img src="/dateWalkLogo.png" alt="logo" style={{ width: '45%', marginBottom: '-40px' }} />
-        {/* <p style={{ textAlign: 'center', marginTop: '10px' }}>DateWalk</p> */}
+        <img src="/dateWalkLogo.png" alt="logo" style={{ width: '15%', marginBottom: '-10px' }} />
         <p style={{ fontSize: '55px', fontWeight: 'bold', textAlign: 'center', color: 'white', textDecoration: 'none' }}>DateWalk</p>
 
       </div>

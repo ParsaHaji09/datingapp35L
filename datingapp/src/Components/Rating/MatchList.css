@@ -28,7 +28,7 @@ ul {
   width: 100%;
   overflow-y: auto;
   border: 0.05px solid #f0f0f0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 1);
   border-radius: 10px;
   box-sizing: border-box;
   height: 100%; /* Adjust the height to leave space for the header and margin */
@@ -38,32 +38,32 @@ ul {
 }
 
 ul:hover {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 1);
 }
 
 li {
-  background-color: #f0f0f0;
-  border: 0.5px solid #ccc;
+  background-color: rgb(231, 75, 130);
   margin-bottom: 8px;
   cursor: pointer;
   transition: background-color 0.1s ease;
   width: 100%;
   box-sizing: border-box;
-  color: grey;
+  color: white;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: wrap;
   padding: 10px;
   position: relative;
   z-index: 2;
+  border-radius: 20px;
 }
 li span {
   font-size: 0.8em; /* Adjust the font size as needed */
 }
 li:hover {
-  background-color: #e0e0e0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .selected {
-  background-color: rgb(250, 201, 109);
+  background-color: rgb(255, 209, 216); /*rgb(250, 201, 109);*/
 }

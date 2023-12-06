@@ -2,9 +2,9 @@
   
   .prof p {
     text-align: center;
-    font-size: 20px;
     font-weight: normal;
-    color: #555; /* Dark gray color for the subtitle */
+    color: rgb(231, 75, 130);;; /* Dark gray color for the subtitle */
+
     margin-top: 5px; /* Add some space above the subtitle */
   }
   
@@ -45,9 +45,9 @@
     width: 50%;
     border: 1px solid #ddd; /* Add border */
     border-radius: 20px; /* Add rounded corners */
-    overflow: hidden;
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
     margin: auto;
-    background-color: #ecf0f1; 
+    background-color:rgb(255, 209, 216);
     height:300px;
     width:300px;
   }

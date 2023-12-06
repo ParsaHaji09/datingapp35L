@@ -20,9 +20,3 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-
-{/*<React.StrictMode>
-      <Provider store = { store }>
-        <App />
-      </Provider>
-</React.StrictMode>*/}
