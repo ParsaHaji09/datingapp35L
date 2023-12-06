@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from "@material-ui/core/IconButton";
@@ -92,6 +92,7 @@ const infoStyles = {
     fontSize: "18px",
     color: "#e6e6e6",
     fontFamily: 'Nunito, sans-serif',
+    paddingBottom: '15px',
   },
 
   pronouns: {
@@ -155,11 +156,12 @@ const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject })
     return age;
   }
 
+  const firstName = (userData.name).split(" ")[0];
 
   return (
     <div style={sliderStyles}>
       <div style={infoStyles}>
-        <h2 style={infoStyles.h2}>{userData.name}, {calculateAge(userData.birthday)}</h2>
+        <h2 style={infoStyles.h2}>{firstName}, {calculateAge(userData.birthday)}</h2>
         <p style={infoStyles.p}>{userData.year} Year {userData.major} Major<span style={infoStyles.pronouns}><em>, {userData.pronouns}</em></span></p>
       </div>
       <div>
@@ -191,10 +193,11 @@ const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject })
           </div>
         ))}
       </div>
-      { console.log("OtherID: " + otherId) }
+
+      { otherId && console.log("OtherID: " + otherId) }
       {otherId && (
-        <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076', }} aria-label="add" onClick = {() => accept(userData, otherId)}>
+        <div style={{ display: 'flex', position: 'absolute', bottom: '12px', right: '24px', gap: '4px', zIndex: 3}}>
+          <IconButton style={{ color: '#e90076' }} aria-label="add" onClick = {() => accept(userData, otherId)}>
             <CheckIcon style={{ fontSize: 48 }} />
           </IconButton>
           <IconButton style={{ color: '#D70040' }} aria-label="add" onClick = {() => reject(userData, otherId)}>
