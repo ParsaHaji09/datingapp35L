@@ -13,6 +13,8 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@material-ui/core/IconButton";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 
 const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
@@ -123,6 +125,23 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     }
   };
 
+  const handleImageUpload = (event) => {
+    
+    const files = [...event.target.files];  // Use the spread operator to convert FileList to an array
+  
+    if (files.length <= 5) {
+      setSelectedImages(files);
+    } else {
+      // Display a message or take appropriate action for exceeding the limit
+      console.log("You can only select up to 5 images");
+    }
+    console.log(files);
+  };
+
+  function capitalizeWords(str) {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
   return (
     <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '95vh', height: '95vh' }}>
       <IconButton onClick={onHide} style={{ position: 'absolute', right: '6px', top: '6px' }}>
@@ -143,41 +162,10 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                   type="text"
                   fullWidth
                   placeholder='Daemon Eggert-Smallberg'
-                  value={name}
+                  value={capitalizeWords(name)}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-
-              {/* Year */}
-              <div style={{ flex: 1 }}>
-                <InputLabel htmlFor="year">Year</InputLabel>
-                <TextField
-                  margin="dense"
-                  id="year"
-                  type="text"
-                  fullWidth
-                  placeholder='2nd'
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', gap: '16px' }}>
-              {/* Email */}
-              <div style={{ flex: 1 }}>
-                <InputLabel htmlFor="pronouns">Pronouns</InputLabel>
-                <TextField
-                  margin="dense"
-                  id="pronouns"
-                  type="text"
-                  fullWidth
-                  placeholder='Pronouns'
-                  value={pronouns}
-                  onChange={(e) => setPronouns(e.target.value)}
-                />
-              </div>
-
               {/* Major */}
               <div style={{ flex: 1 }}>
                 <InputLabel htmlFor="major">Major</InputLabel>
@@ -187,9 +175,41 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
                   type="text"
                   fullWidth
                   placeholder='Major'
-                  value={major}
+                  value={capitalizeWords(major)}
                   onChange={(e) => setMajor(e.target.value)}
                 />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '16px' }}>
+              {/* Pronouns */}
+              <div style={{ flex: 1 }}>
+                <InputLabel htmlFor="pronouns">Pronouns</InputLabel>
+                <Select
+                  id="pronouns"
+                  value={pronouns}
+                  onChange={(e) => setPronouns(e.target.value)}
+                  fullWidth
+                >
+                  <MenuItem value="she/her">She/Her</MenuItem>
+                  <MenuItem value="he/him">He/Him</MenuItem>
+                  <MenuItem value="they/them">They/Them</MenuItem>
+                </Select>
+              </div>
+              {/* Year */}
+              <div style={{ flex: 1 }}>
+                <InputLabel htmlFor="year">Year</InputLabel>
+                <Select
+                  id="year"
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                  fullWidth
+                >
+                  <MenuItem value="1st">1st</MenuItem>
+                  <MenuItem value="2nd">2nd</MenuItem>
+                  <MenuItem value="3rd">3rd</MenuItem>
+                  <MenuItem value="4th+">4th+</MenuItem>
+                </Select>
               </div>
             </div>
 
