@@ -25,6 +25,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const [selectedTags, setSelectedTags] = useState(userData.tags);
   const [selectedImages, setSelectedImages] = useState(userData.pic);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -37,6 +38,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   //@aland figure out async and stuff???
   // np baebae :kiss:
   const uploadImage = (pics) => {
+    setLoading(true);
     const imCount = Math.min(pics.length, 4);
     let imUrls = [];
 
@@ -63,7 +65,8 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
         } else {
         console.log("Unsupported Image Format");
         }
-    }   
+    } 
+    setLoading(false);  
   }
 
   const handleSave = () => {
@@ -345,14 +348,17 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
             <ArrowForwardIosIcon/>
           </Button>
         </div>
-
         <div style={{ display: 'flex', gap: '8px' }}>
           <Button onClick={onHide} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSave} color="primary" variant="contained">
-            Save
-          </Button>
+
+          {
+          loading === false ? 
+            (<Button onClick={handleSave} color="primary" variant="contained">
+              Save
+            </Button>) : null
+          }
         </div>
       </DialogActions>
     </Dialog>
