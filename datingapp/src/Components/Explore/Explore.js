@@ -29,6 +29,7 @@ function Explore() {
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
   const [curProfile, setCurProfile] = useState(0);
+  const [sizeOfAll, setSizeOfAll] = useState(0);
 
   const [users, setUsers] = useState([]);
  
@@ -105,6 +106,7 @@ const recommendationAlg = (users, currUser) => {
   }
   // Sort the list based on points
   const sortedUsers = users.sort(compareUsers);
+  setSizeOfAll(sortedUsers.length);
   return sortedUsers;
 };
 
@@ -150,7 +152,6 @@ const getAllUsers = async (currUser) => {
             "value": userId,
           }
         });
-        localStorage.setItem('saveData', JSON.stringify(response.data));
         console.log("Successfully added " + userId + " to the match array of " + other_data._id);
       } catch (error) {
         console.error('Error updating user data through matches and incoming:', error);
@@ -162,7 +163,6 @@ const getAllUsers = async (currUser) => {
         const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
           "incoming": inc,
         });
-        localStorage.setItem('saveData', JSON.stringify(response.data));
         console.log("Successfully added " + userId + " to the incoming array of " + other_data._id);
       } catch (error) {
         console.error('Error updating user data through incoming:', error);
@@ -194,7 +194,7 @@ const getAllUsers = async (currUser) => {
           <div className='search'><Search /></div>
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
-        <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
+        { curProfile < sizeOfAll ? <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}
