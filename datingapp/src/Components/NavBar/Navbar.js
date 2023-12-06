@@ -1,7 +1,7 @@
 import React from "react";
 import "./Navbar.css"
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../../actions/reduxActions';
 
 // for another day
@@ -23,11 +23,6 @@ function Navbar(){
     const navigate = useNavigate();
     const logoutHandler = () => {
         dispatch(logout());
-        navigate('/');
-    }
-
-    const hardreload = () => {
-        // dispatch(logout());
         navigate('/');
     }
 

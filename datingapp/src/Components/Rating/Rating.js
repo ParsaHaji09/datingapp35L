@@ -15,7 +15,6 @@ function Rating(){
         setList({})
     }
           
-    const location = useLocation();
     const userData = JSON.parse(localStorage.getItem("saveData"));
     console.log(userData);
 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { register } from '../../actions/reduxActions';
-import ErrorRedirect, { ErrorField } from './Error';
+import { ErrorField } from './Error';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
 
@@ -25,7 +25,6 @@ const Register = (props) => {
   const dispatch = useDispatch();
 
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
 
   const MAX_SELECTED_TAGS = 10; // Set the maximum number of selected tags
 
