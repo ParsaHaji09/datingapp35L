@@ -102,7 +102,11 @@ const infoStyles = {
 
 };
 
-const ImageSlider = ({ slides, parentWidth, userData, other_uid }) => {
+const chipStyles = {
+  color: "white"
+}
+
+const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
