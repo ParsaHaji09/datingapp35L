@@ -9,6 +9,11 @@ import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import InputLabel from '@mui/material/InputLabel';
 import axios from 'axios';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from "@material-ui/core/IconButton";
+
 
 const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const [curData, setCurData] = useState(userData);
@@ -19,7 +24,15 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const [bio, setBio] = useState(userData.bio);
   const [selectedTags, setSelectedTags] = useState(userData.tags);
   const [selectedImages, setSelectedImages] = useState(userData.pic);
-  const bioPlaceholder = "Hey, I'm Daemon. In my free time, I run silently in the background to monitor subsystems to ensure that my current operating system runs properly. I am going to make this bio longer to see how things may look if a user's bio becomes long. Right now, what you see is what you get. We are going to try to make this as long as possible."
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
 
   //@aland figure out async and stuff???
   // np baebae :kiss:
@@ -97,138 +110,250 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     
     const files = [...event.target.files];  // Use the spread operator to convert FileList to an array
   
-    if (files.length <= 4) {
+    if (files.length <= 5) {
       setSelectedImages(files);
     } else {
       // Display a message or take appropriate action for exceeding the limit
-      console.log("You can only select up to 4 images");
+      console.log("You can only select up to 5 images");
     }
     console.log(files);
   };
-  
 
   return (
-    <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm">
+    <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '100vh', height: '100vh' }}>
+      <IconButton onClick={onHide} style={{ position: 'absolute', right: '6px', top: '6px' }}>
+        <CloseIcon />
+      </IconButton>
       <DialogTitle style={{ fontSize: '36px' }}>Edit Profile</DialogTitle>
       <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex', gap: '16px' }}>
-          {/* Name */}
-          <div style={{ flex: 1 }}>
-            <InputLabel htmlFor="name">Name</InputLabel>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              type="text"
-              fullWidth
-              placeholder='Daemon Eggert-Smallberg'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+        {currentPage === 1 && (
+          <div>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              {/* Name */}
+              <div style={{ flex: 1 }}>
+                <InputLabel htmlFor="name">Name</InputLabel>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  type="text"
+                  fullWidth
+                  placeholder='Daemon Eggert-Smallberg'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+              {/* Year */}
+              <div style={{ flex: 1 }}>
+                <InputLabel htmlFor="year">Year</InputLabel>
+                <TextField
+                  margin="dense"
+                  id="year"
+                  type="text"
+                  fullWidth
+                  placeholder='2nd'
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '16px' }}>
+              {/* Email */}
+              <div style={{ flex: 1 }}>
+                <InputLabel htmlFor="pronouns">Pronouns</InputLabel>
+                <TextField
+                  margin="dense"
+                  id="pronouns"
+                  type="text"
+                  fullWidth
+                  placeholder='Pronouns'
+                  value={pronouns}
+                  onChange={(e) => setPronouns(e.target.value)}
+                />
+              </div>
+
+              {/* Major */}
+              <div style={{ flex: 1 }}>
+                <InputLabel htmlFor="major">Major</InputLabel>
+                <TextField
+                  margin="dense"
+                  id="major"
+                  type="text"
+                  fullWidth
+                  placeholder='Major'
+                  value={major}
+                  onChange={(e) => setMajor(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div style={{ marginTop: '16px' }}>
+              {/* Bio */}
+              <InputLabel htmlFor="bio">Bio (Max 300 chars.)</InputLabel>
+              <TextField
+                margin="dense"
+                id="bio"
+                type="text"
+                fullWidth
+                placeholder='Bio'
+                multiline
+                rows={5}
+                inputProps={{
+                  maxLength: 300,
+                }}
+                value={bio}
+                onChange={(e) => {
+                  if (e.target.value.length <= 300) {
+                    setBio(e.target.value);
+                  }
+                }}
+              />
+            </div>
+
+            <div style={{ marginTop: '16px', marginBottom: '26px' }}>
+              {/* Tags */}
+              <InputLabel>Tags (Choose up to 5)</InputLabel>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
+              {tags.map((tag, index) => (
+                <Chip
+                  key={index}
+                  label={tag}
+                  clickable
+                  color={selectedTags.includes(tag) ? 'primary' : 'default'}
+                  onClick={() => handleChipClick(tag)}
+                />
+              ))}
+            </div>
           </div>
+        )}
 
-          {/* Year */}
-          <div style={{ flex: 1 }}>
-            <InputLabel htmlFor="year">Year</InputLabel>
-            <TextField
-              margin="dense"
-              id="year"
-              type="text"
-              fullWidth
-              placeholder='2nd'
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-            />
+        {currentPage === 2 && (
+          <div> 
+            <div style={{ display: 'flex', gap: '16px' }}>
+              {/* Instagram */}
+              <div style={{ flex: 1 }}>
+                  <InputLabel htmlFor="instagram">Instagram</InputLabel>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="instagram"
+                    type="text"
+                    fullWidth
+                    placeholder='Instagram Username'
+                    value={name} // change me
+                    onChange={(e) => setName(e.target.value)} // change me
+                  />
+              </div>
+              {/* Facebook */}
+              <div style={{ flex: 1 }}>
+                  <InputLabel htmlFor="facebook">Facebook</InputLabel>
+                  <TextField
+                    margin="dense"
+                    id="facebook"
+                    type="text"
+                    fullWidth
+                    placeholder='Facebook Username'
+                    value={name} // change me
+                    onChange={(e) => setName(e.target.value)} // change me
+                  />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '16px' }}>
+              {/* Snapchat */}
+              <div style={{ flex: 1 }}>
+                  <InputLabel htmlFor="snapchat">Snapchat</InputLabel>
+                  <TextField
+                    margin="dense"
+                    id="snapchat"
+                    type="text"
+                    fullWidth
+                    placeholder='Snapchat Username'
+                    value={name} // change me
+                    onChange={(e) => setName(e.target.value)} // change me
+                  />
+              </div>
+              {/* Twitter */}
+              <div style={{ flex: 1 }}>
+                  <InputLabel htmlFor="twitter">Twitter</InputLabel>
+                  <TextField
+                    margin="dense"
+                    id="twitter"
+                    type="text"
+                    fullWidth
+                    placeholder='Twitter Username'
+                    value={name} // change me
+                    onChange={(e) => setName(e.target.value)} // change me
+                  />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '16px' }}>
+              {/* Tiktok */}
+              <div style={{ flex: 1 }}>
+                  <InputLabel htmlFor="">Tiktok</InputLabel>
+                  <TextField
+                    margin="dense"
+                    id="tiktok"
+                    type="text"
+                    fullWidth
+                    placeholder='Tiktok Username'
+                    value={name} // change me
+                    onChange={(e) => setName(e.target.value)} // change me
+                  />
+              </div>
+              {/* Spotify */}
+              <div style={{ flex: 1 }}>
+                  <InputLabel htmlFor="spotify">Spotify</InputLabel>
+                  <TextField
+                    margin="dense"
+                    id="spotify"
+                    type="text"
+                    fullWidth
+                    placeholder='Spotify Username'
+                    value={name} // change me
+                    onChange={(e) => setName(e.target.value)} // change me
+                  />
+              </div>
+            </div>
+
+            <div style={{ flex: 1 }}>
+              {/* Image Upload */}
+              <InputLabel style= {{ paddingTop: '3px', paddingBottom: '9px' }} htmlFor="name">Images (Up to 5) </InputLabel>
+              <div style={{ display: 'flex', border: '1px solid #c8c4c4', borderRadius: '4px' }}>
+                <input style={{ }} type="file" accept="image/*" multiple onChange={(e) => { uploadImage(e.target.files); }} />
+              </div>
+            </div>
           </div>
-        </div>
+        )}
 
-        <div style={{ display: 'flex', gap: '16px' }}>
-          {/* Email */}
-          <div style={{ flex: 1 }}>
-            <InputLabel htmlFor="pronouns">Pronouns</InputLabel>
-            <TextField
-              margin="dense"
-              id="pronouns"
-              type="text"
-              fullWidth
-              placeholder='Pronouns'
-              value={pronouns}
-              onChange={(e) => setPronouns(e.target.value)}
-            />
-          </div>
-
-          {/* Major */}
-          <div style={{ flex: 1 }}>
-            <InputLabel htmlFor="major">Major</InputLabel>
-            <TextField
-              margin="dense"
-              id="major"
-              type="text"
-              fullWidth
-              placeholder='Computer Science'
-              value={major}
-              onChange={(e) => setMajor(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div style={{ marginTop: '16px' }}>
-          {/* Bio */}
-          <InputLabel htmlFor="bio">Bio (Max 300 chars.)</InputLabel>
-          <TextField
-            margin="dense"
-            id="bio"
-            type="text"
-            fullWidth
-            placeholder={bioPlaceholder}
-            multiline
-            rows={5}
-            inputProps={{
-              maxLength: 300,
-            }}
-            value={bio}
-            onChange={(e) => {
-              if (e.target.value.length <= 300) {
-                setBio(e.target.value);
-              }
-            }}
-          />
-        </div>
-
-        <div style={{ marginTop: '16px', marginBottom: '26px' }}>
-          {/* Tags */}
-          <InputLabel>Tags (Choose up to 5)</InputLabel>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-          {tags.map((tag, index) => (
-            <Chip
-              key={index}
-              label={tag}
-              clickable
-              color={selectedTags.includes(tag) ? 'primary' : 'default'}
-              onClick={() => handleChipClick(tag)}
-            />
-          ))}
-        </div>
-
-
-        <div style={{ marginTop: '24px', marginBottom: '24px' }}>
-          {/* Image Upload */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-            <InputLabel>Upload Images (Up to 4)</InputLabel>
-            <input type="file" accept="image/*" multiple onChange={(e) => { uploadImage(e.target.files); }} />
-          </div>
-        </div>
-
-        <div style={{ marginTop: '16px', fontStyle: 'italic', color: '#757575' }}>
+        <div style={{ display: 'flex', marginTop: '16px', fontStyle: 'italic', color: '#757575', height: '100vh', alignItems: 'flex-end'}}>
           To change password, birthday, or phone number, please email support@datewalk.com
         </div>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onHide}>Cancel</Button>
-        <Button onClick={handleSave} color="primary">
-          Save
-        </Button>
+      <DialogActions style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex'}}>
+          <Button style={{ minWidth: '50px', maxWidth: '50px' }} onClick={prevPage} disabled={currentPage === 1}>
+            {/* You can also use Tooltip to add text if needed */}
+            <ArrowBackIosNewIcon />
+          </Button>
+          <Button style={{ minWidth: '50px', maxWidth: '50px' }} onClick={nextPage} disabled={currentPage === 2}>
+            {/* You can also use Tooltip to add text if needed */}
+            <ArrowForwardIosIcon/>
+          </Button>
+        </div>
+
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Button onClick={onHide} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSave} color="primary" variant="contained">
+            Save
+          </Button>
+        </div>
       </DialogActions>
     </Dialog>
   );
