@@ -46,7 +46,7 @@ const dividerStyles = {
 }
 
 const Bio = ({userData, other_uid}) => {
-  console.log(userData)
+  //console.log(userData)
   return (
     <div className='glass'>
     <Box sx={{ width: '100%', maxWidth: 360, }}>
