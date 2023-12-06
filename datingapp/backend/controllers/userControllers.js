@@ -106,8 +106,7 @@ const getUser = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
     // need id and updated traits/tags
-    const { tags, attractiveness, conversation,
-            activity, humor, decency, after, matches, incoming, bio, year, pic, snapchat, facebook, instagram, spotify, tiktok, twitter } = req.body;
+    const { tags, matches, pic, incoming } = req.body;
 
     const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
     const simpleUpdates = ['bio', 'year', 'major', 'name', 'pronouns', 'instagram', 'snapchat', 'facebook', 'twitter', 'spotify', 'tiktok'];
@@ -126,6 +125,7 @@ const updateUser = asyncHandler(async (req, res) => {
         }
 
         if (incoming) {
+            console.log("incoming reached");
             user["incoming"] = incoming;
         }
 

@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from "@material-ui/core/IconButton";
@@ -191,7 +191,8 @@ const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject })
           </div>
         ))}
       </div>
-      { console.log("OtherID: " + otherId) }
+
+      { otherId && console.log("OtherID: " + otherId) }
       {otherId && (
         <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
           <IconButton style={{ color: '#e90076', }} aria-label="add" onClick = {() => accept(userData, otherId)}>
