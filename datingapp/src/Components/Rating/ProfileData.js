@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import './ProfileData.css'
 import ImageDisplay from './ImageDisplay'
+import SocialButton from '../Profile/SocialButton';
 
 
 
@@ -47,6 +48,14 @@ function ProfileData({userID}){
         }
       }, [profile]);
 
+      const hasInstagram = profile && (profile.instagram || '').trim() !== "";
+      const hasSnapchat = profile && (profile.snapchat || '').trim() !== "";
+      const hasFacebook = profile && (profile.facebook || '').trim() !== "";
+      const hasSpotify = profile && (profile.spotify || '').trim() !== "";
+      const hasTwitter = profile && (profile.twitter || '').trim() !== "";
+      const hasTiktok = profile && (profile.tiktok || '').trim() !== "";
+      const hasAnySocial = hasInstagram || hasSnapchat || hasFacebook || hasSpotify || hasTwitter || hasTiktok;
+
       const containerStyles = {
         width: "300px",
         height: "300px",
@@ -90,15 +99,27 @@ function ProfileData({userID}){
           </button>
           </div>
       </div>
-      {showInfo &&(
+      {showInfo && profile &&(
       <div className="info"ref={infoRef} >
         
         <div className='content'style={{ fontSize }}>
         <p style={{fontWeight:'bold'}}>{"ADDITIONAL INFO"} </p>
         <p>{"Phone #: "+profile.phone}</p>
         <p>{"\n"+profile.tags.join(', ')}</p>
+        <div>{hasAnySocial && (
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center' }}>
+            {hasInstagram &&( <SocialButton socialMedia="instagram" userName={profile.instagram} /> )}
+            {hasSnapchat && ( <SocialButton socialMedia="snapchat" userName={profile.snapchat} /> )}
+            {hasFacebook && ( <SocialButton socialMedia="facebook" userName={profile.facebook} /> )}
+            {hasSpotify && ( <SocialButton socialMedia="spotify" userName={profile.spotify} /> )}
+            {hasTwitter && ( <SocialButton socialMedia="twitter" userName={profile.twitter} /> )}
+            {hasTiktok && ( <SocialButton socialMedia="tiktok" userName={profile.tiktok} /> )}
+          </div>
+        )}
+        </div>
         <p> {profile.bio}</p>
         </div>
+        
         
       </div>
       )}
