@@ -70,8 +70,10 @@
     border-radius: 20px;
     border: 2px solid transparent;
     color: white;
-    background-color: rgb(231, 75, 130);;
-    
-
-
+    background-color: rgb(231, 75, 130);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .toggle-button:hover {
+    transform: scale(1.1); /* Scale the button on hover */
+    background-color: rgb(255, 209, 216);;
   }

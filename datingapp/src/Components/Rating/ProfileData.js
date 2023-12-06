@@ -64,7 +64,7 @@ function ProfileData({userID}){
       </div>
       <div className="info"ref={infoRef} >
         <div className='content'style={{ fontSize }}>
-        <p>{"ADDITIONAL INFO"}</p>
+        <p style={{fontWeight:'bold'}}>{"ADDITIONAL INFO"} </p>
         <p>{"Phone #: "+profile.phone}</p>
         <p>{"\n"+profile.tags.join(', ')}</p>
         <p> {profile.bio}</p>
