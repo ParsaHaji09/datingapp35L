@@ -53,7 +53,7 @@ const Bio = ({userData, other_uid}) => {
 
   return (
     <div className='glass'>
-    <Box sx={{ width: '100%', maxWidth: 360, }}>
+    <Box sx={{ width: 360, maxWidth: 360, }}>
       <Box sx={{ m: 2 }}>
         <Typography theme={theme} gutterBottom variant="h4" component="div">
           About Me

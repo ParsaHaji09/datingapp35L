@@ -27,15 +27,121 @@ const Register = (props) => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  const MAX_SELECTED_TAGS = 5; // Set the maximum number of selected tags
+  const MAX_SELECTED_TAGS = 10; // Set the maximum number of selected tags
 
-  const tagsArray = ['Adventure Seeker', 'Anime Watcher', 'Art Enthusiast', 'Book Lover', 
-                    'Coffee Connoisseur', 'Creative Mind',  'Easy Going', 'Entrepreneur Life',
-                    'Fitness Freak', 'Family First', 'Fashion Fanatic', 'Foodie Adventures',
-                    'Game Night Champ', 'Home Chef', 'K-Drama Lover','Movie Buff',  
-                    'Music Lover', 'Nature Lover', 'Pet Lover', 'Spritual Journey', 
-                    'Travel Addict', 'Tech Geek', 'Serious Relationship', 
-                    ];
+  const tagsArray = [
+    "Foodie",
+    "Cooking",
+    "Restaurants",
+    "Street Food",
+    "Sushi",
+    "Vegetarian",
+    "Vegan",
+    "Gym",
+    "Yoga",
+    "Sports Enthusiast",
+    "Basketball",
+    "Soccer",
+    "Football",
+    "Hockey",
+    "Baseball",
+    "NBA",
+    "NFL",
+    "NHL",
+    "MLB",
+    "Dancing",
+    "Martial Arts",
+    "Astrology",
+    "90s Kid",
+    "History",
+    "Thrifting",
+    "Vintages",
+    "Antiques",
+    "Trying New Things",
+    "Party Animal",
+    "Going Out",
+    "Staying In",
+    "Dogs",
+    "Cats",
+    "Anime",
+    "Art",
+    "DIY",
+    "Movies",
+    "Star Wars",
+    "Marvel/DC",
+    "Netflix",
+    "K-Dramas",
+    "Study Cafes",
+    "Adventures",
+    "Hiking",
+    "Bird Watching",
+    "The Beach",
+    "Boating/Sailing",
+    "Nature",
+    "Traveling",
+    "Shopping",
+    "Fashion",
+    "Sneakerhead",
+    "Book Worm",
+    "Astronomy",
+    "Music",
+    "Bands",
+    "Concerts",
+    "K-Pop",
+    "Video Games", 
+    "Cars",
+    "Geek",
+    "Technology",
+    "Study Buddy",
+    "Casual",
+    "Serious",
+    "Long-Term",
+  ];
+  // const tagsArray = [
+  //   "Foodie",
+  //   "Cooking",
+  //   "Restaurants",
+  //   "Street Food",
+  //   "Sushi",
+  //   "Vegetarian",
+  //   "Vegan",
+  //   "Gym",
+  //   "Yoga",
+  //   "Sports Enthusiast",
+  //   "Dancing",
+  //   "Martial Arts",
+  //   "Astrology",
+  //   "History",
+  //   "Thrifting",
+  //   "Party Animal",
+  //   "Going Out",
+  //   "Staying In",
+  //   "Dogs",
+  //   "Cats",
+  //   "Anime",
+  //   "Art",
+  //   "Movies",
+  //   "Netflix",
+  //   "K-Dramas",
+  //   "Study Cafes",
+  //   "Adventures",
+  //   "Hiking",
+  //   "The Beach",
+  //   "Nature",
+  //   "Traveling",
+  //   "Shopping",
+  //   "Fashion",
+  //   "Book Worm",
+  //   "Music",
+  //   "Concerts",
+  //   "Video Games", 
+  //   "Cars",
+  //   "Technology",
+  //   "Study Buddy",
+  //   "Casual",
+  //   "Serious",
+  //   "Long-Term",
+  // ];
 
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -119,7 +225,7 @@ const Register = (props) => {
     <form className="login-form" onSubmit={handleSubmit}>
 
     <label htmlFor="name">Full Name</label>
-      <input value={capitalizeWords(name)} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="Enter here"/>
+      <input value={capitalizeWords(name)} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="Enter here" required />
 
     <div className ="flex-container">
 
@@ -144,7 +250,7 @@ const Register = (props) => {
 
         <div className="flex-item">
         <label htmlFor="birthday">Birthday</label>
-      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" placeholder= "placeholder" id="birthday" name="birthday"/>
+      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" placeholder= "placeholder" id="birthday" name="birthday" required />
       </div>
 
       </div>
@@ -162,7 +268,7 @@ const Register = (props) => {
       <PhoneInput country="US" value={phone} onChange={setPhone} placeholder="+1 (xxx) xxx-xxxx"  />
 
         <div style = {{margin: 20}}>
-          <h3>Select Your Tags (up to 5)</h3>
+          <h3>Select Your Tags (up to 10)</h3>
           {tagsArray.map((tag) => (
             <button
               key={tag} type = "button" onClick={() => handleTagClick(tag)}
@@ -174,7 +280,7 @@ const Register = (props) => {
         </div>
 
         <label>
-          Upload Image:
+          Upload Profile Picture:
           <input id = "custom-file" type = "file" label = "Upload Profile Picture" onChange={(e) => uploadImage(e.target.files[0])} />
           { picMsg }
         </label>

@@ -112,7 +112,6 @@ function Search(){
                           <span className= "star"><BsStarFill/></span>
                           <span className= "srating">{calcRating(user)}</span>
                         </div>
-                      
                     </div>
                   ),
                 )}
