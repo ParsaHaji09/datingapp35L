@@ -125,7 +125,6 @@ const updateUser = asyncHandler(async (req, res) => {
         }
 
         if (incoming) {
-            console.log("incoming reached");
             user["incoming"] = incoming;
         }
 
