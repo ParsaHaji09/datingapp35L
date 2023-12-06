@@ -28,7 +28,7 @@ function RatingForm({user, onListChange}) {
       const parsedData = JSON.parse(prevData);
       setUdata(parsedData);
     }
-  }, []);
+  }, [navigate]);
 
   function handleRatingChange(categoryName, ratingValue) {
     setRatings((prevRatings) => ({
@@ -116,7 +116,7 @@ function RatingForm({user, onListChange}) {
     </div>
       
       <div className="styledRating">
-        <CustomizedRating value={averageRating}name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange}/>
+        <CustomizedRating value={averageRating} size="large" name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange}/>
       </div>
       </div>
       )}

@@ -1,16 +1,16 @@
 .category {
     display: inline-block;
-    border: 2px solid #000000;
+    border: 2px ;
     border-radius: 20px; /* Adjust the border-radius for a circular effect */
     overflow: hidden;
     margin-bottom: 10px;
     width: 300px;
     text-align: center;
     background-color:rgb(255, 209, 216);
+    color: rgb(255, 86, 142);
   }
   .category:hover{
     outline: none; /* Remove the default focus outline */
-    border-color: #000000; /* Change the border color on focus */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a box shadow on focus */
   }
   .nameAndImage {
@@ -28,6 +28,8 @@
     display: flex;
     justify-content: center;
     padding: 15px;
+    font-weight: normal;
+    font-size: 18px;
   }
   .image {
     width: 70px;
