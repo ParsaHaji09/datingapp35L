@@ -123,19 +123,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     }
   };
 
-  const handleImageUpload = (event) => {
-    
-    const files = [...event.target.files];  // Use the spread operator to convert FileList to an array
-  
-    if (files.length <= 5) {
-      setSelectedImages(files);
-    } else {
-      // Display a message or take appropriate action for exceeding the limit
-      console.log("You can only select up to 5 images");
-    }
-    console.log(files);
-  };
-
   return (
     <Dialog open={show} onClose={onHide} fullWidth maxWidth="sm" style={{ maxHeight: '95vh', height: '95vh' }}>
       <IconButton onClick={onHide} style={{ position: 'absolute', right: '6px', top: '6px' }}>

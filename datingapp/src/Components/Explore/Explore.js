@@ -148,7 +148,7 @@ const getAllUsers = async (currUser) => {
           <div className='search'><Search /></div>
         </div>
         {users.map((user, index) => (
-             <GenericProfile userData={user} other_uid={userData._id}></GenericProfile>
+             <GenericProfile key={index} userData={user} other_uid={userData._id}></GenericProfile>
         ))}
        
       </div>
