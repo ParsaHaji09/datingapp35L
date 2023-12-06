@@ -27,8 +27,7 @@ function Explore() {
   const [selfLoading, setselfLoading] = useState(true); 
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
-
-  const [showBio, setShowBio] = useState([]);
+  const [curProfile, setCurProfile] = useState(0);
 
   const [users, setUsers] = useState([]);
  
@@ -105,7 +104,6 @@ const recommendationAlg = (users, currUser) => {
   }
   // Sort the list based on points
   const sortedUsers = users.sort(compareUsers);
-  setShowBio(sortedUsers.map(() => false));
   return sortedUsers;
 };
 
@@ -136,6 +134,14 @@ const getAllUsers = async (currUser) => {
     navigate('/rating', { state: { data } });
   }
 
+  const acceptProfile = (other_data, cur_data) => {
+    setCurProfile(curProfile + 1);
+  }
+
+  const rejectProfile = (other_data, cur_data) => {
+    setCurProfile(curProfile + 1);
+  }
+
   return (
     <div>
     {loading | selfLoading ? (
@@ -150,9 +156,10 @@ const getAllUsers = async (currUser) => {
           </div>
           <div className='search'><Search /></div>
         </div>
-        {users.map((user, index) => (
-             <GenericProfile key = {index} userData={user} other_uid={userData._id} showBio = {showBio[index]} style = {{marginBottom: 30}}></GenericProfile>
-        ))}
+        {/* {users.map((user, index) => (
+             <GenericProfile key = {index} userData={user} other_uid={userData._id}></GenericProfile>
+        ))} */}
+        <GenericProfile userData={users[curProfile]} other_uid={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
        
       </div>
     )}

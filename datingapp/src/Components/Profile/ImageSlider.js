@@ -106,7 +106,7 @@ const chipStyles = {
   color: "white"
 }
 
-const ImageSlider = ({ slides, parentWidth, userData, other_uid }) => {
+const ImageSlider = ({ slides, parentWidth, userData, other_uid, accept, reject }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
@@ -203,10 +203,10 @@ const ImageSlider = ({ slides, parentWidth, userData, other_uid }) => {
       )} */}
 
     <div style={{ position: 'absolute', bottom: '8px', right: '16px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076', }} aria-label="add">
+          <IconButton style={{ color: '#e90076', }} aria-label="add" onClick={accept}>
             <CheckIcon style={{ fontSize: 48 }} />
           </IconButton>
-          <IconButton style={{ color: '#D70040' }} aria-label="add">
+          <IconButton style={{ color: '#D70040' }} aria-label="add" onClick={reject}>
             <ClearIcon style={{ fontSize: 48 }} />
           </IconButton>
         </div>

@@ -93,7 +93,7 @@ const Bio = ({userData, other_uid}) => {
           </div>
       </Box>
       )}
-      {other_uid && (
+      {/* {other_uid && (
         <Box sx={{ m: 2 }}>
           <Stack direction="row" spacing={1}>
             <Fab size="medium" color="secondary" aria-label="add">
@@ -104,7 +104,7 @@ const Bio = ({userData, other_uid}) => {
             </Fab>
           </Stack>
         </Box>
-      )}
+      )} */}
     </Box>
     </div>
     
