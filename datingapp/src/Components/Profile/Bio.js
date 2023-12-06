@@ -64,8 +64,8 @@ const Bio = ({userData, other_uid}) => {
           Interests
         </Typography>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap',  justifyContent: 'center', paddingTop: "12px" }}>
-          {userData.tags.map((item) => (
-            <Chip style={chipStyles} variant="outlined" label={item}></Chip>
+          {userData.tags.map((item, index) => (
+            <Chip key = {index} style={chipStyles} variant="outlined" label={item}></Chip>
           ))}
         </div>
         <Box sx={{ my: 1 }}>

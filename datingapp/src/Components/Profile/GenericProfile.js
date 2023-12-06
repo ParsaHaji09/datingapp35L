@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ImageSlider from "./ImageSlider";
 import Bio from "./Bio";
 
-const GenericProfile = ({userData, other_uid}) => {
+const GenericProfile = ({userData, other_uid, showBio}) => {
   
   const containerStyles = {
     width: "800px",
@@ -17,7 +17,7 @@ const GenericProfile = ({userData, other_uid}) => {
         <div style={containerStyles}>
           <ImageSlider userData={userData} slides={userData.pic} parentWidth={800} />
         </div>
-        <Bio userData={userData} other_uid={other_uid}/>
+        { true ? <Bio userData={userData} other_uid={other_uid}/> : null }
       </div>
     </div>
   );

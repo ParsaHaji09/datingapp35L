@@ -28,6 +28,8 @@ function Explore() {
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
 
+  const [showBio, setShowBio] = useState([]);
+
   const [users, setUsers] = useState([]);
  
 useEffect(() => {
@@ -102,7 +104,9 @@ const recommendationAlg = (users, currUser) => {
     console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
   }
   // Sort the list based on points
-  return users.sort(compareUsers);
+  const sortedUsers = users.sort(compareUsers);
+  setShowBio(sortedUsers.map(() => false));
+  return sortedUsers;
 };
 
 const getAllUsers = async (currUser) => {
@@ -132,7 +136,6 @@ const getAllUsers = async (currUser) => {
     navigate('/rating', { state: { data } });
   }
 
-
   return (
     <div>
     {loading | selfLoading ? (
@@ -140,7 +143,7 @@ const getAllUsers = async (currUser) => {
       <p>Loading Page...</p>
     ): (
       <div>
-        <div className='search-personal'>
+        <div className='search-personal' style = {{marginBottom: 30}}>
           <div className='personal-info-wrapper'>
             <h1>{ userData.name }</h1>
             <img src={userData.pic[0]} style={{ width: '100px' }} />
@@ -148,7 +151,7 @@ const getAllUsers = async (currUser) => {
           <div className='search'><Search /></div>
         </div>
         {users.map((user, index) => (
-             <GenericProfile userData={user} other_uid={userData._id}></GenericProfile>
+             <GenericProfile key = {index} userData={user} other_uid={userData._id} showBio = {showBio[index]} style = {{marginBottom: 30}}></GenericProfile>
         ))}
        
       </div>
