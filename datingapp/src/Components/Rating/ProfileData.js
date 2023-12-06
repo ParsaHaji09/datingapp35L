@@ -67,9 +67,10 @@ function ProfileData({userID}){
         top: 0,
         right: 0,
         padding: '10px',
-        background: "rgba(255, 255, 255, 0.8)",
+        background: " rgba(231, 75, 130)",
+        color:"white",
         border: "none",
-        borderRadius: "20px",
+        borderRadius: "30px",
         cursor: "pointer",
         zIndex: 3,
       };
