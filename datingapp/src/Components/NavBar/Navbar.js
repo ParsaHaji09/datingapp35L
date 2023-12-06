@@ -34,7 +34,7 @@ function Navbar(){
             <div className="links">
                 <Link to="/profile" className="profile">Profile</Link>
                 <Link to = "/" className="explore">Explore</Link>
-                <Link to="/ratings" className="rating">Ratings</Link>
+                <Link to="/rating" className="rating">Ratings</Link>
                 <button className="logout" onClick= {logoutHandler}>Log Out</button>
             </div>
         </nav>
