@@ -26,7 +26,7 @@ Welcome to DateWalk, where meaningful connections start with a stroll. DateWalk 
 ```git clone https://github.com/ParsaHaji09/datingapp35L ```   
 
 2. Navigate to the project directory:  
-```cd DateWalk```
+```cd datingapp``
 
 4. Install dependencies:  
 ```npm install```
