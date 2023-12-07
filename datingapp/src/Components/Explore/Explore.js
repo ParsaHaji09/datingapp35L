@@ -210,15 +210,19 @@ const getAllUsers = async (currUser) => {
     setFilterBoth(users.filter((el) => {
       const lowercaseUsers = el.tags.map(word => word.toLowerCase());
       if (tag === '' && pronouns === "") {
+        setCurProfile(0);
         return el;
       }
       if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
+        setCurProfile(0);
           return el;
       }
       if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        setCurProfile(0);
         return el;
       }
       if(el.pronouns.includes(pronouns) && tag === ''){
+        setCurProfile(0);
         return el;
       }
     }));
@@ -233,19 +237,23 @@ const getAllUsers = async (currUser) => {
     setFilterBoth(users.filter((el) => {
       const lowercaseUsers = el.tags.map(word => word.toLowerCase());
       if (tag === '' && pronouns === "") {
+        setCurProfile(0);
         return el;
       }
       if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
-          return el;
+        setCurProfile(0); 
+        return el;
       }
       if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        setCurProfile(0);
         return el;
       }
       if(el.pronouns.includes(pronouns) && tag === ''){
+        setCurProfile(0);
         return el;
       }
     }));
-    
+    console.log(filterBoth)
   };
   
   return (
