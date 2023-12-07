@@ -13,6 +13,8 @@ import {Select, MenuItem, FormControl, InputLabel, FormHelperText} from "@mui/ma
 
 
 
+var pronouns = "";
+var tag = "";
 
 function Explore() {
   const navigate = useNavigate();
@@ -23,8 +25,11 @@ function Explore() {
   const [sizeOfAll, setSizeOfAll] = useState(0);
   const [users, setUsers] = useState([]);
   const [inputText, setInputText] = useState("");
-  const [filtered, setFiltered] = useState([]);
+  //const [filtered, setFiltered] = useState([]);
 
+  const [filterBoth, setFilterBoth] = useState([]);
+
+  
  
   const load = async () => {
     const prevData = localStorage.getItem("saveData");
@@ -134,7 +139,7 @@ const getAllUsers = async (currUser) => {
     const optionsArray = await listFilter(currUser, response.data);
     const sorted_users = recommendationAlg(optionsArray, currUser)
     setUsers(sorted_users);
-    setFiltered(sorted_users);
+    setFilterBoth(sorted_users);
   } catch (error) {
     console.error('Error updating user data:', error);
   }
@@ -179,7 +184,7 @@ const getAllUsers = async (currUser) => {
         console.error('Error updating user data through incoming:', error);
       }
     }
-    moveNext(other_data, user_data);
+    moveNext(other_data, user_data);   
   }
 
   //set as viewed and move next
@@ -198,58 +203,48 @@ const getAllUsers = async (currUser) => {
     
   }
 
-  let inputHandler = (e) => {
-    //convert input text to lower case
-    
-    var inputs = e.target.value;
-    //const prevData = localStorage.getItem("saveData");
-    //setInputText(lowerCase);
-    console.log(inputs)
-    console.log(users)
-    setFiltered(users.filter((el) => {
-      //if no input the return the original
-      if (inputs === '') {
-        // const parsedData = JSON.parse(prevData);  
-        // getAllUsers(parsedData);
+  let inputHandler = async(e) => {
+    tag = (e.target.value.toLowerCase());
+    console.log(tag);
+    console.log(pronouns);
+    setFilterBoth(users.filter((el) => {
+      const lowercaseUsers = el.tags.map(word => word.toLowerCase());
+      if (tag === '' && pronouns === "") {
         return el;
       }
-      //return the item which contains the user input
-      else {
-            if(el.tags.includes(inputs)){
-              return el;
-            }
-          
+      if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
+          return el;
+      }
+      if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        return el;
+      }
+      if(el.pronouns.includes(pronouns) && tag === ''){
+        return el;
       }
     }));
-    console.log(filtered)
+    //console.log(filterBoth)
     
   };
   
   let inputHandler2 = (e) => {
-    //convert input text to lower case
-    
-    var inputs = e.target.value;
-    //const prevData = localStorage.getItem("saveData");
-    //setInputText(lowerCase);
-    console.log(inputs)
-    console.log(users)
-    setFiltered(users.filter((el) => {
-      //if no input the return the original
-      if (inputs === '') {
-        // const parsedData = JSON.parse(prevData);  
-        // getAllUsers(parsedData);
+    pronouns = (e.target.value)
+    console.log(tag);
+    console.log(pronouns);
+    setFilterBoth(users.filter((el) => {
+      const lowercaseUsers = el.tags.map(word => word.toLowerCase());
+      if (tag === '' && pronouns === "") {
         return el;
       }
-      //return the item which contains the user input
-      else {
-          
-            if(el.pronouns.includes(inputs)){
-              return el;
-            }
-          
+      if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
+          return el;
+      }
+      if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        return el;
+      }
+      if(el.pronouns.includes(pronouns) && tag === ''){
+        return el;
       }
     }));
-    console.log(filtered)
     
   };
   
@@ -284,11 +279,12 @@ const getAllUsers = async (currUser) => {
               sx={{ 
                 width: 250,
                 height: 55, }}>  
-              <InputLabel>Sex</InputLabel>  
-              <Select label="Sexes" onChange={inputHandler2}>     
+              <InputLabel>Gender</InputLabel>  
+              <Select label="Genders" onChange={inputHandler2}>     
+              <MenuItem value={"All"}>Any Sex</MenuItem>
               <MenuItem value={"he/him"}>He/Him</MenuItem>
               <MenuItem value={"She/Her"}>She/Her</MenuItem>
-              <MenuItem value={"they/them"}>They/Them</MenuItem> 
+              <MenuItem value={"they/them"}>They/Them</MenuItem>
               </Select>  
               
             </FormControl>
@@ -299,7 +295,7 @@ const getAllUsers = async (currUser) => {
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
         
-        { curProfile < sizeOfAll ? <GenericProfile otherData={filtered[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
+        { curProfile < sizeOfAll ? <GenericProfile otherData={filterBoth[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}
