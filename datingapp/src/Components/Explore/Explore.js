@@ -215,11 +215,12 @@ const getAllUsers = async (currUser) => {
       }
       //return the item which contains the user input
       else {
-          for(let i = 0; i < el.tags.length; i++){
-            if(el.tags[i].includes(inputs)){
+          const temp = [];
+
+            if(el.tags.includes(inputs)){
               return el;
             }
-          }
+
       }
     }));
     console.log(filtered)
