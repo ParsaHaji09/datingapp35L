@@ -54,8 +54,6 @@ function Navbar(){
                 <img src="/dateWalkLogo.png" alt="logo" className="logo-image"  />
             </a>
             <div className="links">
-                {console.log(currentUser.pic)}
-                {currentUser && <img src = {currentUser.pic[0]} alt = "Profile" className = "avatar"/>}
                 <a href="/profile" className="profile">Profile</a>
                 <a href="/" className="explore">Explore</a>
                 <a href="/rating" className="rating">Rating</a>
