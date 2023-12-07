@@ -19,7 +19,7 @@ const Register = (props) => {
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
   const [phoneMsg, setPhoneMsg] = useState(null);
-  const [pic, setPic] = useState("");
+  const [pic, setPic] = useState(["https://res.cloudinary.com/deyvjcuxo/image/upload/v1701859740/default_profile_pzrkfd.png"]);
   const [picMsg, setPicMsg] = useState(null);
 
 
