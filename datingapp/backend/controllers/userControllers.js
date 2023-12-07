@@ -73,6 +73,7 @@ const verifyUser = asyncHandler(async (req, res) => {
             humor: user.humor,
             after: user.after,
             matches: user.matches,
+            viewed: user.viewed,
             incoming: user.incoming,
             token: generateToken(user._id)
         })
@@ -106,7 +107,7 @@ const getUser = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
     // need id and updated traits/tags
-    const { tags, matches, pic, incoming } = req.body;
+    const { tags, matches, pic, incoming, viewed } = req.body;
 
     const includedKeys = ['attractiveness', 'conversation', 'activity', 'humor', 'decency', 'after'];
     const simpleUpdates = ['bio', 'year', 'major', 'name', 'pronouns', 'instagram', 'snapchat', 'facebook', 'twitter', 'spotify', 'tiktok'];
@@ -126,6 +127,10 @@ const updateUser = asyncHandler(async (req, res) => {
 
         if (incoming) {
             user["incoming"] = incoming;
+        }
+
+        if (viewed){
+            user["viewed"] = viewed;
         }
 
 

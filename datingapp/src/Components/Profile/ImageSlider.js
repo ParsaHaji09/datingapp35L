@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from "@material-ui/core/IconButton";
@@ -107,8 +107,15 @@ const chipStyles = {
   color: "white"
 }
 
-const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject }) => {
+const ImageSlider = ({ slides, parentWidth, userData, otherData, accept, reject }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    // Reset currentIndex to 0 whenever slides change
+    setCurrentIndex(0);
+  }, [slides]);
+
+
   const getDotStyle = (slideIndex) => ({
     ...dotStyle,
     color: currentIndex === slideIndex ? "#01BFFF" : "rgba(255, 255, 255, 0.5)", // Set your desired colors
@@ -156,13 +163,13 @@ const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject })
     return age;
   }
 
-  const firstName = (userData.name).split(" ")[0];
+  const firstName = (otherData.name).split(" ")[0];
 
   return (
     <div style={sliderStyles}>
       <div style={infoStyles}>
-        <h2 style={infoStyles.h2}>{firstName}, {calculateAge(userData.birthday)}</h2>
-        <p style={infoStyles.p}>{userData.year} Year {userData.major} Major<span style={infoStyles.pronouns}><em>, {userData.pronouns}</em></span></p>
+        <h2 style={infoStyles.h2}>{firstName}, {calculateAge(otherData.birthday)}</h2>
+        <p style={infoStyles.p}>{otherData.year} Year {otherData.major} Major<span style={infoStyles.pronouns}><em>, {otherData.pronouns}</em></span></p>
       </div>
       <div>
         <div onClick={goToPrevious} style={leftArrowStyles}>
@@ -194,13 +201,13 @@ const ImageSlider = ({ slides, parentWidth, userData, otherId, accept, reject })
         ))}
       </div>
 
-      { otherId && console.log("OtherID: " + otherId) }
-      {otherId && (
+      { userData && console.log("userID: " + userData) }
+      {userData && (
         <div style={{ display: 'flex', position: 'absolute', bottom: '12px', right: '24px', gap: '4px', zIndex: 3}}>
-          <IconButton style={{ color: '#e90076' }} aria-label="add" onClick = {() => accept(userData, otherId)}>
+          <IconButton style={{ color: '#e90076' }} aria-label="add" onClick = {() => accept(otherData, userData)}>
             <CheckIcon style={{ fontSize: 48 }} />
           </IconButton>
-          <IconButton style={{ color: '#D70040' }} aria-label="add" onClick = {() => reject(userData, otherId)}>
+          <IconButton style={{ color: '#D70040' }} aria-label="add" onClick = {() => reject(otherData, userData)}>
             <ClearIcon style={{ fontSize: 48 }} />
           </IconButton>
         </div>
