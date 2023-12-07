@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import RatingForm from './RatingForm';
 import MatchList from './MatchList';
 import './Rating.css';
-import { useLocation } from 'react-router-dom';
 import NavBar from '../NavBar/Navbar.js';
 
 function Rating(){

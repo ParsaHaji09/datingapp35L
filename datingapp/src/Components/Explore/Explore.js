@@ -204,7 +204,7 @@ const getAllUsers = async (currUser) => {
         <div className='search-personal' style = {{marginBottom: 30}}>
           <div className='personal-info-wrapper'>
             <h1>{ userData.name }</h1>
-            <img src={userData.pic[0]} style={{ width: '100px' }} />
+            <img src={userData.pic[0]} style={{ width: '100px' }} alt="User Profile Pic" />
           </div>
           <div className='search'><Search /></div>
         </div>

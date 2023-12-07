@@ -23,10 +23,7 @@ function App() {
 
   }, [currentForm])
 
-  const toggleForm = (formName)=>{
-    setCurrentForm(formName);
-    console.log(currentForm);
-  }
+
   return (
     <>
       <div>
@@ -48,6 +45,3 @@ function App() {
 }
 
 export default App;
-
-{/* <Route path="/" element={<Login />} />
-<Route path="/register" element={<Register />} /> */}

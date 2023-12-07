@@ -160,10 +160,8 @@ const updateUser = asyncHandler(async (req, res) => {
 
         if (matches){
             if (matches.type==="remove"){
-                console.log("Hee");
                 user["matches"] = user["matches"].filter(item => item !== matches.value);
             } else {
-                console.log("Teehee");
                 user.matches = [...user["matches"], matches.value];
             }
         }

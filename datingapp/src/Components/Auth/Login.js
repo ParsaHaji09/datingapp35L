@@ -11,7 +11,7 @@ const Login = (props) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { loading, error } = userLogin;
 
   // check if user has logged in already based on local storage
   useEffect(() => {
