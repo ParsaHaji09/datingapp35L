@@ -29,7 +29,6 @@ const dividerStyles = {
   height: '3px'
 }
 
-
 const Bio = ({userData}) => {
 
   const hasInstagram = (userData.instagram).trim() !== "";
