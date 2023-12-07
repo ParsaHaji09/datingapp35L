@@ -23,19 +23,20 @@ Welcome to DateWalk, where meaningful connections start with a stroll. DateWalk 
 - React
 ### Installation
 1. Clone the repository:  
-```git clone https://github.com/ParsaHaji09/datingapp35L.git ```   
+```git clone https://github.com/ParsaHaji09/datingapp35L.git ```
 
-2. Navigate to the project directory:  
+2. Install dependencies for outer folder:  
+```npm i```
+
+3. Navigate to the project directory:  
 ```cd datingapp```
 
-4. Install dependencies:  
-```npm install```
+4. Install dependencies for inner folder:  
+```npm i```
 
    - if you are unable to install please try:  
 ```npm i --force```
 
-5. Run the App:  
-```npm run dev```
 
 ## Features
 ### User Profile
