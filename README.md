@@ -23,7 +23,7 @@ Welcome to DateWalk, where meaningful connections start with a stroll. DateWalk 
 - React
 ### Installation
 1. Clone the repository:  
-```git clone [https://github.com/ParsaHaji09/datingapp35L.git](https://github.com/ParsaHaji09/datingapp35L.git) ```   
+```git clone https://github.com/ParsaHaji09/datingapp35L.git ```   
 
 2. Navigate to the project directory:  
 ```cd datingapp```
