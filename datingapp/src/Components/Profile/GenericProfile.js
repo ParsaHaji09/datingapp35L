@@ -3,7 +3,7 @@ import ImageSlider from "./ImageSlider";
 import Bio from "./Bio";
 
 const GenericProfile = ({userData, otherData, accept, reject}) => {
-  
+
   const containerStyles = {
     width: "800px",
     height: "600px",
@@ -25,7 +25,6 @@ const GenericProfile = ({userData, otherData, accept, reject}) => {
       )}
     </div>
   );
-  
 };
 
 export default GenericProfile;
