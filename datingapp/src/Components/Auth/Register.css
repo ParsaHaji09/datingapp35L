@@ -1,0 +1,18 @@
+input {
+  padding: 1em;
+  width: 250px;
+}
+/* Position label on top of input field */
+label {
+  margin-left: -80px;
+  position: relative;
+  z-index: 2;
+}
+/* Show red label when input invalid */
+input:required:invalid+label {
+  color: red;
+}
+/* Don't display label when input is valid */
+input:required:valid+label {
+  display: none;
+}

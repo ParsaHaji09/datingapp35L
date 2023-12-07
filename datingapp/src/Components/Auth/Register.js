@@ -7,7 +7,6 @@ import { register } from '../../actions/reduxActions';
 import { ErrorField } from './Error';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
-
 const Register = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -18,9 +17,8 @@ const Register = (props) => {
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
   const [phoneMsg, setPhoneMsg] = useState(null);
-  const [pic, setPic] = useState("");
+  const [pic, setPic] = useState(["https://res.cloudinary.com/deyvjcuxo/image/upload/v1701859740/default_profile_pzrkfd.png"]);
   const [picMsg, setPicMsg] = useState(null);
-
 
   const dispatch = useDispatch();
 
@@ -96,51 +94,6 @@ const Register = (props) => {
     "Serious",
     "Long-Term",
   ];
-  // const tagsArray = [
-  //   "Foodie",
-  //   "Cooking",
-  //   "Restaurants",
-  //   "Street Food",
-  //   "Sushi",
-  //   "Vegetarian",
-  //   "Vegan",
-  //   "Gym",
-  //   "Yoga",
-  //   "Sports Enthusiast",
-  //   "Dancing",
-  //   "Martial Arts",
-  //   "Astrology",
-  //   "History",
-  //   "Thrifting",
-  //   "Party Animal",
-  //   "Going Out",
-  //   "Staying In",
-  //   "Dogs",
-  //   "Cats",
-  //   "Anime",
-  //   "Art",
-  //   "Movies",
-  //   "Netflix",
-  //   "K-Dramas",
-  //   "Study Cafes",
-  //   "Adventures",
-  //   "Hiking",
-  //   "The Beach",
-  //   "Nature",
-  //   "Traveling",
-  //   "Shopping",
-  //   "Fashion",
-  //   "Book Worm",
-  //   "Music",
-  //   "Concerts",
-  //   "Video Games", 
-  //   "Cars",
-  //   "Technology",
-  //   "Study Buddy",
-  //   "Casual",
-  //   "Serious",
-  //   "Long-Term",
-  // ];
 
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -239,7 +192,7 @@ const Register = (props) => {
 
         <div className="flex-item">
           <label htmlFor="year">Year</label>
-          <select value={year} onChange={(e) => setYear(e.target.value)} id="year" name="year">
+          <select value={year} onChange={(e) => setYear(e.target.value)} id="year" name="year" required>
           <option value="1st">1st</option>
           <option value="2nd">2nd</option>
           <option value="3rd">3rd</option>
@@ -249,7 +202,7 @@ const Register = (props) => {
 
         <div className="flex-item">
         <label htmlFor="birthday">Birthday</label>
-      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" placeholder= "placeholder" id="birthday" name="birthday" required />
+      <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="date" placeholder= "placeholder" id="birthday" name="birthday" required/>
       </div>
 
       </div>
@@ -257,10 +210,10 @@ const Register = (props) => {
       <input value={capitalizeWords(major)} onChange={(e) => setMajor(e.target.value)} name="major" id="major" placeholder="Enter here"/>
 
       <label htmlFor ="email">Email</label>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter here" id="email" name="email"/>
+      <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter here" id="email" name="email" required/>
 
       <label htmlFor ="password">Password</label>
-      <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password"/>
+      <input value={pass} onChange={(e) => setPass (e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
 
       { phoneMsg !== null ? <ErrorField ErrorMessage = { phoneMsg } /> : null }
       <label htmlFor="phoneNumber">Phone Number</label>
