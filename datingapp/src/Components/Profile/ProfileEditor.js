@@ -44,8 +44,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     setCurrentPage(currentPage - 1);
   };
 
-  //@aland figure out async and stuff???
-  // np baebae :kiss:
   const uploadImage = (pics) => {
     const imCount = Math.min(pics.length, 5);
     let imUrls = [];
@@ -83,7 +81,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const handleSave = () => {
     // Add logic to save the input data
     updateUserData();
-    console.log(userData.pronouns);
     onHide();
   };
 

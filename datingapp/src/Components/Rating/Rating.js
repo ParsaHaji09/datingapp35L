@@ -7,6 +7,7 @@ import NavBar from '../NavBar/Navbar.js';
 function Rating(){
     const [list, setList] = useState({});
     const [currentPerson, setCurrentPerson]=useState(null)
+    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('saveData')));
 
 
     function handleListChange() {
@@ -14,7 +15,7 @@ function Rating(){
         setList({})
     }
           
-    const userData = JSON.parse(localStorage.getItem("saveData"));
+    //const userData = JSON.parse(localStorage.getItem("saveData"));
     console.log(userData);
 
     function handlePersonClick(person){
@@ -22,26 +23,6 @@ function Rating(){
     }
     
  
-
-    // const addMatch = async (uid) => {
-    //     try {
-    //   const response = await axios.put(`http://localhost:5000/api/users/${userData._id}`, {
-    //     matches: {
-    //       type: "",
-    //       value: uid
-    //     }
-    //   });
-    //   console.log(response.data); // Handle the response from the server
-    // } catch (error) {
-    //   console.error('Error updating user data:', error);
-    // }
-    // };
-
-    // useEffect(() => {
-    //     addMatch("656ac4b6ad5e19914368dafc");
-    // }, [])
-
-
     return (
         <div>
         <NavBar />
@@ -52,7 +33,7 @@ function Rating(){
             </div>
             
             <div className="ratingForm">
-            {currentPerson && <RatingForm key={currentPerson} user={currentPerson} onListChange={handleListChange}/>}
+            {currentPerson && <RatingForm key={currentPerson} user={currentPerson} onListChange={handleListChange} setUserData={setUserData}/>}
             </div>
         </div>
         </div>
