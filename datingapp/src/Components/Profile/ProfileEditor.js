@@ -15,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { allTags } from '../../constants/tags';
 
 
 const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
@@ -113,7 +114,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     }
   };
 
-  const tags = ["Funny", "Introverted", "Extroverted", "Casual", "Adventurous", "Creative", "Organized", "Laid-back", "Optimistic", "Reserved"];
+  const tags = allTags;
 
   const handleChipClick = (tag) => {
     if (selectedTags.includes(tag)) {

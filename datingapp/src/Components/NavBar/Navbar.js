@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css"
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,6 +21,13 @@ import { logout } from '../../actions/reduxActions';
 function Navbar(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('saveData')));
+
+    useEffect(() => {
+        const prevData = JSON.parse(localStorage.getItem('saveData'));
+        setCurrentUser(prevData);
+    }, []);
+
     const logoutHandler = () => {
         dispatch(logout());
         navigate('/');
@@ -52,6 +59,8 @@ function Navbar(){
                 <img src="/dateWalkLogo.png" alt="logo" className="logo-image"  />
             </Link>
             <div className="links">
+                {console.log(currentUser.pic)}
+                {currentUser && <img src = {currentUser.pic[0]} alt = "Profile" className = "avatar"/>}
                 <a href="/profile" className="profile">Profile</a>
                 <a href="/" className="explore">Explore</a>
                 <a href="/rating" className="rating">Rating</a>

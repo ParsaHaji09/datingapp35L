@@ -6,6 +6,7 @@ import PhoneInput from 'react-phone-number-input'
 import { register } from '../../actions/reduxActions';
 import ErrorRedirect, { ErrorField } from './Error';
 import { isValidPhoneNumber } from 'react-phone-number-input';
+import { allTags } from '../../constants/tags';
 
 
 const Register = (props) => {
@@ -29,13 +30,7 @@ const Register = (props) => {
 
   const MAX_SELECTED_TAGS = 5; // Set the maximum number of selected tags
 
-  const tagsArray = ['Adventure Seeker', 'Anime Watcher', 'Art Enthusiast', 'Book Lover', 
-                    'Coffee Connoisseur', 'Creative Mind',  'Easy Going', 'Entrepreneur Life',
-                    'Fitness Freak', 'Family First', 'Fashion Fanatic', 'Foodie Adventures',
-                    'Game Night Champ', 'Home Chef', 'K-Drama Lover','Movie Buff',  
-                    'Music Lover', 'Nature Lover', 'Pet Lover', 'Spritual Journey', 
-                    'Travel Addict', 'Tech Geek', 'Serious Relationship', 
-                    ];
+  const tagsArray = allTags;
 
   const [selectedTags, setSelectedTags] = useState([]);
 
