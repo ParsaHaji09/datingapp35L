@@ -42,7 +42,11 @@ const userSchema = mongoose.Schema(
         },
         pic: {
             type: Array,
+<<<<<<< HEAD
             default: ["https://res.cloudinary.com/deyvjcuxo/image/upload/v1701859740/default_profile_pzrkfd.png"]
+=======
+            default: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxgEX_wO9rjgXHNXRkTB7QRYhExsEb7a1il89Fd_UxJQ&s"]
+>>>>>>> 1775d0f96cf5589018820d412826df1d5e447f32
         },
         birthday: {
             type: String,
@@ -105,6 +109,10 @@ const userSchema = mongoose.Schema(
             default: []
         },
         incoming: {
+            type: Array,
+            default: []
+        },
+        viewed: {
             type: Array,
             default: []
         },

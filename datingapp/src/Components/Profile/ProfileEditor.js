@@ -15,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { allTags } from '../../constants/tags';
 
 
 const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
@@ -43,8 +44,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     setCurrentPage(currentPage - 1);
   };
 
-  //@aland figure out async and stuff???
-  // np baebae :kiss:
   const uploadImage = (pics) => {
     const imCount = Math.min(pics.length, 5);
     let imUrls = [];
@@ -82,7 +81,6 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
   const handleSave = () => {
     // Add logic to save the input data
     updateUserData();
-    console.log(userData.pronouns);
     onHide();
   };
 
@@ -113,74 +111,7 @@ const ProfileEditor = ({ show, onHide, userData, setUserData }) => {
     }
   };
 
-  const tags = [
-    "Foodie",
-    "Cooking",
-    "Restaurants",
-    "Street Food",
-    "Sushi",
-    "Vegetarian",
-    "Vegan",
-    "Gym",
-    "Yoga",
-    "Sports Enthusiast",
-    "Basketball",
-    "Soccer",
-    "Football",
-    "Hockey",
-    "Baseball",
-    "NBA",
-    "NFL",
-    "NHL",
-    "MLB",
-    "Dancing",
-    "Martial Arts",
-    "Astrology",
-    "90s Kid",
-    "History",
-    "Thrifting",
-    "Vintages",
-    "Antiques",
-    "Trying New Things",
-    "Party Animal",
-    "Going Out",
-    "Staying In",
-    "Dogs",
-    "Cats",
-    "Anime",
-    "Art",
-    "DIY",
-    "Movies",
-    "Star Wars",
-    "Marvel/DC",
-    "Netflix",
-    "K-Dramas",
-    "Study Cafes",
-    "Adventures",
-    "Hiking",
-    "Bird Watching",
-    "The Beach",
-    "Boating/Sailing",
-    "Nature",
-    "Traveling",
-    "Shopping",
-    "Fashion",
-    "Sneakerhead",
-    "Book Worm",
-    "Astronomy",
-    "Music",
-    "Bands",
-    "Concerts",
-    "K-Pop",
-    "Video Games", 
-    "Cars",
-    "Geek",
-    "Technology",
-    "Study Buddy",
-    "Casual",
-    "Serious",
-    "Long-Term",
-  ];
+  const tags = allTags;
 
   const handleChipClick = (tag) => {
     if (selectedTags.includes(tag)) {

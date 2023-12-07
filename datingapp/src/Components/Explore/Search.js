@@ -2,7 +2,6 @@ import './Search.css'
 import React, { useState } from 'react';
 import axios from 'axios';
 import { BsSearch, BsStarFill} from "react-icons/bs"
-import { useRouteLoaderData } from 'react-router-dom';
 
 function Search(){
     const [error, setError] = useState(false);
@@ -71,11 +70,8 @@ function Search(){
 
     function calcRating(user){
         console.log(user)
-        //activity, after, attractiveness, conversation, decency, humor
         console.log("here")
         const xafter = ((user.after[1]) === 0) ? 0 : (user.after[0])/(user.after[1]);
-        console.log("worked")
-        console.log(user.name)
         const xactivity = (user.activity[1] === 0) ? 0 : user.activity[0]/user.activity[1];
         const xattractiveness = (user.attractiveness[1] === 0) ? 0 : user.attractiveness[0]/user.attractiveness[1];
         const xconversation = (user.conversation[1] === 0) ? 0 : user.conversation[0]/user.conversation[1];

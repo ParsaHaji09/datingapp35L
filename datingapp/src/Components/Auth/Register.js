@@ -6,6 +6,8 @@ import PhoneInput from 'react-phone-number-input'
 import { register } from '../../actions/reduxActions';
 import { ErrorField } from './Error';
 import { isValidPhoneNumber } from 'react-phone-number-input';
+import { allTags } from '../../constants/tags';
+
 
 const Register = (props) => {
   const [email, setEmail] = useState('');
@@ -21,79 +23,9 @@ const Register = (props) => {
   const [picMsg, setPicMsg] = useState(null);
 
   const dispatch = useDispatch();
-
-  const userRegister = useSelector((state) => state.userRegister);
-
   const MAX_SELECTED_TAGS = 10; // Set the maximum number of selected tags
 
-  const tagsArray = [
-    "Foodie",
-    "Cooking",
-    "Restaurants",
-    "Street Food",
-    "Sushi",
-    "Vegetarian",
-    "Vegan",
-    "Gym",
-    "Yoga",
-    "Sports Enthusiast",
-    "Basketball",
-    "Soccer",
-    "Football",
-    "Hockey",
-    "Baseball",
-    "NBA",
-    "NFL",
-    "NHL",
-    "MLB",
-    "Dancing",
-    "Martial Arts",
-    "Astrology",
-    "90s Kid",
-    "History",
-    "Thrifting",
-    "Vintages",
-    "Antiques",
-    "Trying New Things",
-    "Party Animal",
-    "Going Out",
-    "Staying In",
-    "Dogs",
-    "Cats",
-    "Anime",
-    "Art",
-    "DIY",
-    "Movies",
-    "Star Wars",
-    "Marvel/DC",
-    "Netflix",
-    "K-Dramas",
-    "Study Cafes",
-    "Adventures",
-    "Hiking",
-    "Bird Watching",
-    "The Beach",
-    "Boating/Sailing",
-    "Nature",
-    "Traveling",
-    "Shopping",
-    "Fashion",
-    "Sneakerhead",
-    "Book Worm",
-    "Astronomy",
-    "Music",
-    "Bands",
-    "Concerts",
-    "K-Pop",
-    "Video Games", 
-    "Cars",
-    "Geek",
-    "Technology",
-    "Study Buddy",
-    "Casual",
-    "Serious",
-    "Long-Term",
-  ];
+  const tagsArray = allTags;
 
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -113,14 +45,6 @@ const Register = (props) => {
     }
   };
 
-
-  const [uploadedFile, setUploadedFile] = useState(null);
-
-  const onFileChange = async (event) => {
-    const file = event.target.files[0];
-    setPic(file.name)
-    console.log(file.name)
-  };
 
   const navigate = useNavigate();
   const handleClick = () => {

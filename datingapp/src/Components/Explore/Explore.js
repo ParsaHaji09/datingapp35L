@@ -1,62 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../actions/reduxActions';
 import Search from './Search';
 import axios from 'axios';
 import GenericProfile from '../Profile/GenericProfile';
 import './Explore.css'
 import NavBar from '../NavBar/Navbar.js';
 
+import TextField from "@mui/material/TextField";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';	
+import {Select, MenuItem, FormControl, InputLabel, FormHelperText} from "@mui/material";
 
-/*TODO: Explore page match processing
-  - some sort of algorithm to rank all other users in terms of compatibility (on page load)
-  - remember to filter our users that the user has already seen somehow??
-  - implement like/dislike feature (pass data in generic profile -> bio?) add to other user's incoming first, then check if the other user is in incoming list 
-    then add to match list... i can explain more if u want.
-*/
 
+
+var pronouns = "";
+var tag = "";
 
 function Explore() {
-
-  const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-  
   const navigate = useNavigate();
-  const [selfLoading, setselfLoading] = useState(true); 
+  const [selfLoading, setSelfLoading] = useState(true); 
   const [loading, setLoading] = useState(true); 
   const [userData, setUserData] = useState(null);
   const [curProfile, setCurProfile] = useState(0);
-
+  const [sizeOfAll, setSizeOfAll] = useState(0);
   const [users, setUsers] = useState([]);
+  const [inputText, setInputText] = useState("");
+  //const [filtered, setFiltered] = useState([]);
+
+  const [filterBoth, setFilterBoth] = useState([]);
+
+  
  
+  const load = async () => {
+    const prevData = localStorage.getItem("saveData");
+    if (!prevData) {
+      navigate('/');
+    } else {
+      const parsedData = JSON.parse(prevData);
+      await getUser(parsedData._id);
+      
+    }
+  };
+
+  useEffect (() => {
+    load();
+  }, [curProfile])
+
+  
 useEffect(() => {
+  
   const prevData = localStorage.getItem("saveData");
-  if (!prevData) {
-    navigate('/');
-  } else {
-    const parsedData = JSON.parse(prevData);
-    
-    getUser(parsedData._id);
-    getAllUsers(parsedData);
-  }
+    if (!prevData) {
+      navigate('/');
+    }
+    else {
+      const parsedData = JSON.parse(prevData);
+      getAllUsers(parsedData);
+      
+    }
 
 }, [navigate])
 
 const getUser = async (uid) => {
   try {
     const response = await axios.get(`http://localhost:5000/api/users/${uid}`);
-    //console.log(response.data); // Handle the response from the server
     setUserData(response.data);
+    localStorage.setItem('saveData', JSON.stringify(response.data));
   } catch (error) {
     console.error('Error updating user data:', error);
   }
   finally {
-    setselfLoading(false); // Set loading to false once data is fetched or if an error occurs
+    setSelfLoading(false); // Set loading to false once data is fetched or if an error occurs
+    
   }
 };
+
 
 const recommendationAlg = (users, currUser) => {
   function calculatePoints(otherUser) {
@@ -101,20 +119,27 @@ const recommendationAlg = (users, currUser) => {
 
   const temp = users.sort(compareUsers);
   for (let i = 0; i < temp.length; i++) {
-    console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
+    // console.log("Match " + i + ": " + temp[i].name + " has points " + (calculatePoints(temp[i])));
   }
   // Sort the list based on points
   const sortedUsers = users.sort(compareUsers);
+  setSizeOfAll(sortedUsers.length);
   return sortedUsers;
 };
+
+const listFilter = (currUser, optionsArray) => {
+  // console.log("currUser " + currUser.name );
+  // console.log(currUser.viewed);
+  return optionsArray.filter(item => !currUser.viewed.includes(item._id) && item._id !== currUser._id );
+}
 
 const getAllUsers = async (currUser) => {
   try {
     const response = await axios.get(`http://localhost:5000/api/users/all-users`);
-    
-    const sorted_users = recommendationAlg(response.data, currUser)
-
+    const optionsArray = await listFilter(currUser, response.data);
+    const sorted_users = recommendationAlg(optionsArray, currUser)
     setUsers(sorted_users);
+    setFilterBoth(sorted_users);
   } catch (error) {
     console.error('Error updating user data:', error);
   }
@@ -124,77 +149,153 @@ const getAllUsers = async (currUser) => {
   
 };
 
-
-  const logoutHandler = () => {
-    dispatch(logout());
-    navigate('/');
+//template to match one user with another
+  const matchingLogic = async (other_data, user_data) => {
+    var inc = other_data.incoming.filter((id) => id !== user_data._id);
+    try {
+      const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
+        "incoming": inc,
+        "matches": {
+          "type": "",
+          "value": user_data._id,
+        }
+      });
+      console.log(response);
+    } catch (error) {
+      console.error('Error updating user data through matches and incoming:', error);
+    }
   }
 
-  const toRating = () => {
-    const data = { userData };
-    navigate('/rating', { state: { data } });
-  }
-
-  const acceptProfile = async (other_data, userId) => {
-    var inc = [];
-    console.log("Other data: " + other_data);
-    console.log("User ID: " + userId);
-
+  //if user hits accept
+  const acceptProfile = async (other_data, user_data) => {
     if (userData.incoming.includes(other_data._id)) {
-      inc = other_data.incoming.filter((id) => id === userId);
-      try {
-        const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
-          "incoming": inc,
-          "matches": {
-            "type": "",
-            "value": userId,
-          }
-        });
-        localStorage.setItem('saveData', JSON.stringify(response.data));
-        console.log("Successfully added " + userId + " to the match array of " + other_data._id);
-      } catch (error) {
-        console.error('Error updating user data through matches and incoming:', error);
-      }
+      //call matching template
+      await matchingLogic(other_data, user_data);
+      await matchingLogic(user_data, other_data);
+      
     } else {
-      inc = [...other_data.incoming, userId]
+      var inc = [...other_data.incoming, user_data._id]
       try {
-        console.log("INC RN: " + inc);
         const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
           "incoming": inc,
         });
-        localStorage.setItem('saveData', JSON.stringify(response.data));
-        console.log("Successfully added " + userId + " to the incoming array of " + other_data._id);
+        console.log(response);
       } catch (error) {
         console.error('Error updating user data through incoming:', error);
       }
     }
-
-    setCurProfile(curProfile + 1);
+    moveNext(other_data, user_data);   
   }
 
-  const rejectProfile = async (other_data, userId) => {
+  //set as viewed and move next
+  const moveNext = async (other_data, user_data) => {
+    var vie = [...userData.viewed, other_data._id];
+    console.log(vie);
+    try {
+      const response = await axios.put(`http://localhost:5000/api/users/${user_data._id}`, {
+        "viewed": vie,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error('Error updating user data through matches and incoming:', error);
+    }
     setCurProfile(curProfile + 1);
+    
   }
 
+  let inputHandler = async(e) => {
+    tag = (e.target.value.toLowerCase());
+    console.log(tag);
+    console.log(pronouns);
+    setFilterBoth(users.filter((el) => {
+      const lowercaseUsers = el.tags.map(word => word.toLowerCase());
+      if (tag === '' && pronouns === "") {
+        return el;
+      }
+      if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
+          return el;
+      }
+      if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        return el;
+      }
+      if(el.pronouns.includes(pronouns) && tag === ''){
+        return el;
+      }
+    }));
+    //console.log(filterBoth)
+    
+  };
+  
+  let inputHandler2 = (e) => {
+    pronouns = (e.target.value)
+    console.log(tag);
+    console.log(pronouns);
+    setFilterBoth(users.filter((el) => {
+      const lowercaseUsers = el.tags.map(word => word.toLowerCase());
+      if (tag === '' && pronouns === "") {
+        return el;
+      }
+      if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
+          return el;
+      }
+      if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        return el;
+      }
+      if(el.pronouns.includes(pronouns) && tag === ''){
+        return el;
+      }
+    }));
+    
+  };
+  
   return (
     <div>
     <NavBar />
     <div className="content-container">
     <div>
-    {loading | selfLoading ? (
+    {loading || selfLoading ? (
       // Display a loading indicator or message while data is being fetched
       <p>Loading Page...</p>
     ): (
       <div>
         <div className='search-personal' style = {{marginBottom: 30}}>
           <div className='personal-info-wrapper'>
-            <h1>{ userData.name }</h1>
-            <img src={userData.pic[0]} style={{ width: '100px' }} />
+            <img src={userData.pic[0]} style={{ width: '70px', borderRadius: '35px'}} />
+            <h2>Welcome back { userData.name }! Have a fantastic day!</h2>
           </div>
-          <div className='search'><Search /></div>
+          <div className='search-info-wrapper'>
+            <div className="search">
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                fullWidth
+                onChange={inputHandler}
+                label="Search Tags"
+              />
+            </div>
+            <div className="gender-drop">
+            
+            <FormControl variant="outlined"
+              sx={{ 
+                width: 250,
+                height: 55, }}>  
+              <InputLabel>Gender</InputLabel>  
+              <Select label="Genders" onChange={inputHandler2}>     
+              <MenuItem value={"All"}>Any Sex</MenuItem>
+              <MenuItem value={"he/him"}>He/Him</MenuItem>
+              <MenuItem value={"She/Her"}>She/Her</MenuItem>
+              <MenuItem value={"they/them"}>They/Them</MenuItem>
+              </Select>  
+              
+            </FormControl>
+            
+            
+            </div>
+          </div>
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
-        <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
+        
+        { curProfile < sizeOfAll ? <GenericProfile otherData={filterBoth[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}
@@ -208,3 +309,31 @@ const getAllUsers = async (currUser) => {
 
 
 export default Explore;
+
+
+//   return (
+//     <div>
+//     <NavBar />
+//     <div className="content-container">
+//     <div>
+//     {(loading || selfLoading) ? (
+//       // Display a loading indicator or message while data is being fetched
+//       <p>Loading Page...</p>
+//     ): (
+//       <div>
+        
+//         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
+//         { curProfile < sizeOfAll ? <GenericProfile otherData={users[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
+       
+//       </div>
+//     )}
+//     </div>
+//     </div>
+//         </div>
+    
+//   )
+    
+// }
+
+
+// export default Explore;
