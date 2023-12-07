@@ -6,7 +6,15 @@ import GenericProfile from '../Profile/GenericProfile';
 import './Explore.css'
 import NavBar from '../NavBar/Navbar.js';
 
+import TextField from "@mui/material/TextField";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';	
+import {Select, MenuItem, FormControl, InputLabel, FormHelperText} from "@mui/material";
 
+
+
+var pronouns = "";
+var tag = "";
 
 function Explore() {
   const navigate = useNavigate();
@@ -15,9 +23,13 @@ function Explore() {
   const [userData, setUserData] = useState(null);
   const [curProfile, setCurProfile] = useState(0);
   const [sizeOfAll, setSizeOfAll] = useState(0);
-
   const [users, setUsers] = useState([]);
+  const [inputText, setInputText] = useState("");
+  //const [filtered, setFiltered] = useState([]);
 
+  const [filterBoth, setFilterBoth] = useState([]);
+
+  
  
   const load = async () => {
     const prevData = localStorage.getItem("saveData");
@@ -127,6 +139,7 @@ const getAllUsers = async (currUser) => {
     const optionsArray = await listFilter(currUser, response.data);
     const sorted_users = recommendationAlg(optionsArray, currUser)
     setUsers(sorted_users);
+    setFilterBoth(sorted_users);
   } catch (error) {
     console.error('Error updating user data:', error);
   }
@@ -136,6 +149,7 @@ const getAllUsers = async (currUser) => {
   
 };
 
+//template to match one user with another
   const matchingLogic = async (other_data, user_data) => {
     var inc = other_data.incoming.filter((id) => id !== user_data._id);
     try {
@@ -152,20 +166,16 @@ const getAllUsers = async (currUser) => {
     }
   }
 
+  //if user hits accept
   const acceptProfile = async (other_data, user_data) => {
-    
-    console.log("Other data: " + other_data);
-    console.log("User data: " + user_data);
-
     if (userData.incoming.includes(other_data._id)) {
-      
+      //call matching template
       await matchingLogic(other_data, user_data);
       await matchingLogic(user_data, other_data);
       
     } else {
       var inc = [...other_data.incoming, user_data._id]
       try {
-        console.log("INC RN: " + inc);
         const response = await axios.put(`http://localhost:5000/api/users/${other_data._id}`, {
           "incoming": inc,
         });
@@ -174,9 +184,10 @@ const getAllUsers = async (currUser) => {
         console.error('Error updating user data through incoming:', error);
       }
     }
-    moveNext(other_data, user_data);
+    moveNext(other_data, user_data);   
   }
 
+  //set as viewed and move next
   const moveNext = async (other_data, user_data) => {
     var vie = [...userData.viewed, other_data._id];
     console.log(vie);
@@ -189,27 +200,112 @@ const getAllUsers = async (currUser) => {
       console.error('Error updating user data through matches and incoming:', error);
     }
     setCurProfile(curProfile + 1);
+    
   }
 
+  let inputHandler = async(e) => {
+    tag = (e.target.value.toLowerCase());
+    console.log(tag);
+    console.log(pronouns);
+    setFilterBoth(users.filter((el) => {
+      const lowercaseUsers = el.tags.map(word => word.toLowerCase());
+      if (tag === '' && pronouns === "") {
+        return el;
+      }
+<<<<<<< HEAD
+      if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
+          return el;
+      }
+      if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        return el;
+      }
+      if(el.pronouns.includes(pronouns) && tag === ''){
+        return el;
+=======
+      //return the item which contains the user input
+      else {
+
+            if(el.tags.includes(inputs)){
+              return el;
+            }
+          
+>>>>>>> 7dabcee7872c4c10e40830453823f80d3e18a9a9
+      }
+    }));
+    //console.log(filterBoth)
+    
+  };
+  
+  let inputHandler2 = (e) => {
+    pronouns = (e.target.value)
+    console.log(tag);
+    console.log(pronouns);
+    setFilterBoth(users.filter((el) => {
+      const lowercaseUsers = el.tags.map(word => word.toLowerCase());
+      if (tag === '' && pronouns === "") {
+        return el;
+      }
+      if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
+          return el;
+      }
+      if(lowercaseUsers.includes(tag) && (pronouns === "")){
+        return el;
+      }
+      if(el.pronouns.includes(pronouns) && tag === ''){
+        return el;
+      }
+    }));
+    
+  };
+  
   return (
     <div>
     <NavBar />
     <div className="content-container">
     <div>
-    {(loading || selfLoading) ? (
+    {loading || selfLoading ? (
       // Display a loading indicator or message while data is being fetched
       <p>Loading Page...</p>
     ): (
       <div>
         <div className='search-personal' style = {{marginBottom: 30}}>
           <div className='personal-info-wrapper'>
-            <h1>{ userData.name }</h1>
-            <img src={userData.pic[0]} style={{ width: '100px' }} />
+            <img src={userData.pic[0]} style={{ width: '70px', borderRadius: '35px'}} />
+            <h2>Welcome back { userData.name }! Have a fantastic day!</h2>
           </div>
-          <div className='search'><Search /></div>
+          <div className='search-info-wrapper'>
+            <div className="search">
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                fullWidth
+                onChange={inputHandler}
+                label="Search Tags"
+              />
+            </div>
+            <div className="gender-drop">
+            
+            <FormControl variant="outlined"
+              sx={{ 
+                width: 250,
+                height: 55, }}>  
+              <InputLabel>Gender</InputLabel>  
+              <Select label="Genders" onChange={inputHandler2}>     
+              <MenuItem value={"All"}>Any Sex</MenuItem>
+              <MenuItem value={"he/him"}>He/Him</MenuItem>
+              <MenuItem value={"She/Her"}>She/Her</MenuItem>
+              <MenuItem value={"they/them"}>They/Them</MenuItem>
+              </Select>  
+              
+            </FormControl>
+            
+            
+            </div>
+          </div>
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
-        { curProfile < sizeOfAll ? <GenericProfile otherData={users[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
+        
+        { curProfile < sizeOfAll ? <GenericProfile otherData={filterBoth[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}
@@ -223,3 +319,31 @@ const getAllUsers = async (currUser) => {
 
 
 export default Explore;
+
+
+//   return (
+//     <div>
+//     <NavBar />
+//     <div className="content-container">
+//     <div>
+//     {(loading || selfLoading) ? (
+//       // Display a loading indicator or message while data is being fetched
+//       <p>Loading Page...</p>
+//     ): (
+//       <div>
+        
+//         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
+//         { curProfile < sizeOfAll ? <GenericProfile otherData={users[curProfile]} userData={userData} accept = {acceptProfile} reject = {moveNext}></GenericProfile> : <div>OUT OF BOUND</div> }
+       
+//       </div>
+//     )}
+//     </div>
+//     </div>
+//         </div>
+    
+//   )
+    
+// }
+
+
+// export default Explore;
