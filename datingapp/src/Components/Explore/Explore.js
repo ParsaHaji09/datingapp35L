@@ -212,7 +212,6 @@ const getAllUsers = async (currUser) => {
       if (tag === '' && pronouns === "") {
         return el;
       }
-<<<<<<< HEAD
       if(lowercaseUsers.includes(tag) &&(el.pronouns.includes(pronouns) || pronouns === "All")){
           return el;
       }
@@ -221,15 +220,6 @@ const getAllUsers = async (currUser) => {
       }
       if(el.pronouns.includes(pronouns) && tag === ''){
         return el;
-=======
-      //return the item which contains the user input
-      else {
-
-            if(el.tags.includes(inputs)){
-              return el;
-            }
-          
->>>>>>> 7dabcee7872c4c10e40830453823f80d3e18a9a9
       }
     }));
     //console.log(filterBoth)
