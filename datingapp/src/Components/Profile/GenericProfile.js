@@ -13,14 +13,19 @@ const GenericProfile = ({userData, otherData, accept, reject}) => {
 
   return (
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center" }}>
-      <div style={{ display: 'flex', gap: '20px', position: 'relative' }}>
-        <div style={containerStyles}>
-          <ImageSlider userData={userData} otherData = {otherData} slides={otherData.pic} parentWidth={800} accept = {accept} reject = {reject}/>
+      {otherData ? (
+        <div style={{ display: 'flex', gap: '20px', position: 'relative' }}>
+          <div style={containerStyles}>
+            <ImageSlider userData={userData} otherData={otherData} slides={otherData.pic} parentWidth={800} accept={accept} reject={reject} />
+          </div>
+          <Bio userData={otherData} />
         </div>
-        <Bio userData={otherData}/>
-      </div>
+      ) : (
+        <p>No Matches Available</p>
+      )}
     </div>
   );
+  
 };
 
 export default GenericProfile;

@@ -40,12 +40,6 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error('Error Occurred!');
     }
 
-    // res.json({
-    //     name,
-    //     email,
-    //     password,
-    //     pic,
-    // })
 });
 
 // authorize user logging in
@@ -94,6 +88,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
     }
 });
 
+//get one instance of user from id
 const getUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
@@ -104,7 +99,7 @@ const getUser = asyncHandler(async (req, res) => {
     }
 });
 
-
+//updates user with req parameters
 const updateUser = asyncHandler(async (req, res) => {
     // need id and updated traits/tags
     const { tags, matches, pic, incoming, viewed } = req.body;
