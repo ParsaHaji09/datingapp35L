@@ -251,8 +251,8 @@ let inputHandler2 = (e) => {
       <div>
         <div className='search-personal' style = {{marginBottom: 30}}>
           <div className='personal-info-wrapper'>
+            <img src={userData.pic[0]} style={{ width: '70px', borderRadius: '35px'}} />
             <h2>Welcome back { userData.name }! Have a fantastic day!</h2>
-            <img src={userData.pic[0]} style={{ width: '100px' }} />
           </div>
           <div className='search-info-wrapper'>
             <div className="search">
@@ -270,7 +270,7 @@ let inputHandler2 = (e) => {
               sx={{ 
                 width: 250,
                 height: 55, }}>  
-              <InputLabel shrink>Sex</InputLabel>  
+              <InputLabel>Sex</InputLabel>  
               <Select label="Sexes" onChange={inputHandler2}>     
               <MenuItem value={"he/him"}>He/Him</MenuItem>
               <MenuItem value={"She/Her"}>She/Her</MenuItem>
@@ -284,8 +284,8 @@ let inputHandler2 = (e) => {
           </div>
         </div>
         { console.log("UserData submitted with: " + users[curProfile] + " and otherData: " + userData._id )}
-        <GenericProfile userData={filtered[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile>
-        { curProfile < sizeOfAll ? <GenericProfile userData={users[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile> : <div>OUT OF BOUND</div> }
+        
+        { curProfile < sizeOfAll ? <GenericProfile userData={filtered[curProfile]} otherId={userData._id} accept = {acceptProfile} reject = {rejectProfile}></GenericProfile> : <div>OUT OF BOUND</div> }
        
       </div>
     )}

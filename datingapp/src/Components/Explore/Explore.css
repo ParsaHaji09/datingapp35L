@@ -38,6 +38,11 @@ body {
     grid-template-columns: 2fr 1fr;
 }
 
+.personal-info-wrapper{
+    display: flex;
+    margin-left: 25px;
+}
+
 .nav {
     background-color: rgb(231, 75, 130);
     width: 100%;
