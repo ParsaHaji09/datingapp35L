@@ -1,22 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import CheckIcon from '@mui/icons-material/Check';
-import ClearIcon from '@mui/icons-material/Clear';
-import Fab from '@mui/material/Fab';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
 import SocialButton from './SocialButton';
-
-const instagramUsername = 'instagram_username';
-const spotifyUsername = 'spotify_username';
-const snapchatUsername = 'snapchat_username';
-const tiktokUsername  = 'tiktok_username';
-const facebookUsername = 'facebook_username';
-const twitterUsername = 'twitter_username';
-
 
 const theme = createTheme();
 
@@ -53,7 +42,7 @@ const Bio = ({userData}) => {
 
   return (
     <div className='glass'>
-    <Box sx={{ width: '100%', maxWidth: 360, }}>
+    <Box sx={{ width: 360, maxWidth: 360, }}>
       <Box sx={{ m: 2 }}>
         <Typography theme={theme} gutterBottom variant="h4" component="div">
           About Me

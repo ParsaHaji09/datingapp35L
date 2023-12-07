@@ -1,13 +1,10 @@
 import ImageSlider from "../Profile/ImageSlider";
 import ScrollAnimation from 'react-animate-on-scroll';
-import CreateIcon from '@mui/icons-material/Create';
-import IconButton from "@material-ui/core/IconButton";
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const GalleryScroll = () => {
     const [result, setResult] = useState([]);
-    const [call, setCall] = useState(false);
     
     const slides = [
         { url: "http://localhost:3000/image-1.jpg", title: "beach" },

@@ -18,6 +18,7 @@ function RatingForm({user, onListChange}) {
   const [ratings, setRatings] = useState({});
   const [udata, setUdata] = useState({});
   const [showForm, setShowForm] = useState(false);
+  const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     const prevData = localStorage.getItem("saveData");
@@ -34,7 +35,18 @@ function RatingForm({user, onListChange}) {
       ...prevRatings,
       [categoryName]: ratingValue*2,
     }));
+    setAnimate(true);
+
   }
+  useEffect(() => {
+    if (animate) {
+      const timeoutId = setTimeout(() => {
+        setAnimate(false);
+      }, 1000); // Adjust the timeout to match the transition duration
+      return () => clearTimeout(timeoutId);
+    }
+  }, [animate]);
+
 
   const updateUserData = async (userId, updatedData) => {
     try {
@@ -109,8 +121,9 @@ function RatingForm({user, onListChange}) {
           <Category  name={"after"}onRatingChange={handleRatingChange}image={afterDate}/>
         </div>
       </div>
-      <div className="styledRating">
-        <CustomizedRating value={averageRating} size="large" name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange}/>
+      <div className={`styledRating ${animate ? 'animate' : ''}`}>
+        <CustomizedRating value={averageRating} size="large" name={`Average Rating: ${(averageRating).toFixed(2)}`} onRatingChange={handleRatingChange} 
+        />
       </div>
       <div className="submit-container">
       <Submit onSubmit={handleSubmit} />

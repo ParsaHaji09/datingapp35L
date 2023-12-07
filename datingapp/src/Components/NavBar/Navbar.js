@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css"
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../../actions/reduxActions';
 
 // for another day
@@ -33,11 +33,6 @@ function Navbar(){
         navigate('/');
     }
 
-    const hardreload = () => {
-        // dispatch(logout());
-        navigate('/');
-    }
-
     if (window.location.pathname === "/") return null;
     if (window.location.pathname === "/register") return null;
     // return(
@@ -54,10 +49,10 @@ function Navbar(){
 
     return (
         <nav className="nav">
-            <Link to="/" className="sitename">
+            <a href="/" className="sitename">
                 <span>DateWalk</span>
                 <img src="/dateWalkLogo.png" alt="logo" className="logo-image"  />
-            </Link>
+            </a>
             <div className="links">
                 {console.log(currentUser.pic)}
                 {currentUser && <img src = {currentUser.pic[0]} alt = "Profile" className = "avatar"/>}
