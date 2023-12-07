@@ -2,7 +2,6 @@ import './Search.css'
 import React, { useState } from 'react';
 import axios from 'axios';
 import { BsSearch, BsStarFill} from "react-icons/bs"
-import { useRouteLoaderData } from 'react-router-dom';
 
 function Search(){
     const [error, setError] = useState(false);

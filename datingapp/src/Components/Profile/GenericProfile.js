@@ -25,7 +25,6 @@ const GenericProfile = ({userData, otherData, accept, reject}) => {
       )}
     </div>
   );
-
 };
 
 export default GenericProfile;
